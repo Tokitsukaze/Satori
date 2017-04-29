@@ -1,0 +1,397 @@
+/**
+ * 项目信息
+
+ <div class="project">
+ 	<div class="left">
+ 		<div class="project-avatar-container">
+ 			<img class="project-avatar-5x">
+ 		</div>
+ 	</div>
+ 	<div class="right">
+ 		<h2 class="project-name"></h2>
+ 		<h3 class="project-intro"></h3>
+ 	</div>
+ </div>
+
+ */
+.project {
+	.left {
+		float: left;
+		margin-right: 5px;
+		.project-avatar-container {
+			border: 1px solid rgba($color_grape, .1);
+
+			.project-avatar-5x {
+				display: block;
+
+
+				width: 58px;
+				height: 58px;
+			}
+		}
+	}
+	.right {
+		height: 60px;
+		.project-name {
+			display: block;
+			font-size: 14px;
+		}
+		.project-intro {
+			display: block;
+			font-size: 12px;
+		}
+	}
+}
+
+.message-tip {
+	position: relative;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	font-size: 0;
+
+	.tip {
+		margin: 0 10px;
+		display: inline-block;
+		font-size: 12px;
+
+		.i-circle-5x {
+			margin-right: 10px;
+		}
+	}
+}
+
+/**
+ *  原型装饰
+
+ <i class="circle-5x i-circle-5x"></i>
+ */
+.circle-5x {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: rgba($color_grape, 1);
+}
+
+
+
+/**
+ * 对话框
+
+ <div class="@prefix-message-item $message-item">
+ 	<div class="friend-avatar-container">
+ 		<img src="../images/poi.png" alt="夕立酱" class="user-avatar-5x">
+ 	</div>
+ 	<div class="friend-info">
+ 		<div class="friend-name">夕立酱</div>
+ 		<div class="friend-message">姆嗯、喵……蛋糕又甜又好吃po-i！但是，如果吃得太多的話，排水量會增加的poi。 po~i…。 </div>
+ 	</div>
+ </div>
+*/
+.friend-message-item {
+	position: relative;
+	&:before {
+		content: '';
+		position: absolute;
+		top: 30px;
+		left: 42px;
+		border-top: 0 solid transparent;
+		border-bottom: 10px solid transparent;
+		border-right: 10px solid rgba($color_grape_lighten, 1);
+	}
+	.friend-avatar-container {
+		margin-right: 5px;
+		float: left;
+		font-size: 0;
+		.user-avatar-5x {
+			width: 40px;
+			height: 40px;
+			border: 1px solid rgba($color_grape, .1);
+			border-radius: 50%;
+		}
+	}
+	.friend-info {
+		overflow: hidden;
+
+		.friend-header {
+			line-height: 25px;
+			height: 25px;
+			font-size: 12px;
+
+			.friend-name {
+
+			}
+			.friend-send-time {
+				float: right;
+			}
+		}
+		.friend-message-container {
+			display: inline-block;
+			position: relative;
+			float: left;
+			padding: 5px 10px;
+			line-height: 20px;
+
+			border-radius: 10px;
+			background-color: rgba($color_grape_lighten, 1);
+			.friend-message {
+
+			}
+		}
+	}
+}
+
+.my-message-item {
+	position: relative;
+	&:before {
+		content: '';
+		position: absolute;
+		top: 30px;
+		right: 42px;
+		border-top: 0 solid transparent;
+		border-bottom: 10px solid transparent;
+		border-left: 10px solid rgba($color_grape_lighten, 1);
+	}
+	.my-avatar-container {
+		margin-left: 5px;
+		float: right;
+		font-size: 0;
+		.user-avatar-5x {
+			width: 40px;
+			height: 40px;
+			border: 1px solid rgba($color_grape, .1);
+			border-radius: 50%;
+		}
+	}
+	.my-info {
+		overflow: hidden;
+		.my-header {
+			line-height: 25px;
+			height: 25px;
+			font-size: 12px;
+			.my-name {
+				float: right;
+			}
+			.my-send-time {
+				float: left;
+			}
+		}
+		.my-message-container {
+			display: inline-block;
+			position: relative;
+			float: right;
+			padding: 5px 10px;
+			line-height: 20px;
+
+			border-radius: 10px;
+			background-color: rgba($color_grape_lighten, 1);
+			.my-message {
+
+			}
+		}
+	}
+}
+
+/**
+ * 贡献者列表
+
+<li class="contributor-item i-contributor-item">
+	<div class="contributor-avatar-container">
+		<img class="contributor-avatar-5x">
+	</div>
+	<div class="contributor-info">
+		<span class="contributor-name"></span>
+	</div>
+</li>
+ */
+.contributor-item {
+	position: relative;
+	overflow: hidden;
+	.contributor-avatar-container {
+		float: left;
+		margin-right: 5px;
+		font-size: 0;
+		.contributor-avatar-5x {
+			width: 25px;
+			height: 25px;
+			border-radius: 25px;
+		}
+	}
+	.contributor-info {
+		overflow: hidden;
+		.contributor-name {
+			height: 25px;
+			line-height: 25px;
+		}
+	}
+}
+
+
+
+/**
+ * chat 的图层
+ */
+.chat-layer {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: $chat-layer;
+	pointer-events: none;
+
+	.chat-component-full {
+		position: relative;
+		height: 500px;
+		width: 600px;
+
+		border: 1px solid rgba($color_grape, 1);
+		border-radius: 5px;
+
+		box-shadow: 5px 5px 5px rgba($color_grape, 1);
+
+		> .header {
+			padding: 5px;
+
+			box-sizing: border-box;
+
+			width: 100%;
+		}
+
+		> .body {
+			position: absolute;
+			top: 70px;
+			bottom: 0;
+
+			width: 100%;
+
+			> .right {
+				float: right;
+
+				border-left: 1px solid rgba($color_grape, .1);
+
+				width: 200px;
+				height: 100%;
+				> .contributor-info {
+					margin: 0 5px;
+					height: 25px;
+					line-height: 25px;
+					.sort-type {
+						float: left;
+
+						.i-circle-5x {
+							margin-right: 5px;
+						}
+					}
+					.contributor-count {
+						float: right;
+					}
+				}
+				/* 参与者列表 */
+				.contributor-list-wrap {
+
+					.contributor-list {
+						overflow: hidden;
+						.i-contributor-item {
+							margin: 5px;
+						}
+					}
+				}
+				.footer {
+
+				}
+			}
+
+			> .left {
+				position: relative;
+				overflow: hidden;
+				height: 100%;
+				/* 聊天框 */
+				.chat-container {
+					position: absolute;
+					top: 0;
+					bottom: 140px;
+
+					width: 100%;
+					overflow: hidden;
+
+					.message-content {
+						position: absolute;
+						bottom: 0;
+
+						width: 100%;
+						/* height: 100%;*/
+
+						.i-message-item {
+							margin: 25px 5px;
+						}
+					}
+				}
+
+				/* 输入框 */
+				.chater-container {
+					position: absolute;
+					bottom: 0;
+
+					width: 100%;
+
+					.top {
+						margin: 5px;
+						.option-container {
+							margin-bottom: 5px;
+							height: 25px;
+							/* 文字处理选项 */
+							.option-list {
+								display: inline-block;
+								font-size: 0;
+								.option-item {
+									display: inline-block;
+									margin-right: 10px;
+									padding: 0 5px;
+									box-sizing: border-box;
+									line-height: 25px;
+									height: 25px;
+
+									font-size: 12px;
+									background-color: rgba($color_grape_darken, 1);
+									color: rgba($color_white, 1);
+
+									&:last-child {
+										margin-right: 0;
+									}
+								}
+							}
+							/* 文字 IO 选项 */
+							.operation-list {
+								font-size: 0;
+								float: right;
+								.operation-item {
+									display: inline-block;
+									margin-right: 10px;
+									padding: 0 5px;
+									box-sizing: border-box;
+									line-height: 25px;
+									height: 25px;
+
+									font-size: 12px;
+									background-color: rgba($color_grape_darken, 1);
+									color: rgba($color_white, 1);
+
+									&:last-child {
+										margin-right: 0;
+									}
+								}
+							}
+						}
+						.inputer-container {
+							height: 115px;
+						}
+					}
+					.bottom {
+						height: 40px;
+					}
+				}
+			}
+		}
+
+	}
+}
