@@ -23,6 +23,96 @@
 /**
  * 白色
  */
+/**
+ * 灰色
+ */
+/**
+ * 紫色
+ */
+/**
+ * 蓝色
+ */
+/**
+ * 粉色
+ */
+/**
+ * 表单 输入 行
+
+<div class="r-input-line i-input-line">
+	<span class="name"></span>
+	<input class="input">
+	<span class="condition"></span>
+</div>
+ */
+.r-result-error, .r-result-success, .r-result-normal {
+  display: block;
+  font-size: 12px;
+  line-height: 25px;
+}
+
+.r-result-error {
+  color: #7c484d;
+}
+
+.r-result-success {
+  color: #6bdbcd;
+}
+
+.r-result-normal {
+  color: #ac92ec;
+}
+
+.r-submit {
+  display: block;
+  color: #4fc1e9;
+  border: 1px solid #3bafda;
+  border-radius: 5px;
+}
+
+.r-input {
+  display: block;
+  padding: 0 5px;
+  height: 25px;
+  border: 1px solid #4fc1e9;
+  font-size: 12px;
+}
+
+ /* .r-input-array {
+ 	.r-input-line {
+ 		line-height: 25px;
+ 		.name {
+ 			display: block;
+ 			height: 25px;
+ 			font-size: 12px;
+ 		}
+ 		.input {
+ 			display: block;
+ 			padding: 0 5px;
+
+ 			height: 25px;
+ 			border: 1px solid rgba($color_uniform, 1);
+
+ 			font-size: 12px;
+ 		}
+ 		.condition {
+ 			display: block;
+ 			height: 25px;
+
+ 			font-size: 12px;
+ 		}
+ 	}
+ } */
+/**
+ * 表单 选择项 行
+ */
+.r-option-line .input {
+  display: block;
+  padding: 0 5px;
+  height: 25px;
+  border: 1px solid #4d6899;
+  font-size: 12px;
+}
+
 /* 图层管理 */
 /**
  * 加载 层
@@ -32,6 +122,9 @@
  */
 /**
  * 分支 层
+ */
+/**
+ * 主 层
  */
 /**
  * 技能 层
@@ -250,11 +343,11 @@
 
  <div class="@prefix-message-item $message-item">
  	<div class="friend-avatar-container">
- 		<img src="../images/poi.png" alt="夕立酱" class="user-avatar-5x">
+ 		<img class="user-avatar-5x">
  	</div>
  	<div class="friend-info">
- 		<div class="friend-name">夕立酱</div>
- 		<div class="friend-message">姆嗯、喵……蛋糕又甜又好吃po-i！但是，如果吃得太多的話，排水量會增加的poi。 po~i…。 </div>
+ 		<div class="friend-name"></div>
+ 		<div class="friend-message"></div>
  	</div>
  </div>
 */
@@ -533,7 +626,6 @@
 }
 .skill-layer .skill-component {
   position: relative;
-  overflow: hidden;
   text-align: center;
   font-size: 0;
 }
@@ -568,10 +660,314 @@
   height: 40px;
 }
 
+.main-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 899;
+  /* 技能栏移动到顶部 */
+  /* 注册框 */
+  /* 登陆框 */
+  /* 个人主页 */
+}
+.main-layer .skill-component {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background-color: white;
+}
+.main-layer .skill-component .skill-list-container {
+  margin: 0 auto;
+  width: 1200px;
+  height: 40px;
+  font-size: 0;
+}
+.main-layer .skill-component .skill-list-container .skill-list {
+  display: inline-block;
+  height: 40px;
+}
+.main-layer .skill-component .skill-list-container .skill-list .skill-item {
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 15px;
+}
+.main-layer .skill-component .skill-list-container .skill-list:last-child {
+  float: right;
+}
+.main-layer .signup-component, .main-layer .signin-component {
+  margin-top: 50px;
+  text-align: center;
+}
+.main-layer .signup-component .card-list .operation-container, .main-layer .signin-component .card-list .operation-container {
+  margin-top: 25px;
+  text-align: center;
+}
+.main-layer .signup-component .card-list .operation-container .i-r-submit, .main-layer .signin-component .card-list .operation-container .i-r-submit {
+  display: inline-block;
+  width: 289px;
+  height: 30px;
+  line-height: 30px;
+  background-color: white;
+}
+.main-layer .signup-component .card-list .type-input .card-avatar-container, .main-layer .signin-component .card-list .type-input .card-avatar-container {
+  border: 1px solid #aab2bd;
+  background-color: #ccd1d9;
+  color: white;
+}
+.main-layer .signup-component .card-list .card-item .card-wrap, .main-layer .signin-component .card-list .card-item .card-wrap {
+  display: inline-block;
+  margin-bottom: 25px;
+}
+.main-layer .signup-component .card-list .card-item .card-wrap .left, .main-layer .signin-component .card-list .card-item .card-wrap .left {
+  float: left;
+  margin-right: 15px;
+}
+.main-layer .signup-component .card-list .card-item .card-wrap .left .card-avatar-container, .main-layer .signin-component .card-list .card-item .card-wrap .left .card-avatar-container {
+  display: inline-block;
+  font-size: 12px;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 5px;
+}
+.main-layer .signup-component .card-list .card-item .card-wrap .left .card-illustate, .main-layer .signin-component .card-list .card-item .card-wrap .left .card-illustate {
+  width: 50px;
+  height: 50px;
+}
+.main-layer .signup-component .card-list .card-item .card-wrap .right, .main-layer .signin-component .card-list .card-item .card-wrap .right {
+  overflow: hidden;
+  line-height: 25px;
+}
+.main-layer .signup-component .card-list .card-item .card-wrap .right .info-container .i-r-input, .main-layer .signin-component .card-list .card-item .card-wrap .right .info-container .i-r-input {
+  margin-bottom: 10px;
+  padding: 0 10px;
+  width: 200px;
+  border-radius: 5px;
+  color: #656d78;
+}
+.main-layer .signup-component .card-list .card-item .card-wrap .right .info-container .condition-list, .main-layer .signin-component .card-list .card-item .card-wrap .right .info-container .condition-list {
+  text-align: left;
+}
+.main-layer .signup-component .card-list .card-item .card-wrap .right .info-container .condition-list .condition-item, .main-layer .signin-component .card-list .card-item .card-wrap .right .info-container .condition-list .condition-item {
+  line-height: 20px;
+  color: #aab2bd;
+}
+.main-layer .signup-component .card-list .card-item .card-wrap .right .info-container .i-r-result, .main-layer .signin-component .card-list .card-item .card-wrap .right .info-container .i-r-result {
+  text-align: left;
+}
+.main-layer .signup-component .part-two, .main-layer .signin-component .part-two {
+  margin-top: 200px;
+}
+.main-layer .signin-component {
+  display: none;
+  margin-top: 200px;
+  text-align: center;
+}
+.main-layer .signin-component .form-container {
+  text-align: left;
+  display: inline-block;
+}
+.main-layer .signin-component .form-container .i-input-array {
+  margin-bottom: 25px;
+}
+.main-layer .home-component, .main-layer .signup-component {
+  /* 印象图 */
+  /* 头像 以及 统计 */
+  /* 个人信息 以及 主要信息展示 */
+}
+.main-layer .home-component .impression-component .impression-container, .main-layer .signup-component .impression-component .impression-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+.main-layer .home-component .impression-component .impression-container .impression-5x, .main-layer .signup-component .impression-component .impression-container .impression-5x {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 100%;
+}
+.main-layer .home-component .statistics-component, .main-layer .signup-component .statistics-component {
+  position: relative;
+  margin: 0 auto;
+  width: 1200px;
+  height: 50px;
+  line-height: 50px;
+  /* 头像 */
+  /* 统计 */
+}
+.main-layer .home-component .statistics-component .user-avatar-container, .main-layer .signup-component .statistics-component .user-avatar-container {
+  position: absolute;
+  top: -120px;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+.main-layer .home-component .statistics-component .user-avatar-container .user-avatar-5x, .main-layer .signup-component .statistics-component .user-avatar-container .user-avatar-5x {
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+}
+.main-layer .home-component .statistics-component .statistics-container .statistics-list, .main-layer .signup-component .statistics-component .statistics-container .statistics-list {
+  margin-left: 275px;
+  font-size: 0;
+}
+.main-layer .home-component .statistics-component .statistics-container .statistics-list .statistics-item, .main-layer .signup-component .statistics-component .statistics-container .statistics-list .statistics-item {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  font-size: 12px;
+}
+.main-layer .home-component .statistics-component .statistics-container .statistics-list .statistics-item:last-child, .main-layer .signup-component .statistics-component .statistics-container .statistics-list .statistics-item:last-child {
+  float: right;
+}
+.main-layer .home-component .statistics-component .statistics-container .statistics-list .statistics-item .statistics-count, .main-layer .signup-component .statistics-component .statistics-container .statistics-list .statistics-item .statistics-count {
+  display: block;
+  padding: 0 15px;
+  min-width: 50px;
+  font-size: 50px;
+  color: rgba(172, 146, 236, 0.2);
+}
+.main-layer .home-component .statistics-component .statistics-container .statistics-list .statistics-item .item-name, .main-layer .signup-component .statistics-component .statistics-container .statistics-list .statistics-item .item-name {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.main-layer .home-component .info-component-wrap, .main-layer .signup-component .info-component-wrap {
+  width: 100%;
+  background-color: rgba(204, 209, 217, 0.2);
+}
+.main-layer .home-component .info-component-wrap .info-component, .main-layer .signup-component .info-component-wrap .info-component {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.main-layer .home-component .info-component-wrap .info-component > .left, .main-layer .signup-component .info-component-wrap .info-component > .left {
+  float: left;
+  margin-left: -100%;
+  width: 250px;
+}
+.main-layer .home-component .info-component-wrap .info-component > .left .info-container, .main-layer .signup-component .info-component-wrap .info-component > .left .info-container {
+  margin-top: 30px;
+}
+.main-layer .home-component .info-component-wrap .info-component > .left .info-container .user-name, .main-layer .signup-component .info-component-wrap .info-component > .left .info-container .user-name {
+  line-height: 50px;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap, .main-layer .signup-component .info-component-wrap .info-component .center-wrap {
+  float: left;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center {
+  margin: 0 300px 0 250px;
+  left: 250px;
+  right: 300px;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .state-component, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .state-component {
+  margin: 15px 25px;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .state-component .state-no-card, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .state-component .state-no-card {
+  box-sizing: border-box;
+  width: 100%;
+  height: 300px;
+  line-height: 300px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ccd1d9;
+  background-color: rgba(204, 209, 217, 0.5);
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .state-component .state-no-card .state-illustate, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .state-component .state-no-card .state-illustate {
+  font-size: 30px;
+  color: white;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .type-note .card-avatar-container, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .type-note .card-avatar-container {
+  border: 1px solid #d770ad;
+  background-color: #ec87c0;
+  color: white;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .type-project .card-avatar-container, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .type-project .card-avatar-container {
+  border: 1px solid #967adc;
+  background-color: #ac92ec;
+  color: white;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .type-store .card-avatar-container, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .type-store .card-avatar-container {
+  border: 1px solid #3bafda;
+  background-color: #4fc1e9;
+  color: white;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item {
+  margin: 15px 25px 50px 25px;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .left, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .left {
+  float: left;
+  margin-right: 15px;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .left .card-avatar-container, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .left .card-avatar-container {
+  display: inline-block;
+  font-size: 12px;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 5px;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .left .card-avatar-5x, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .left .card-avatar-5x {
+  width: 50px;
+  height: 50px;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right {
+  overflow: hidden;
+  line-height: 25px;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .title, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .date, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .date {
+  line-height: 20px;
+  font-size: 12px;
+  color: #aab2bd;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .content, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .content {
+  font-size: 14px;
+}
+.main-layer .home-component .info-component-wrap .info-component > .right, .main-layer .signup-component .info-component-wrap .info-component > .right {
+  float: left;
+  margin-left: -300px;
+  width: 300px;
+}
+
 * {
-  background-color: rgba(220, 238, 229, 0.3);
+  /* background-color: rgba($color_wave, .3);*/
 }
 
 main {
   position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link {
+  color: #5d9cec;
+}
+
+a:hover {
+  color: #5d9cec;
+}
+
+a:active {
+  color: #5d9cec;
+}
+
+a:visited {
+  color: #5d9cec;
 }

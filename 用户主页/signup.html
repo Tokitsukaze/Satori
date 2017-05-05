@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		 <link rel="stylesheet" href="../style/normalize.css">
+		 <link rel="stylesheet" href="../style/satori.css">
+
+		<title>注册</title>
+	</head>
+
+	<body>
+		<main>
+			<!-- 加载框所在的图层 -->
+			<div class="loading-layer">
+				<!-- 页面级别的加载 -->
+				<div class="page-component"></div>
+
+				<!-- 任务级别的加载 -->
+				<div class="task-component">
+
+				</div>
+			</div>
+
+			<!-- 所有其他信息所在的图层 -->
+			<div class="main-layer">
+				<!-- 技能栏移动到顶部 -->
+				<div class="skill-component">
+					<div class="skill-list-container">
+						<ul class="skill-list">
+							<li class="skill-item">主页</li>
+							<li class="skill-item">地图</li>
+							<li class="skill-item">搜索</li>
+						</ul>
+						<ul class="skill-list">
+							<li class="skill-item">项目</li>
+							<li class="skill-item">仓库</li>
+							<li class="skill-item">笔记</li>
+							<li class="skill-item">好友</li>
+							<li class="skill-item">设置</li>
+							<li class="skill-item">消息</li>
+						</ul>
+					</div>
+				</div>
+				<!-- 注册框 -->
+				<div class="signup-component" style="display: block;">
+					<ul class="card-list" style="display: none;">
+						<li class="card-item type-input">
+							<div class="card-wrap">
+								<div class="left">
+									<div class="card-avatar-container">
+										<span class="card-illustate">用户名</span>
+									</div>
+								</div>
+								<div class="right">
+									<div class="info-container">
+										<input type="text" class="r-input i-r-input" placeholder="登陆用的用户名，不是昵称哦">
+										<span class="r-result-error i-r-result">该用户名已经被占用啦</span>
+										<span class="r-result-error i-r-result">用户名不符合规范</span>
+										<span class="r-result-success i-r-result">是新朋友哦</span>
+										<ul class="condition-list">
+											<li class="condition-item">六位以上</li>
+											<li class="condition-item">二十位以下</li>
+											<li class="condition-item">数字 字母 下划线组成</li>
+											<li class="condition-item">开头不能是数字</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+
+						<li class="card-item type-input">
+							<div class="card-wrap">
+								<div class="left">
+									<div class="card-avatar-container">
+										<span class="card-illustate">密码</span>
+									</div>
+								</div>
+								<div class="right">
+									<div class="info-container">
+										<input type="text" class="r-input i-r-input" placeholder="登陆用的验证密码">
+										<span class="r-result-error i-r-result">密码不符合规范</span>
+										<span class="r-result-success i-r-result">虽说是通过了 可能不怎么安全</span>
+										<span class="r-result-success i-r-result">通过啦</span>
+										<span class="r-result-success i-r-result">很安全的密码</span>
+										<ul class="condition-list">
+											<li class="condition-item">六位以上</li>
+											<li class="condition-item">二十位以下</li>
+											<li class="condition-item">含有数字</li>
+											<li class="condition-item">含有小写字母</li>
+											<li class="condition-item">含有大写字母</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+
+						<li class="card-item type-input">
+							<div class="card-wrap">
+								<div class="left">
+									<div class="card-avatar-container">
+										<span class="card-illustate">重复密码</span>
+									</div>
+								</div>
+								<div class="right">
+									<div class="info-container">
+										<input type="text" class="r-input i-r-input" placeholder="保证跟上面一样">
+										<span class="r-result-error i-r-result">密码不一致哦</span>
+										<span class="r-result-success i-r-result">一致的密码</span>
+										<ul class="condition-list">
+											<li class="condition-item">与密码相同</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+
+						<li class="operation-container">
+							<div class="next r-submit i-r-submit">提交</div>
+						</li>
+					</ul>
+
+					<ul class="card-list part-two" style="display: block;">
+						<li class="card-item type-input">
+							<div class="card-wrap">
+								<div class="left">
+									<div class="card-avatar-container">
+										<span class="card-illustate">昵称</span>
+									</div>
+								</div>
+								<div class="right">
+									<div class="info-container">
+										<input type="text" class="r-input i-r-input" placeholder="对外公开的名字">
+										<span class="r-result-error i-r-result">被占用啦</span>
+										<span class="r-result-error i-r-result">昵称不符合规范</span>
+										<span class="r-result-success i-r-result">是新的friends!</span>
+										<ul class="condition-list">
+											<li class="condition-item">大于一位</li>
+											<li class="condition-item">小于十六位</li>
+											<li class="condition-item">特殊标点符号除外</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+
+						<li class="operation-container">
+							<input type="submit" class="r-submit i-r-submit">
+						</li>
+					</ul>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
+
+<script>
+
+</script>

@@ -24,79 +24,30 @@
 				</div>
 			</div>
 
-			<!-- 分支所在的图层 -->
-			<div class="branch-layer">
-			</div>
-
 			<!-- 所有其他信息所在的图层 -->
 			<div class="main-layer">
-				<!-- 注册框 -->
-				<div class="signup-component">
-					<div class="form-container">
-						<div class="r-input-array i-input-array">
-							<div class="r-input-line i-input-line">
-								<span class="name">用户名</span>
-								<input type="text" class="input">
-								<span class="condition">六位以上 二十位以下的 数字 字母 下划线组成</span>
-							</div>
-							<div class="r-input-line i-input-line">
-								<span class="name">密码</span>
-								<input type="text" class="input">
-								<span class="condition">六位以上 十六位以下的 数字 字母 下划线组成</span>
-							</div>
-							<div class="r-input-line i-input-line">
-								<span class="name">重复密码</span>
-								<input type="text" class="input">
-								<span class="condition">重复一遍密码哦</span>
-							</div>
-						</div>
-						<div class="r-option-line i-option-line">
-							<input type="submit" class="input" value="发送">
-						</div>
-					</div>
-				</div>
-
-				<!-- 登陆框 -->
-				<div class="signin-component">
-					<div class="form-container">
-						<div class="r-input-array i-input-array">
-							<div class="r-input-line i-input-line">
-								<span class="name">用户名</span>
-								<input type="text" class="input">
-								<span class="condition">六位以上 二十位以下的 数字 字母 下划线组成</span>
-							</div>
-							<div class="r-input-line i-input-line">
-								<span class="name">密码</span>
-								<input type="text" class="input">
-								<span class="condition">六位以上 十六位以下的 数字 字母 下划线组成</span>
-							</div>
-						</div>
-						<div class="r-option-line i-option-line">
-							<input type="submit" class="input" value="发送">
-						</div>
+				<!-- 技能栏移动到顶部 -->
+				<div class="skill-component">
+					<div class="skill-list-container">
+						<ul class="skill-list">
+							<li class="skill-item">主页</li>
+							<li class="skill-item">地图</li>
+							<li class="skill-item">搜索</li>
+						</ul>
+						<ul class="skill-list">
+							<li class="skill-item">项目</li>
+							<li class="skill-item">仓库</li>
+							<li class="skill-item">笔记</li>
+							<li class="skill-item">好友</li>
+							<li class="skill-item">设置</li>
+							<li class="skill-item">消息</li>
+						</ul>
 					</div>
 				</div>
 
 				<!-- 个人中心 -->
 				<div class="home-component">
-					<!-- 技能栏移动到顶部 -->
-					<div class="skill-component">
-						<div class="skill-list-container">
-							<ul class="skill-list">
-								<li class="skill-item">主页</li>
-								<li class="skill-item">地图</li>
-								<li class="skill-item">搜索</li>
-							</ul>
-							<ul class="skill-list">
-								<li class="skill-item">项目</li>
-								<li class="skill-item">仓库</li>
-								<li class="skill-item">笔记</li>
-								<li class="skill-item">好友</li>
-								<li class="skill-item">设置</li>
-								<li class="skill-item">消息</li>
-							</ul>
-						</div>
-					</div>
+
 					<!-- 印象图 -->
 					<div class="impression-component">
 						<div class="impression-container">
@@ -112,37 +63,37 @@
 						<div class="statistics-container">
 							<ul class="statistics-list">
 								<li class="statistics-item">
-									<i class="satori-icon"></i>
+									<span class="statistics-count"></span>
 									<a class="item-name" href="">动态</a>
 								</li>
 								<li class="statistics-item">
-									<i class="satori-icon"></i>
+									<span class="statistics-count">5</span>
 									<a class="item-name" href="">项目</a>
 								</li>
 								<li class="statistics-item">
-									<i class="satori-icon"></i>
+									<span class="statistics-count">12</span>
 									<a class="item-name" href="">笔记</a>
 								</li>
 								<li class="statistics-item">
-									<i class="satori-icon"></i>
+									<span class="statistics-count">5</span>
 									<a class="item-name" href="">好友</a>
 								</li>
 								<li class="statistics-item">
-									<i class="satori-icon"></i>
+									<span class="statistics-count">10</span>
 									<a class="item-name" href="">仓库</a>
 								</li>
 								<li class="statistics-item">
-									<i class="satori-icon"></i>
+									<span class="statistics-count"></span>
 									<a class="item-name" href="">时津风</a>
 								</li>
 								<!-- 这里如果是自己，就是设置 -->
 								<li class="statistics-item">
-									<i class="satori-icon"></i>
+									<span class="statistics-count"></span>
 									<a class="item-name" href="">设置</a>
 								</li>
 								<!-- 如果是别人，就是关注 -->
 								<!-- <li class="statistics-item">
-									<i class="satori-icon"></i>
+									<span class="statistics-count"></span>
 									<a class="item-name" href="">关注</a>
 								</li> -->
 							</ul>
@@ -207,10 +158,42 @@
 											</div>
 											<div class="right">
 												<div class="info-container">
-													<span class="title">组件仓库1</span>
+													<span class="title">滚动条</span>
 													<div class="date">5月2日 23:22</div>
 													<p class="content">
+														自定义的滚动条
+													</p>
+												</div>
+											</div>
+										</li>
 
+										<li class="card-item type-friend">
+											<div class="left">
+												<div class="card-avatar-container">
+													<img  src="../images/poi.png" alt="夕立酱" class="card-avatar-5x"></img>
+												</div>
+											</div>
+											<div class="right">
+												<div class="info-container">
+													<span class="title">夕立酱</span>
+													<p class="content">
+														姆嗯、喵……蛋糕又甜又好吃po-i！但是，如果吃得太多的話，排水量會增加的poi。 po~i…。
+													</p>
+												</div>
+											</div>
+										</li>
+
+										<li class="card-item type-input">
+											<div class="left">
+												<div class="card-avatar-container">
+													<img  src="../images/poi.png" alt="夕立酱" class="card-avatar-5x"></img>
+												</div>
+											</div>
+											<div class="right">
+												<div class="info-container">
+													<span class="title">夕立酱</span>
+													<p class="content">
+														姆嗯、喵……蛋糕又甜又好吃po-i！但是，如果吃得太多的話，排水量會增加的poi。 po~i…。
 													</p>
 												</div>
 											</div>
@@ -242,52 +225,6 @@
 			<div class="effect-layer">
 				<!-- 网格 -->
 				<div class="grid-component"></div>
-			</div>
-
-			<!-- 所有原型所在的图层 -->
-			<div class="prototype-layer">
-			</div>
-
-			<!-- 讨论框所在的图层 -->
-			<div class="chat-layer">
-			</div>
-
-			<!-- 用到的工具所在的图层 -->
-			<div class="util-layer">
-			</div>
-
-			<!-- 用到的技能所在的图层 -->
-			<div class="skill-layer">
-				<!-- <div class="skill-component"> 技能栏组件
-					用户级别的菜单，登陆前
-					<ul class="skill-list">
-						<li class="skill-item">注册</li>
-						<li class="skill-item">登陆</li>
-						<li class="skill-item">介绍</li>
-						<li class="skill-item"></li>
-						<li class="skill-item"></li>
-						<li class="skill-item"></li>
-						<li class="skill-item"></li>
-						<li class="skill-item">搜索</li> 搜索功能
-						<li class="skill-item">地图</li> 查看当前所在网站的位置，并且可以跳转到其他地方
-						<li class="skill-item">主页</li> 跳转到主页
-					</ul>
-					用户级别的菜单，登陆后
-					<ul class="skill-list">
-						<li class="skill-item">
-							<img class="skill-avatar" alt="时津风" src="../images/harusame.png">
-						</li> 我的所有相关
-						<li class="skill-item">项目</li> 所有项目列表
-						<li class="skill-item">仓库</li> 包括所有组件
-						<li class="skill-item">笔记</li> 笔记列表
-						<li class="skill-item">好友</li> 好友列表
-						<li class="skill-item">设置</li> 设置列表
-						<li class="skill-item">消息</li> 私信，站内信
-						<li class="skill-item">搜索</li> 搜索功能
-						<li class="skill-item">地图</li> 查看当前所在网站的位置，并且可以跳转到其他地方
-						<li class="skill-item">主页</li> 跳转到主页
-					</ul>
-				</div> -->
 			</div>
 		</main>
 	</body>

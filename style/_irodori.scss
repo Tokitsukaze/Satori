@@ -1,0 +1,85 @@
+/**
+ * 表单 输入 行
+
+<div class="r-input-line i-input-line">
+	<span class="name"></span>
+	<input class="input">
+	<span class="condition"></span>
+</div>
+ */
+
+ %r-result {
+ 	display: block;
+ 	font-size: 12px;
+ 	line-height: 25px;
+ }
+ .r-result-error {
+ 	@extend %r-result;
+ 	color: rgba($color_claret, 1);
+ }
+ .r-result-success {
+ 	@extend %r-result;
+ 	color: rgba($color_beryl_darken, 1);
+ }
+ .r-result-normal {
+ 	@extend %r-result;
+ 	color: rgba($color_lavender, 1);
+ }
+
+ .r-submit {
+ 	display: block;
+	color: rgba($color_aqua, 1);
+	border: 1px solid rgba($color_aqua_darken, 1);
+	border-radius: 5px;
+ }
+
+.r-input {
+	display: block;
+	padding: 0 5px;
+
+	height: 25px;
+	border: 1px solid rgba($color_aqua, 1);
+
+	font-size: 12px;
+}
+
+ /* .r-input-array {
+ 	.r-input-line {
+ 		line-height: 25px;
+ 		.name {
+ 			display: block;
+ 			height: 25px;
+ 			font-size: 12px;
+ 		}
+ 		.input {
+ 			display: block;
+ 			padding: 0 5px;
+
+ 			height: 25px;
+ 			border: 1px solid rgba($color_uniform, 1);
+
+ 			font-size: 12px;
+ 		}
+ 		.condition {
+ 			display: block;
+ 			height: 25px;
+
+ 			font-size: 12px;
+ 		}
+ 	}
+ } */
+
+/**
+ * 表单 选择项 行
+ */
+.r-option-line {
+	.input {
+		display: block;
+		padding: 0 5px;
+
+		height: 25px;
+		border: 1px solid rgba($color_uniform, 1);
+
+		font-size: 12px;
+	}
+}
