@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+			.input {
+				width: 100%;
+				height: 200px;
+			}
+			.output {
+				font-size: 12px;
+				line-height: 25px;
+				width: 500px;
+			}
+		</style>
+	</head>
+	<body>
+		<textarea class="input" id="input"></textarea>
+		<div class="output" id="output"></div>
+		<script type="text/javascript">
+			var INSERT_SIGN_AS = {
+				"CHILD": 2,
+				"SIBLING": 1,
+				"PARENT": 0
+			}
+
+
+			var input = document.getElementById('input'),
+				output = document.getElementById('output'),
+				tab_count = 0,
+				tab_count_last = 0,
+				VN_list = [],
+				sign_list = []
+
+			input.addEventListener('paste', function (event) {
+				setTimeout(function () {
+					var content = input.value
+						content_array = content.split("\n")
+
+					content_array.reduce(function (v_rope, v_current) {
+						v_current = v_current.replace(/\t/g, function () {
+							tab_count++
+							return ''
+						})
+						console.info('current', tab_count)
+						console.info('last', tab_count_last)
+						if (tab_count < tab_count_last) { // 如果这次缩进比上次少
+							sign_list.push(INSERT_SIGN_AS.PARENT)
+							tab_count_last = tab_count
+							tab_count = 0
+							return
+						} else  if (tab_count === tab_count_last) { // 如果这次缩进与上次相同
+							sign_list.push(INSERT_SIGN_AS.SIBLING)
+							tab_count_last = tab_count
+							tab_count = 0
+						} else  if (tab_count > tab_count_last) { // 如果这次缩进比上次多
+							sign_list.push(INSERT_SIGN_AS.CHILD)
+							tab_count_last = tab_count
+							tab_count = 0
+						}
+						VN_list.push(compileToVN(v_current))
+					}, "")
+					console.info(VN_list)
+					console.info(sign_list)
+
+					// 输出最终格式
+					var result = ""
+					var finish_sign = false
+					tab_count = 0
+
+					for (var i = 0; i < sign_list.length; i++) {
+						var sign = sign_list[i + 1]
+						var prefix
+						var content
+						var suffix
+						var VN = VN_list[i]
+
+						if (sign == null) {
+							finish_sign = true
+						}
+
+						if (VN != null) {
+							content =  "e(" + transVNToText(VN)
+						} else {
+							content = ""
+						}
+
+						if (sign === INSERT_SIGN_AS.CHILD) {
+							prefix = tab(tab_count)
+							suffix = ", [\n"
+							tab_count++
+						} else if (sign === INSERT_SIGN_AS.SIBLING) {
+							prefix = tab(tab_count)
+							suffix = "),\n"
+						} else if (sign === INSERT_SIGN_AS.PARENT) {
+							prefix = tab(tab_count)
+							suffix = "]),\n"
+							tab_count--
+						}
+
+						if (finish_sign) {
+							prefix = tab(tab_count - 1)
+							suffix = "])\n"
+						}
+
+						result += prefix + content + suffix
+
+						if (finish_sign) {
+							console.info(result)
+							return result
+						}
+					}
+				})
+			})
+
+			function tab (v_tab_count) {
+				var tabs = ""
+				for (var i = 0; i < v_tab_count; i++) {
+					tabs += "\t"
+				}
+				return tabs
+			}
+
+			var CREATE_VN_FN_NAME = "e"
+
+			function transVNToText (v_VN) {
+				var result = ""
+
+				var DOUBLE_QUOTATION = '"'
+
+				var tagName = v_VN.tagName,
+					text = v_VN.text,
+					props = v_VN.props,
+					props_len = props.length,
+					props_str = ""
+
+				result += DOUBLE_QUOTATION + tagName + DOUBLE_QUOTATION
+
+				if (props_len > 0) {
+					result += ", "
+
+					props_str += "{"
+					props_str += props.reduce(function (v_result, v_current) {
+						v_result += DOUBLE_QUOTATION + v_current.key + DOUBLE_QUOTATION + ': ' + DOUBLE_QUOTATION + v_current.value + DOUBLE_QUOTATION + ", "
+						return v_result
+					}, "")
+					props_str = props_str.substring(0, props_str.length - 2) // 截除自尾的 ", "
+					props_str += "}"
+					result += props_str
+				}
+
+				if (text != null) {
+					result += ", "
+					result += DOUBLE_QUOTATION + text + DOUBLE_QUOTATION
+				}
+
+				return result
+			}
+
+
+
+			function compileToVN (str) {
+				var result = ""
+				var str_array,
+					VN = {}
+
+				// 获得 text
+				VN.text = str.match(/\>(.+?)\</g)
+
+				if (VN.text != null) {
+					VN.text = VN.text[0].replace('>', '').replace('<', '')
+				} else {
+					VN.text = null
+				}
+
+				// 获得 tagName
+				str_array = str.split(' ')
+				VN.tagName = str_array[0].split('<')[1]
+
+				// 获得 props
+				var len = VN.tagName.length
+				str = str.substr(len + 2)
+				str = str.split('>')[0]
+				str = str.replace(/\"/g, '')
+
+				str_array = str.split(' ')
+				VN.props = str_array.reduce(function (v_arr, v_current) {
+					var obj = {}
+					var t = v_current.split('=') // class = demo
+					obj.key = t[0] // class
+					obj.value = t[1] // demo
+					v_arr.push(obj)
+					return v_arr
+				}, [])
+				return VN
+			}
+		</script>
+	</body>
+</html>

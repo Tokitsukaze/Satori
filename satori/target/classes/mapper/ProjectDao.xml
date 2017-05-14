@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- 目的:为 dao接口方法提供 sql语句 -->
+<mapper namespace="moe.harusame.dao.ProjectDao">
+
+	<insert id="insertProject">
+		insert ignore into project (creator, name, info)
+		values (#{creator}, #{name}, #{info})
+	</insert>
+	
+	<update id="updateLogo">
+		update 
+			project
+		set
+			logo = #{logo}
+		where project_id = #{projectId} 
+		and creator = #{creator}
+	</update>
+	
+	<update id="update">
+		update 
+			project
+		set
+			name = #{name}
+			info = #{info}
+		where project_id = #{projectId} 
+		and creator = #{creator}
+	</update>
+	
+	<update id="remove">
+		update 
+			project
+		set
+			state = -1
+		where project_id = #{projectId} 
+		and creator = #{creator}
+	</update>
+	
+	<select id="getProjectList" resultType="Project">
+		select project_id, name, info, logo, create_date
+		from project
+		where creator = #{creator}
+	</select>
+	
+
+</mapper>

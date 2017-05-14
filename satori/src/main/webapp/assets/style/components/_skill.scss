@@ -1,0 +1,53 @@
+/**
+ * 原型设计页面的 底部 工具栏
+ */
+ .skill-layer {
+ 	position: fixed;
+	bottom: 50px;
+	width: 100%;
+	z-index: $skill-layer;
+
+	/**
+	 * 技能栏
+	 */
+	.skill-component {
+		position: relative;
+		text-align: center;
+		font-size: 0;
+
+		.skill-list {
+			margin-bottom: 5px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			.skill-item {
+				display: inline-block;
+				vertical-align: middle;
+				cursor: pointer;
+				margin-right: 5px;
+
+				width: 40px;
+				height: 40px;
+				border: 1px solid rgba($color_grape, 1);
+				border-radius: 5px;
+
+				line-height: 40px;
+				color: rgba($color_grape_darken, 1);
+				font-size: 12px;
+
+				&:last-child {
+					margin-right: 0;
+				}
+
+				/**
+				 * 技能栏里的头像
+				 */
+				.skill-avatar {
+					display: block;
+					width: 40px;
+					height: 40px;
+				}
+			}
+		}
+	}
+ }
