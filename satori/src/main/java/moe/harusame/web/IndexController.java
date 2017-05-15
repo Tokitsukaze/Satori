@@ -20,6 +20,10 @@ public class IndexController {
 			suffix = suffix.split("/satori/")[1];
 		}
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("SESSION_userImpression", session.getAttribute("SESSION_userImpression"));
+		mav.addObject("SESSION_userAvatar", session.getAttribute("SESSION_userAvatar"));
+		mav.addObject("SESSION_nickName", session.getAttribute("SESSION_nickName"));
+		mav.addObject("SESSION_info", session.getAttribute("SESSION_info"));
 		mav.addObject("SESSION_userId", session.getAttribute("SESSION_userId"));
 		mav.addObject("SITE_SUFFIX", suffix);
 		mav.setViewName("index");

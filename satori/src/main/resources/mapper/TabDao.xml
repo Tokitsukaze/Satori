@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- 目的:为 dao接口方法提供 sql语句 -->
+<mapper namespace="moe.harusame.dao.TabDao">	
+
+	<update id="updateTabName">
+		update 
+			tab
+		set
+			name = #{name}, update_date = #{updateDate}
+		where tab_id = #{tabId}
+	</update>
+	
+	<update id="updateTabDate">
+		update 
+			tab
+		set
+			update_date = #{updateDate}
+		where tab_id = #{tabId}
+	</update>
+	
+	<insert id="insertTab">
+		insert ignore into tab (project_id, name)
+		values (#{projectId}, #{name})
+	</insert>
+	
+	<update id="removeTab">
+		update 
+			tab
+		set
+			state = -1
+		where tab_id = #{tabId}
+	</update>
+	
+	<select id="getTabByTabId" resultType="Tab">
+		select tab_id, project_id, name, branch, update_date
+		from tab
+		where project_id = #{projectId}
+		and tab_id = #{tabId}
+		and state = 0
+	</select>
+	
+	<select id="getTabList" resultType="Tab">
+		select tab_id, project_id, name, branch, update_date
+		from tab
+		where project_id = #{projectId}
+		and state = 0
+		order by update_date
+		desc
+	</select>
+	
+</mapper>

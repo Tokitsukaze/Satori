@@ -22,7 +22,6 @@ public class SessionFilter extends OncePerRequestFilter {
 		};
 		
 		String uri = request.getRequestURI();
-		
 		boolean doFilter = true;
 		
         for (String s : notFilter) {  

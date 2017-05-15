@@ -12,12 +12,6 @@ public class Project {
 	private Date createDate;
 	private int state;
 
-	public Project(int projectId, int creator) {
-		super();
-		this.projectId = projectId;
-		this.creator = creator;
-	}
-
 	public int getProjectId() {
 		return projectId;
 	}

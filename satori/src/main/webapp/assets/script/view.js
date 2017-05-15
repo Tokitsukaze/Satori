@@ -48,6 +48,8 @@
 		 * 7. 删除多出来的组件
 		 */
 		updateStage: function (v_new_stage, v_callback) {
+			console.info("SESSION_userId", SESSION_userId)
+			console.info("SESSION_userAvatar", SESSION_userAvatar)
 			if (this.stage === v_new_stage) {
 				console.info('WARNING 相同的视图')
 				return
@@ -57,7 +59,8 @@
 
 			var $fragment = document.createDocumentFragment()
 			/* 1  */
-			var components_required = STAGE[v_new_stage]
+			var components_required = STAGE[v_new_stage]["components"]
+			console.info("components_required", components_required)
 			if (components_required == null) {
 				this.updateStage("index")
 				return
@@ -117,7 +120,7 @@
 		/**
 		 * 更新 home 里的二级菜单
 		 */
-		updateViewHome: function (v_new_route, v_$center, v_$card_list) {
+		updateViewHome: function (v_new_route, v_$center, v_$card_list, v_$count) {
 			var $center = v_$center
 			var $card_list = v_$card_list
 			switch (v_new_route) {
@@ -136,15 +139,20 @@
 					})
 					break
 				case "project":
-					axios.post('/satori/project/' + SESSION_userId + '/getProjectList')
+					axios.post('/satori/home/' + SESSION_userId + '/project')
 					.then(function (response) {
 						var data = response.data
 						if (response.status === 200) {
-							if (data)
-							console.info(response)
-							$center.innerHTML = ""
-							$center.appendChild(Template["home_card_list"](data["data"]))
-							$center.appendChild(Template["home_card_tip"]("项目"))
+							console.info("response", response)
+							var datas = data["data"]
+							var datas_length = datas.length
+							if (datas_length > 0) {
+								v_$count.textContent = datas_length
+								$center.innerHTML = ""
+								$center.appendChild(Template["home_card_list"](datas))
+							} else {
+								$center.appendChild(Template["home_card_tip"]("项目"))
+							}
 						} else {
 							console.log(error);
 							console.log(response)
@@ -183,74 +191,77 @@
 			}
 		},
 
-
-
-
-
-
-
-
-
-		/**
-		 * home/trend
-		 */
-		switchStageToIndex: function () {
-			var _this = this
-			axios.post('/satori/home/10001/trend')
+		updateViewHomeUserInfo: function (v_$name, v_$info, v_$avatar, v_$impression) {
+			axios({
+				"method": "post",
+				"url": "/satori/home/" + SESSION_userId + "/getUser",
+			})
 			.then(function (response) {
-				var data = response.data
-				var $fragment = document.createDocumentFragment()
-				$fragment.appendChild(Template.skill_top())
-				$fragment.appendChild(Template.home(data["data"]))
-				_this.$main_layer.innerHTML = ""
-				_this.$main_layer.appendChild($fragment)
+				var data = response.data.data
+				if (response.status === 200) {
+					console.info(response)
+					v_$name.textContent = data.nickName
+					v_$info.textContent = data.info
+					v_$avatar.setAttribute("src", "assets/images/" + data.avatar)
+					v_$impression.setAttribute("src", "assets/images/" + data.impression)
+				} else {
+					console.log(response)
+				}
 			}).catch(function (error) {
 				console.log(error);
 			})
 		},
 
-		/**
-		 * home/project
-		 */
-		switchStageToProject: function () {
-			var _this = this
-			axios.post('/satori/home/10001/project')
+		updateViewPrototype: function (v_projectId) {
+			axios({
+				"method": "post",
+				"url": "/satori/project/" + v_projectId,
+			})
 			.then(function (response) {
-				var data = response.data
-				var $fragment = document.createDocumentFragment()
-				$fragment.appendChild(Template.skill_top())
-				$fragment.appendChild(Template.home(data["data"]))
-				_this.$main_layer.innerHTML = ""
-				_this.$main_layer.appendChild($fragment)
+				var data = response.data.data
+				if (response.status === 200) {
+					console.info(response)
+				} else {
+					console.log(response)
+				}
 			}).catch(function (error) {
 				console.log(error);
 			})
-		},
-
-		/**
-		 *
-		 */
-		getDOM: function (v_template) {
-
 		}
+
+
+
 	}
 
 	window.View =  new View()
 })({
-	"index": [
-		"skill_top"
-	],
-	"signup": [
-		"skill_top",
-		"signup"
-	],
-	"signin": [
-		"skill_top",
-		"signin"
-	],
-	"home": [
-		"skill_top",
-		"home"
-	]
+	"index": {
+		"components": [
+			"skill_top"
+		],
+	},
+	"signup": {
+		"components": [
+			"skill_top",
+			"signup"
+		],
+	},
+	"signin": {
+		"components": [
+			"skill_top",
+			"signin"
+		],
+	},
+	"home": {
+		"components": [
+			"skill_top",
+			"home"
+		],
+	},
+	"prototype": {
+		"components": [
+			"skill",
+		],
+	}
 })
 

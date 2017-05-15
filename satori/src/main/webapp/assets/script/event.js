@@ -193,8 +193,13 @@
 					})
 					.then(function (response) {
 						if (response.status === 200) {
+							var data = response.data.data
 							console.info(response)
-							SESSION_userId = response.data.data.userId
+							SESSION_userId = data.userId
+							SESSION_info = data.info
+							SESSION_nickName = data.nickName
+							SESSION_userAvatar = data.avatar
+							SESSION_userImpression = data.impression
 							View.updateStage("index")
 						} else {
 							console.log(response);
@@ -300,41 +305,13 @@
 			v_$el.addEventListener('click', function (event) {
 				event.preventDefault()
 				View.updateViewHome("trend", v_$center, v_$card_list)
-
-				axios({
-					"method": "post",
-					"url": "/satori/home/" + SESSION_userId + "/trend",
-				})
-				.then(function (response) {
-					if (response.status === 200) {
-						console.info(response)
-					} else {
-						console.log(response)
-					}
-				}).catch(function (error) {
-					console.log(error);
-				})
 			})
 		},
 
-		home_project: function (v_$el, v_$center, v_$card_list) {
+		home_project: function (v_$el, v_$center, v_$card_list, v_$count) {
 			v_$el.addEventListener('click', function (event) {
 				event.preventDefault()
-				View.updateViewHome("project", v_$center, v_$card_list)
-
-				axios({
-					"method": "post",
-					"url": "/satori/home/" + SESSION_userId + "/project",
-				})
-				.then(function (response) {
-					if (response.status === 200) {
-						console.info(response)
-					} else {
-						console.log(response)
-					}
-				}).catch(function (error) {
-					console.log(error);
-				})
+				View.updateViewHome("project", v_$center, v_$card_list, v_$count)
 			})
 		},
 
@@ -345,31 +322,17 @@
 			})
 		},
 
-		home_denpa: function (v_$el, v_$center, v_$card_list) {
+		home_denpa: function (v_$el, v_$center, v_$card_list, v_$count) {
 			v_$el.addEventListener('click', function (event) {
 				event.preventDefault()
-				View.updateViewHome("denpa", v_$center, v_$card_list)
-
-				axios({
-					"method": "post",
-					"url": "/satori/home/" + SESSION_userId + "/denpa",
-				})
-				.then(function (response) {
-					if (response.status === 200) {
-						console.info(response)
-					} else {
-						console.log(response)
-					}
-				}).catch(function (error) {
-					console.log(error);
-				})
+				View.updateViewHome("denpa", v_$center, v_$card_list, v_$count)
 			})
 		},
 
-		home_store: function (v_$el, v_$center, v_$card_list) {
+		home_store: function (v_$el, v_$center, v_$card_list, v_$count) {
 			v_$el.addEventListener('click', function (event) {
 				event.preventDefault()
-				View.updateViewHome("store", v_$center, v_$card_list)
+				View.updateViewHome("store", v_$center, v_$card_list, v_$count)
 			})
 		},
 
@@ -379,6 +342,37 @@
 				View.updateViewHome("setting", v_$center, v_$card_list)
 			})
 		},
+
+		home_center: function (v_$el) {
+			v_$el.addEventListener('click', function (event) {
+				event.preventDefault()
+				var $target = event.target
+				var href = $target.getAttribute("href")
+				if (href != null) {
+					View.updateStage("prototype")
+					View.updateViewPrototype(href.split("/satori/project/")[1])
+				}
+			})
+		},
+
+		/**
+		 * Prototype 相关
+		 */
+		activePrototpye: function (v_$skill_list) {
+			// new Prototype(v_$skill_list)
+		},
+
+
+
+
+
+
+
+
+
+
+
+
 
 		setting_nickName: function (v_$el, v_$tip) {
 			var _this = this

@@ -48,4 +48,6 @@ public interface ProjectDao {
 	 * @return
 	 */
 	List<Project> getProjectList (int creator);
+	
+	Project getProjectByProjectId (@Param("projectId") int projectId, @Param("creator") int creator);
 }

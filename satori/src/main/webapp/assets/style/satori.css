@@ -670,32 +670,32 @@
   /* 登陆框 */
   /* 个人主页 */
 }
-.main-layer .skill-component {
+.main-layer .skill-top-component {
   position: relative;
   width: 100%;
   height: 40px;
   line-height: 40px;
   background-color: white;
 }
-.main-layer .skill-component .skill-list-container {
+.main-layer .skill-top-component .skill-list-container {
   margin: 0 auto;
   width: 1200px;
   height: 40px;
   font-size: 0;
 }
-.main-layer .skill-component .skill-list-container .skill-list {
+.main-layer .skill-top-component .skill-list-container .skill-list {
   display: inline-block;
   height: 40px;
 }
-.main-layer .skill-component .skill-list-container .skill-list .skill-item {
+.main-layer .skill-top-component .skill-list-container .skill-list .skill-item {
   display: inline-block;
 }
-.main-layer .skill-component .skill-list-container .skill-list .skill-item .skill-item-link {
+.main-layer .skill-top-component .skill-list-container .skill-list .skill-item .skill-item-link {
   display: block;
   font-size: 12px;
   padding: 0 15px;
 }
-.main-layer .skill-component .skill-list-container .skill-list:last-child {
+.main-layer .skill-top-component .skill-list-container .skill-list:last-child {
   float: right;
 }
 .main-layer .signup-component, .main-layer .signin-component {

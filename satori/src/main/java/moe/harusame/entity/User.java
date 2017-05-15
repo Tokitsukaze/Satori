@@ -15,31 +15,6 @@ public class User {
 	private Date signupDate;
 	private int state;
 
-//	public User(String loginName, String password) {
-//		super();
-//		this.loginName = loginName;
-//		this.password = password;
-//	}
-//
-//	public User(String loginName, String password, String nickName) {
-//		super();
-//		this.loginName = loginName;
-//		this.password = password;
-//		this.nickName = nickName;
-//	}
-//
-//	public User(int userId, String nickName, String avatar, String impression, String info, String email,
-//			String signupDate) {
-//		super();
-//		this.userId = userId;
-//		this.nickName = nickName;
-//		this.avatar = avatar;
-//		this.impression = impression;
-//		this.info = info;
-//		this.email = email;
-//		this.signupDate = signupDate;
-//	}
-
 	public int getUserId() {
 		return userId;
 	}

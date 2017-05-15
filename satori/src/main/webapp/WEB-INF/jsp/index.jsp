@@ -18,6 +18,10 @@
 </body>
 <script>
 	var SITE_SUFFIX = '${SITE_SUFFIX}'
+	var SESSION_info = '${SESSION_info}'
+	var SESSION_nickName = '${SESSION_nickName}'
+	var SESSION_userAvatar = '${SESSION_userAvatar}'
+	var SESSION_userImpression = '${SESSION_userImpression}'
 	var SESSION_userId = '${SESSION_userId}'
 </script>
 <script src="${ctx}/assets/script/third-party/axios.min.js"></script>

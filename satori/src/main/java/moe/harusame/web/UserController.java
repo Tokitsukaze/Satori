@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import moe.harusame.dto.Card;
 import moe.harusame.dto.Result;
-import moe.harusame.entity.Card;
+import moe.harusame.entity.Project;
 import moe.harusame.entity.User;
 import moe.harusame.service.ProjectService;
 import moe.harusame.service.UserService;
@@ -91,6 +92,10 @@ public class UserController {
 		Result<User> result = userService.login(user.getLoginName(), user.getPassword());
 		User resultUser = result.getData();
 		if (resultUser != null) {
+			session.setAttribute("SESSION_info", resultUser.getInfo());
+			session.setAttribute("SESSION_nickName", resultUser.getNickName());
+			session.setAttribute("SESSION_userAvatar", resultUser.getAvatar());
+			session.setAttribute("SESSION_userImpression", resultUser.getImpression());
 			session.setAttribute("SESSION_userId", resultUser.getUserId());
 		}
 		return result;
@@ -153,19 +158,26 @@ public class UserController {
 		produces = {"application/json; charset=UTF-8"}
 	)
 	@ResponseBody
-	public Result<List<Card>> getCardList (@PathVariable("userId") String userId, @PathVariable("type") String type) {
+	public Result<List<Card>> getCardList (@PathVariable("userId") Integer userId, @PathVariable("type") String type) {
 		List<Card> list = new ArrayList<Card>();
 		switch (type) {
 			case "trend":
-				list.add(new Card("denpa", "夕立酱", "夕立desu", "assets/images/poi.png"));
-				list.add(new Card("denpa", "春雨酱", "春雨desu", "assets/images/poi.png"));
-				list.add(new Card("denpa", "时雨酱", "时雨desu", "assets/images/poi.png"));
+				list.add(new Card("denpa", "1" ,"夕立酱", "夕立desu", "assets/images/poi.png"));
+				list.add(new Card("denpa", "2", "春雨酱", "春雨desu", "assets/images/poi.png"));
+				list.add(new Card("denpa", "3", "时雨酱", "时雨desu", "assets/images/poi.png"));
 				break;
 			
 			case "project":
-				list.add(new Card("project", "大学社团管理系统", "一个简单的社团管理系统", new Date()));
+				List<Project> project_list = projectService.getProjectList(userId).getData();
+				System.out.println("project_list:" + project_list);
+				for (int i = 0; i < project_list.size(); i++) {
+					Project pro = project_list.get(i);
+					System.out.println("projectId" + pro.getProjectId());
+					list.add(new Card("project", pro.getProjectId() + "", pro.getName(), pro.getInfo(), pro.getCreateDate()));
+				}
+				/*list.add(new Card("project", "大学社团管理系统", "一个简单的社团管理系统", new Date()));
 				list.add(new Card("project", "夕立酱", "夕立desu", new Date()));
-				list.add(new Card("project", "夕立酱", "夕立desu", new Date()));
+				list.add(new Card("project", "夕立酱", "夕立desu", new Date()));*/
 				break;
 			
 			case "store":

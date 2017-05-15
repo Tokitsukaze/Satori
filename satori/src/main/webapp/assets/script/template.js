@@ -30,6 +30,11 @@
 				$util_layer: VD.compile(e('div', {'class': 'util-layer'})),
 				$skill_layer: VD.compile(e('div', {'class': 'skill-layer'}))
 			}
+
+			/**
+			 * mask 图层
+			 */
+			this.mask = VD.compile(e('div', {'class': 'mask'}))
 		},
 
 		/**
@@ -59,7 +64,7 @@
 			SatoriEvent.skill_top_signin($signin)
 
 			return VD.compile(
-				e("div", {"class": "skill-component"}, [
+				e("div", {"class": "skill-top-component"}, [
 					e("div", {"class": "skill-list-container"}, [
 						e("ul", {"class": "skill-list"}, [
 							$index,
@@ -114,7 +119,7 @@
 			SatoriEvent.skill_top_home($home)
 
 			return VD.compile(
-				e("div", {"class": "skill-component"}, [
+				e("div", {"class": "skill-top-component"}, [
 					e("div", {"class": "skill-list-container"}, [
 						e("ul", {"class": "skill-list"}, [
 							$index,
@@ -137,12 +142,23 @@
 		 * 个人主页
 		 */
 		home: function () {
+			setTimeout(function () {
+				View.updateViewHome("project", $center, $card_list, $project_count)
+				View.updateViewHomeUserInfo($name, $info, $avatar, $impression)
+			})
 			var $card_list = VD.compile(e("ul", {"class": "card-list"}))
 
 			var $trend = VD.compile(e("a", {"class": "item-name"}, "动态"))
+
+			var $project_count = VD.compile(e("span", {"class": "statistics-count"}, "0"))
 			var $project = VD.compile(e("a", {"class": "item-name"}, "项目"))
+
 			var $note = VD.compile(e("a", {"class": "item-name", "href": ""}, "笔记"))
+
+			var $denpa_count = VD.compile(e("span", {"class": "statistics-count"}, "0"))
 			var $denpa = VD.compile(e("a", {"class": "item-name", "href": ""}, "电波"))
+
+			var $store_count = VD.compile(e("span", {"class": "statistics-count"}, "0"))
 			var $store = VD.compile(e("a", {"class": "item-name", "href": ""}, "仓库"))
 			var $setting = VD.compile(e("a", {"class": "item-name", "href": ""}, "设置"))
 
@@ -152,23 +168,30 @@
 				])
 			)
 
+			SatoriEvent.home_center($center)
+
 			SatoriEvent.home_trend($trend, $center, $card_list)
-			SatoriEvent.home_project($project, $center, $card_list)
+			SatoriEvent.home_project($project, $center, $card_list, $project_count)
 			SatoriEvent.home_note($note, $center, $card_list)
-			SatoriEvent.home_denpa($denpa, $center, $card_list)
-			SatoriEvent.home_store($store, $center, $card_list)
+			SatoriEvent.home_denpa($denpa, $center, $card_list, $denpa_count )
+			SatoriEvent.home_store($store, $center, $card_list, $store_count)
 			SatoriEvent.home_setting($setting, $center, $card_list)
+
+			var $name = VD.compile(e("h1", {"class": "user-name"}))
+			var $info = VD.compile(e("p", {"class": "user-introduce"}))
+			var $impression = VD.compile(e("img", {"src": "assets/images/serval.png", "class": "impression-5x"}))
+			var $avatar = VD.compile(e("img", {"src": "assets/images/serval.png", "class": "user-avatar-5x"}))
 
 			return VD.compile(
 				e("div", {"class": "home-component"}, [
 					e("div", {"class": "impression-component"}, [
 						e("div", {"class": "impression-container"}, [
-							e("img", {"src": "assets/images/he_img.jpg", "class": "impression-5x"})
+							$impression
 						]),
 					]),
 					e("div", {"class": "statistics-component"}, [
 						e("div", {"class": "user-avatar-container"}, [
-							e("img", {"src": "assets/images/harusame.png", "class": "user-avatar-5x"}),
+							$avatar
 						]),
 						e("div", {"class": "statistics-container"}, [
 							e("ul", {"class": "statistics-list"}, [
@@ -177,7 +200,7 @@
 									$trend
 								]),
 								e("li", {"class": "statistics-item"}, [
-									e("span", {"class": "statistics-count"}, "0"),
+									$project_count,
 									$project
 								]),
 								e("li", {"class": "statistics-item"}, [
@@ -185,11 +208,11 @@
 									$note
 								]),
 								e("li", {"class": "statistics-item"}, [
-									e("span", {"class": "statistics-count"}, "0"),
+									$denpa_count,
 									$denpa
 								]),
 								e("li", {"class": "statistics-item"}, [
-									e("span", {"class": "statistics-count"}, "0"),
+									$store_count,
 									$store
 								]),
 								e("li", {"class": "statistics-item"}, [
@@ -206,9 +229,9 @@
 							]),
 							e("div", {"class": "left"}, [
 								e("div", {"class": "info-container"}, [
-									e("h1", {"class": "user-name"}, "时津风"),
+									$name,
 									e("h2", {"class": "user-state"}),
-									e("p", {"class": "user-introduce"}, "阳炎型十号舰的时津风哟。和雪风、初风、天津风编成了第十六驱逐队，我们可是很努力了呢！也加入过二水战哦，真的真的。但是，没有制海权的海域…稍微有点不太喜欢呢…")
+									$info
 								]),
 							]),
 							e("div", {"class": "right"}, [
@@ -472,7 +495,7 @@
 					]),
 					e("div", {"class": "right"}, [
 						e("div", {"class": "info-container"}, [
-							e("span", {"class": "title"}, v_data.title),
+							e("a", {"class": "title", "href": "/satori/project/" + v_data.id}, v_data.title),
 							e("div", {"class": "date"}, v_data.date),
 							e("p", {"class": "content"}, v_data.content)
 						]),
@@ -540,6 +563,136 @@
 
 			return VD.compile(e("ul", {"class": "card-list"}, [$card_list]))
 		},
+
+
+		skill: function () {
+			// VD.compile()
+			var $avatar = VD.compile(e("img", {"class": "skill-avatar", "alt": SESSION_nickName, "src": "assets/images/" + SESSION_userAvatar}))
+
+			var $tab = VD.compile(e("span", {"class": "skill-name"}, "Tab"))
+
+			SatoriEvent.activePrototpye({
+				"$tab": $tab
+			})
+
+			return VD.compile(
+				e("div", {"class": "skill-layer"}, [
+					e("div", {"class": "skill-component"}, [
+						e("ul", {"class": "skill-list"}, [
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "盒子")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "编辑")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "新建")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "历史")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "没有")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "代码")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "注解")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "事件")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "动画")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "操作")
+							])
+						]),
+						e("ul", {"class": "skill-list"}, [
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "当前")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "预览")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								$tab
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "效果")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "计划")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "地图")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "组")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "IO")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "分支")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "载入")
+							])
+						]),
+						e("ul", {"class": "skill-list"}, [
+							e("li",  {"class": "skill-item"}, [
+								$avatar
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "项目")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "仓库")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "笔记")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "好友")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "设置")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "消息")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "搜索")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "地图")
+							]),
+							e("li",  {"class": "skill-item"}, [
+								e("span", {"class": "skill-name"}, "主页")
+							])
+						])
+					])
+				])
+			)
+		},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 
 	window.Template = new Template()

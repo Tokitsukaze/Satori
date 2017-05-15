@@ -47,5 +47,11 @@
 		and state = 0
 	</select>
 	
-
+	<select id="getProjectByProjectId" resultType="Project">
+		select project_id, name, info, logo, create_date
+		from project
+		where creator = #{creator}
+		and project_id= #{projectId}
+		and state = 0
+	</select>
 </mapper>

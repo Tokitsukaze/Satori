@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import moe.harusame.dto.Card;
 import moe.harusame.dto.Result;
-import moe.harusame.entity.Card;
 import moe.harusame.entity.Project;
 import moe.harusame.entity.User;
 import moe.harusame.service.ProjectService;
@@ -47,6 +47,16 @@ public class ProjectController {
 	)
 	@ResponseBody
 	public Result<List<Project>> getProjectList(@PathVariable("userId") int userId) {
+		return projectService.getProjectList(userId);
+	}
+	
+	@RequestMapping(
+		value = "/project/{userId}",
+		method = RequestMethod.POST,
+		produces = {"application/json; charset=UTF-8"}
+	)
+	@ResponseBody
+	public Result<List<Project>> project (@PathVariable("userId") int userId) {
 		return projectService.getProjectList(userId);
 	}
 }
