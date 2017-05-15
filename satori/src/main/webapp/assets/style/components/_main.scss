@@ -24,9 +24,11 @@ $home_width: 1200px;
 				height: 40px;
 				.skill-item {
 					display: inline-block;
-
-					font-size: 12px;
-					padding: 0 15px;
+					.skill-item-link {
+						display: block;
+						font-size: 12px;
+						padding: 0 15px;
+					}
 				}
 
 				&:last-child {
@@ -117,7 +119,6 @@ $home_width: 1200px;
 	}
 	/* 登陆框 */
 	.signin-component {
-		display: none;
 		margin-top: 200px;
 		text-align: center;
 		.form-container {
@@ -249,8 +250,8 @@ $home_width: 1200px;
 				}
 
 				.center-wrap {
-					float: left;
 					width: 100%;
+					float: left;
 
 					.center {
 						margin: 0 300px 0 250px;
@@ -297,6 +298,13 @@ $home_width: 1200px;
 									color: rgba($color_white, 1);
 								}
 							}
+							.type-input {
+								.card-avatar-container {
+									border: 1px solid rgba($color_aqua_darken, 1);
+									background-color: rgba($color_aqua, 1);
+									color: rgba($color_white, 1);
+								}
+							}
 							.card-item {
 								margin: 15px 25px 50px 25px;
 								.left {
@@ -332,6 +340,15 @@ $home_width: 1200px;
 										.content {
 											font-size: 14px;
 										}
+
+										.i-r-input {
+											margin-bottom: 10px;
+											padding: 0 10px;
+											width: 100%;
+											box-sizing: border-box;
+											border-radius: 5px;
+											color: rgb(101, 109, 120);
+										}
 									}
 								}
 							}
@@ -341,8 +358,29 @@ $home_width: 1200px;
 
 				> .right {
 					float: left;
+					margin-top: 15px;
 					margin-left: -300px;
 					width: 300px;
+
+					.create-menu-container {
+
+						.create-menu-list {
+
+							.create-menu-item {
+								display: inline-block;
+								margin-right: 1px;
+								font-size: 12px;
+								text-align: center;
+								width: 60px;
+								height: 80px;
+								line-height: 80px;
+
+								border: 1px solid rgba($color_aqua_darken, 1);
+								background-color: rgba($color_white, 1);
+								color: rgba($color_aqua, 1);
+							}
+						}
+					}
 				}
 			}
 		}

@@ -39,6 +39,14 @@
 		where user_id = #{userId}
 	</update>
 	
+	<update id="updateNickName">
+		update 
+			user
+		set
+			nick_name = #{nickName}
+		where user_id = #{userId}
+	</update>
+	
 	<update id="updateAvatar">
 		update 
 			user
@@ -56,7 +64,7 @@
 	</update>
 
 	<insert id="insertUser">
-		insert ignore into user (login_name, password)
-		values (#{loginName}, #{password})
+		insert ignore into user (login_name, password, nick_name)
+		values (#{loginName}, #{password}, #{nickName})
 	</insert>
 </mapper>

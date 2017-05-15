@@ -56,7 +56,7 @@ public class UserDaoTest {
 	public void insertUser() throws Exception {
 		String loginName = "demo";
 		String password = "demo";
-		int user = userDao.insertUser(loginName, password);
+		int user = userDao.insertUser(loginName, password, "123456");
 		System.out.println(user);
 	}
 	

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import moe.harusame.dto.Result;
 import moe.harusame.entity.Card;
 
-@Controller
+/*@Controller
 @RequestMapping("/home")
 public class HomeCrotroller {
 		
@@ -39,7 +39,7 @@ public class HomeCrotroller {
 				break;
 		}
 		
-		Result<List<Card>> result = new Result<List<Card>>(200, "获取成功", list);
+		Result<List<Card>> result = new Result<List<Card>>("200", "获取成功", list);
 		return result;
 	}
-}
+}*/

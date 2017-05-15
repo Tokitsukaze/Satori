@@ -44,6 +44,14 @@ public interface UserDao {
 	int updateInfo (@Param("userId") int userId, @Param("info") String info);
 	
 	/**
+	 * 更新昵称
+	 * @param userId
+	 * @param nickName
+	 * @return
+	 */
+	int updateNickName (@Param("userId") int userId, @Param("nickName") String nickName);
+	
+	/**
 	 * 更新头像
 	 * @param userId
 	 * @param avatar
@@ -65,5 +73,5 @@ public interface UserDao {
 	 * @param password
 	 * @return
 	 */
-	int insertUser (@Param("loginName") String loginName, @Param("password") String password);
+	int insertUser (@Param("loginName") String loginName, @Param("password") String password, @Param("nickName") String nickName);
 }

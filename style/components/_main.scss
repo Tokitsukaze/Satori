@@ -296,6 +296,13 @@ $home_width: 1200px;
 									color: rgba($color_white, 1);
 								}
 							}
+							.type-input {
+								.card-avatar-container {
+									border: 1px solid rgba($color_aqua_darken, 1);
+									background-color: rgba($color_aqua, 1);
+									color: rgba($color_white, 1);
+								}
+							}
 							.card-item {
 								margin: 15px 25px 50px 25px;
 								.left {
@@ -330,6 +337,15 @@ $home_width: 1200px;
 										}
 										.content {
 											font-size: 14px;
+										}
+
+										.i-r-input {
+											margin-bottom: 10px;
+											padding: 0 10px;
+											width: 100%;
+											box-sizing: border-box;
+											border-radius: 5px;
+											color: rgb(101, 109, 120);
 										}
 									}
 								}

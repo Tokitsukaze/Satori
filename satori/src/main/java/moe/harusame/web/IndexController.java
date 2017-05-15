@@ -1,25 +1,28 @@
 package moe.harusame.web;
 
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndexController {
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String list(Model model) {
-		return "index";
+	public ModelAndView index(Model model, HttpSession session, @RequestParam(value = "suffix", required = false) String suffix) {
+		System.out.println("SUFFIX:" + suffix);
+		if (suffix == null) {
+			suffix = "index";
+		} else {
+			suffix = suffix.split("/satori/")[1];
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("SESSION_userId", session.getAttribute("SESSION_userId"));
+		mav.addObject("SITE_SUFFIX", suffix);
+		mav.setViewName("index");
+		return mav;
 	}
 }

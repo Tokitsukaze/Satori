@@ -1,13 +1,22 @@
 package moe.harusame.web;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import moe.harusame.dto.Result;
+import moe.harusame.entity.Card;
 import moe.harusame.entity.User;
+import moe.harusame.service.ProjectService;
 import moe.harusame.service.UserService;
 
 @Controller
@@ -15,6 +24,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ProjectService projectService;
 	
 	/**
 	 * 注册
@@ -75,8 +87,95 @@ public class UserController {
 		produces = {"application/json; charset=UTF-8"}
 	)
 	@ResponseBody
-	public Result<User> signin(User user) {
-		System.out.println("signin:" + user);
-		return userService.login(user.getLoginName(), user.getPassword());
+	public Result<User> signin(User user, HttpSession session) {
+		Result<User> result = userService.login(user.getLoginName(), user.getPassword());
+		User resultUser = result.getData();
+		if (resultUser != null) {
+			session.setAttribute("SESSION_userId", resultUser.getUserId());
+		}
+		return result;
+	}
+	
+	/**
+	 * 修改信息
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(
+		value = "/home/{userId}/updateInfo",
+		method = RequestMethod.POST,
+		produces = {"application/json; charset=UTF-8"}
+	)
+	@ResponseBody
+	public Result<Integer> updateInfo(@PathVariable("userId") int userId, User user) {
+		System.out.println("info:" + user);
+		Result<Integer> result = userService.updateInfo(userId, user.getInfo());
+		return result;
+	}
+	
+	/**
+	 * 修改昵称
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(
+		value = "/home/{userId}/updateNickName",
+		method = RequestMethod.POST,
+		produces = {"application/json; charset=UTF-8"}
+	)
+	@ResponseBody
+	public Result<Integer> updateNickName(@PathVariable("userId") int userId, User user) {
+		Result<Integer> result = userService.updateNickName(userId, user.getNickName());
+		return result;
+	}
+	
+	
+	
+	/**
+	 * 根据 uid 获得一个用户
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(
+		value = "/home/{userId}/getUser",
+		method = RequestMethod.POST,
+		produces = {"application/json; charset=UTF-8"}
+	)
+	@ResponseBody
+	public Result<User> getUser(@PathVariable("userId") int userId) {
+		Result<User> result = userService.getUserById(userId);
+		return result;
+	}
+	
+	@RequestMapping(
+		value = "/home/{userId}/{type}",
+		method = RequestMethod.POST,
+		produces = {"application/json; charset=UTF-8"}
+	)
+	@ResponseBody
+	public Result<List<Card>> getCardList (@PathVariable("userId") String userId, @PathVariable("type") String type) {
+		List<Card> list = new ArrayList<Card>();
+		switch (type) {
+			case "trend":
+				list.add(new Card("denpa", "夕立酱", "夕立desu", "assets/images/poi.png"));
+				list.add(new Card("denpa", "春雨酱", "春雨desu", "assets/images/poi.png"));
+				list.add(new Card("denpa", "时雨酱", "时雨desu", "assets/images/poi.png"));
+				break;
+			
+			case "project":
+				list.add(new Card("project", "大学社团管理系统", "一个简单的社团管理系统", new Date()));
+				list.add(new Card("project", "夕立酱", "夕立desu", new Date()));
+				list.add(new Card("project", "夕立酱", "夕立desu", new Date()));
+				break;
+			
+			case "store":
+				break;
+			
+			case "note":
+				break;
+		}
+		
+		Result<List<Card>> result = new Result<List<Card>>("200", "获取成功", list);
+		return result;
 	}
 }

@@ -17,7 +17,8 @@
 	</div>
 </body>
 <script>
-	var SESSION_userId = null
+	var SITE_SUFFIX = '${SITE_SUFFIX}'
+	var SESSION_userId = '${SESSION_userId}'
 </script>
 <script src="${ctx}/assets/script/third-party/axios.min.js"></script>
 <script src="${ctx}/assets/script/vd.js"></script>

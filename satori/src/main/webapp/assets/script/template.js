@@ -33,17 +33,76 @@
 		},
 
 		/**
+		 * 顶部技能栏，未登录
+		 */
+		skill_top_false: function () {
+			var $index = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/index"}, "首页")
+			]))
+			var $map = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/index"}, "地图")
+			]))
+			var $search = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/index"}, "搜索")
+			]))
+			var $signup = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/index"}, "注册")
+			]))
+			var $signin = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/index"}, "登陆")
+			]))
+
+			SatoriEvent.skill_top_index($index)
+			SatoriEvent.skill_top_map($map)
+			SatoriEvent.skill_top_search($search)
+			SatoriEvent.skill_top_signup($signup)
+			SatoriEvent.skill_top_signin($signin)
+
+			return VD.compile(
+				e("div", {"class": "skill-component"}, [
+					e("div", {"class": "skill-list-container"}, [
+						e("ul", {"class": "skill-list"}, [
+							$index,
+							$map,
+							$search
+						]),
+						e("ul", {"class": "skill-list"}, [
+							$signup,
+							$signin
+						])
+					])
+				])
+			)
+		},
+
+		/**
 		 * 顶部技能栏
 		 */
-		skill_top: function () {
-			var $index = VD.compile(e("li", {"class": "skill-item"}, "主页"))
-			var $map = VD.compile(e("li", {"class": "skill-item"}, "地图"))
-			var $search = VD.compile(e("li", {"class": "skill-item"}, "搜索"))
-			var $project = VD.compile(e("li", {"class": "skill-item"}, "项目"))
-			var $store = VD.compile(e("li", {"class": "skill-item"}, "仓库"))
-			var $note = VD.compile(e("li", {"class": "skill-item"}, "笔记"))
-			var $denpa = VD.compile(e("li", {"class": "skill-item"}, "电波"))
-			var $home = VD.compile(e("li", {"class": "skill-item"}, "HOME"))
+		skill_top_true: function () {
+			var $index = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/index"}, "首页")
+			]))
+			var $map = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/map"}, "地图")
+			]))
+			var $search = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "搜索")
+			]))
+			var $project = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "项目")
+			]))
+			var $store = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "仓库")
+			]))
+			var $note = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "笔记")
+			]))
+			var $denpa = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "电波")
+			]))
+			var $home = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "HOME")
+			]))
 
 			SatoriEvent.skill_top_index($index)
 			SatoriEvent.skill_top_map($map)
@@ -87,12 +146,18 @@
 			var $store = VD.compile(e("a", {"class": "item-name", "href": ""}, "仓库"))
 			var $setting = VD.compile(e("a", {"class": "item-name", "href": ""}, "设置"))
 
-			SatoriEvent.home_trend($trend)
-			SatoriEvent.home_project($project)
-			SatoriEvent.home_note($note)
-			SatoriEvent.home_denpa($denpa)
-			SatoriEvent.home_store($store)
-			SatoriEvent.home_setting($setting)
+			var $center = VD.compile(
+				e("div", {"class": "center"}, [
+					$card_list
+				])
+			)
+
+			SatoriEvent.home_trend($trend, $center, $card_list)
+			SatoriEvent.home_project($project, $center, $card_list)
+			SatoriEvent.home_note($note, $center, $card_list)
+			SatoriEvent.home_denpa($denpa, $center, $card_list)
+			SatoriEvent.home_store($store, $center, $card_list)
+			SatoriEvent.home_setting($setting, $center, $card_list)
 
 			return VD.compile(
 				e("div", {"class": "home-component"}, [
@@ -137,14 +202,7 @@
 					e("div", {"class": "info-component-wrap"}, [
 						e("div", {"class": "info-component"}, [
 							e("div", {"class": "center-wrap"}, [
-								e("div", {"class": "center"}, [
-									e("div", {"class": "state-component"}, [
-										e("div", {"class": "state-no-card"}, [
-											e("span", {"class": "state-illustate"}, "还没有动态哦"),
-										]),
-									]),
-									$card_list
-								])
+								$center
 							]),
 							e("div", {"class": "left"}, [
 								e("div", {"class": "info-container"}, [
@@ -153,20 +211,106 @@
 									e("p", {"class": "user-introduce"}, "阳炎型十号舰的时津风哟。和雪风、初风、天津风编成了第十六驱逐队，我们可是很努力了呢！也加入过二水战哦，真的真的。但是，没有制海权的海域…稍微有点不太喜欢呢…")
 								]),
 							]),
-							e("div", {"class": "right"}, "")
+							e("div", {"class": "right"}, [
+								e("div", {"class": "create-menu-container"}, [
+									e("ul", {"class": "create-menu-list"}, [
+										e("li", {"class": "create-menu-item"}, "创建项目"),
+										e("li", {"class": "create-menu-item"}, "创建笔记"),
+									])
+								])
+							])
 						])
 					])
 				])
 			)
 		},
 
+		home_card_tip: function (v_data) {
+			return VD.compile(
+				e("div", {"class": "state-component"}, [
+					e("div", {"class": "state-no-card"}, [
+						e("span", {"class": "state-illustate"}, "还没有" + v_data + "哦"),
+					])
+				])
+			)
+		},
+
+		/**
+		 * home 下的设置
+		 */
+		home_setting: function (v_data) {
+			var $setting_nickName = VD.compile(e("input", {"type": "text", "name": "nickName", "class": "r-input i-r-input", "placeholder": "不能为空的昵称", "value": v_data.nickName}))
+			var $setting_nickNameTip = VD.compile(e("span", {"class": "i-r-result"}))
+
+			var $setting_info = VD.compile(e("textarea", {"type": "text","name": "info", "class": "r-input i-r-input", "placeholder": "个人信息", "style": "height: 200px; padding-top: 10px;"}, v_data.info))
+			var $setting_infoTip = VD.compile(e("span", {"class": "i-r-result"}))
+
+			SatoriEvent.setting_nickName($setting_nickName, $setting_nickNameTip)
+			SatoriEvent.setting_info($setting_info, $setting_infoTip)
+
+			return VD.compile(
+				e("ul", {"class": "card-list"}, [
+					e("li", {"class": "card-item type-input"}, [
+						e("div", {"class": "left"}, [
+							e("div", {"class": "card-avatar-container"}, [
+								e("img", {"src": "", "alt": "昵称", "class": "card-avatar-5x"})
+							]),
+						]),
+						e("div", {"class": "right"}, [
+							e("div", {"class": "info-container"}, [
+								$setting_nickName,
+								$setting_nickNameTip,
+								e("ul", {"class": "condition-list"}, [
+									e("li", {"class": "condition-item"}, "一位以上"),
+									e("li", {"class": "condition-item"}, "二十位以下"),
+									e("li", {"class": "condition-item"}, "特殊标点符号除外")
+								]),
+							])
+						])
+					]),
+					e("li", {"class": "card-item type-input"}, [
+						e("div", {"class": "left"}, [
+							e("div", {"class": "card-avatar-container"}, [
+								e("img", {"src": "", "alt": "信息", "class": "card-avatar-5x"})
+							]),
+						]),
+						e("div", {"class": "right"}, [
+							e("div", {"class": "info-container"}, [
+								$setting_info,
+								$setting_infoTip
+							])
+						])
+					])
+				])
+			)
+		},
+
+
+
+
 		/**
 		 * 注册页面
 		 */
 		signup: function () {
+			var $loginName = VD.compile(e("input", {"type": "text", "name": "loginName", "class": "r-input i-r-input", "placeholder": "登陆用的用户名，不是昵称哦"}))
+			var $loginNameTip = VD.compile(e("span", {"class": "i-r-result"}))
+
+			var $password = VD.compile(e("input", {"type": "text", "name": "password", "class": "r-input i-r-input", "placeholder": "登陆用的验证密码"}))
+			var $passwordTip = VD.compile(e("span", {"class": "i-r-result"}))
+
+			var $password_again = VD.compile(e("input", {"type": "text", "class": "r-input i-r-input", "placeholder": "保证跟上面一样"}))
+			var $password_againTip = VD.compile(e("span", {"class": "i-r-result"}))
+
+			var $signup_button = VD.compile(e("div", {"class": "next r-submit i-r-submit"}, "确认注册"))
+
+			SatoriEvent.input_signup_loginName($loginName, $loginNameTip)
+			SatoriEvent.input_signup_password($password, $passwordTip)
+			SatoriEvent.input_signup_password_again($password_again, $password, $password_againTip)
+			SatoriEvent.input_signup_button($signup_button, $loginName, $password)
+
 			return VD.compile(
 				e("div", {"class": "signup-component"}, [
-					e("ul", {"class": "card-list"}, [
+					e("ul", {"class": "card-list part_one"}, [
 						e("li", {"class": "card-item type-input"}, [
 							e("div", {"class": "card-wrap"}, [
 								e("div", {"class": "left"}, [
@@ -176,10 +320,8 @@
 								]),
 								e("div", {"class": "right"}, [
 									e("div", {"class": "info-container"}, [
-										e("input", {"type": "text", "class": "r-input i-r-input", "placeholder": "登陆用的用户名，不是昵称哦"}),
-										e("span", {"class": "r-result-error i-r-result"}, "该用户名已经被占用啦"),
-										e("span", {"class": "r-result-error i-r-result"}, "用户名不符合规范"),
-										e("span", {"class": "r-result-success i-r-result"}, "是新朋友哦"),
+										$loginName,
+										$loginNameTip,
 										e("ul", {"class": "condition-list"}, [
 											e("li", {"class": "condition-item"}, "六位以上"),
 											e("li", {"class": "condition-item"}, "二十位以下"),
@@ -199,10 +341,8 @@
 								]),
 								e("div", {"class": "right"}, [
 									e("div", {"class": "info-container"}, [
-										e("input", {"type": "text", "class": "r-input i-r-input", "placeholder": "登陆用的验证密码"}),
-										e("span", {"class": "r-result-error i-r-result"}, "该用户名已经被占用啦"),
-										e("span", {"class": "r-result-error i-r-result"}, "用户名不符合规范"),
-										e("span", {"class": "r-result-success i-r-result"}, "是新朋友哦"),
+										$password,
+										$passwordTip,
 										e("ul", {"class": "condition-list"}, [
 											e("li", {"class": "condition-item"}, "六位以上"),
 											e("li", {"class": "condition-item"}, "二十位以下"),
@@ -223,9 +363,8 @@
 								]),
 								e("div", {"class": "right"}, [
 									e("div", {"class": "info-container"}, [
-										e("input", {"type": "text", "class": "r-input i-r-input", "placeholder": "保证跟上面一样"}),
-										e("span", {"class": "r-result-error i-r-result"}, "密码不一致哦"),
-										e("span", {"class": "r-result-success i-r-result"}, "一致的密码"),
+										$password_again,
+										$password_againTip,
 										e("ul", {"class": "condition-list"}, [
 											e("li", {"class": "condition-item"}, "与密码相同")
 										])
@@ -234,14 +373,67 @@
 							])
 						]),
 						e("li", {"class": "operation-container"}, [
-							e("div", {"class": "next r-submit i-r-submit"}, "提交"),
+							$signup_button
 						])
 					])
 				])
 			)
 		},
 
+		signin: function () {
+			var $loginName = VD.compile(e("input", {"type": "text", "name": "loginName", "class": "r-input i-r-input", "placeholder": "登陆的用户名"}))
+			var $loginNameTip = VD.compile(e("span", {"class": "i-r-result"}))
 
+			var $password = VD.compile(e("input", {"type": "text", "name": "password", "class": "r-input i-r-input", "placeholder": "登陆密码"}))
+			var $passwordTip = VD.compile(e("span", {"class": "i-r-result"}))
+
+			var $signin_submit = VD.compile(e("div", {"class": "next r-submit i-r-submit"}, "登陆"))
+
+
+			SatoriEvent.input_signin_loginName($loginName, $loginNameTip)
+			SatoriEvent.input_signin_password($password, $passwordTip)
+			SatoriEvent.input_signin_submit($signin_submit, $loginName, $password)
+
+			return VD.compile(
+				e("div", {"class": "signin-component"}, [
+					e("ul", {"class": "card-list"}, [
+						e("li", {"class": "card-item type-input"}, [
+							e("div", {"class": "card-wrap"}, [
+								e("div", {"class": "left"}, [
+									e("div", {"class": "card-avatar-container"}, [
+										e("span", {"class": "card-illustate"}, "用户名")
+									]),
+								]),
+								e("div", {"class": "right"}, [
+									e("div", {"class": "info-container"}, [
+										$loginName,
+										$loginNameTip,
+									])
+								])
+							])
+						]),
+						e("li", {"class": "card-item type-input"}, [
+							e("div", {"class": "card-wrap"}, [
+								e("div", {"class": "left"}, [
+									e("div", {"class": "card-avatar-container"}, [
+										e("span", {"class": "card-illustate"}, "密码")
+									]),
+								]),
+								e("div", {"class": "right"}, [
+									e("div", {"class": "info-container"}, [
+										$password,
+										$passwordTip,
+									])
+								])
+							])
+						]),
+						e("li", {"class": "operation-container"}, [
+							$signin_submit
+						])
+					])
+				])
+			)
+		},
 
 
 
@@ -338,12 +530,15 @@
 		home_card_list: function (v_data) {
 			var _this = this
 			var card_data = v_data
+
 			var $card_list = card_data.reduce(function (v_card_list, v_card_item) {
 				var fn_name = "type_" + v_card_item.type
 				v_card_list.appendChild(_this[fn_name](v_card_item))
 				return v_card_list
 			}, document.createDocumentFragment())
-			return $card_list
+
+
+			return VD.compile(e("ul", {"class": "card-list"}, [$card_list]))
 		},
 	}
 

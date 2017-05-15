@@ -689,6 +689,9 @@
 }
 .main-layer .skill-component .skill-list-container .skill-list .skill-item {
   display: inline-block;
+}
+.main-layer .skill-component .skill-list-container .skill-list .skill-item .skill-item-link {
+  display: block;
   font-size: 12px;
   padding: 0 15px;
 }
@@ -761,7 +764,6 @@
   margin-top: 200px;
 }
 .main-layer .signin-component {
-  display: none;
   margin-top: 200px;
   text-align: center;
 }
@@ -863,8 +865,8 @@
   line-height: 50px;
 }
 .main-layer .home-component .info-component-wrap .info-component .center-wrap, .main-layer .signup-component .info-component-wrap .info-component .center-wrap {
-  float: left;
   width: 100%;
+  float: left;
 }
 .main-layer .home-component .info-component-wrap .info-component .center-wrap .center, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center {
   margin: 0 300px 0 250px;
@@ -899,6 +901,11 @@
   color: white;
 }
 .main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .type-store .card-avatar-container, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .type-store .card-avatar-container {
+  border: 1px solid #3bafda;
+  background-color: #4fc1e9;
+  color: white;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .type-input .card-avatar-container, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .type-input .card-avatar-container {
   border: 1px solid #3bafda;
   background-color: #4fc1e9;
   color: white;
@@ -939,10 +946,31 @@
 .main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .content, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .content {
   font-size: 14px;
 }
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .i-r-input, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .i-r-input {
+  margin-bottom: 10px;
+  padding: 0 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #656d78;
+}
 .main-layer .home-component .info-component-wrap .info-component > .right, .main-layer .signup-component .info-component-wrap .info-component > .right {
   float: left;
+  margin-top: 15px;
   margin-left: -300px;
   width: 300px;
+}
+.main-layer .home-component .info-component-wrap .info-component > .right .create-menu-container .create-menu-list .create-menu-item, .main-layer .signup-component .info-component-wrap .info-component > .right .create-menu-container .create-menu-list .create-menu-item {
+  display: inline-block;
+  margin-right: 1px;
+  font-size: 12px;
+  text-align: center;
+  width: 60px;
+  height: 80px;
+  line-height: 80px;
+  border: 1px solid #3bafda;
+  background-color: white;
+  color: #4fc1e9;
 }
 
 * {
@@ -954,6 +982,7 @@
 }
 
 a {
+  transition: all 0.15s ease-in-out 0s;
   text-decoration: none;
 }
 
@@ -961,14 +990,14 @@ a:link {
   color: #5d9cec;
 }
 
-a:hover {
+a:visited {
   color: #5d9cec;
+}
+
+a:hover {
+  color: #ec87c0;
 }
 
 a:active {
-  color: #5d9cec;
-}
-
-a:visited {
-  color: #5d9cec;
+  color: #ec87c0;
 }

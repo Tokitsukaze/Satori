@@ -902,6 +902,11 @@
   background-color: #4fc1e9;
   color: white;
 }
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .type-input .card-avatar-container, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .type-input .card-avatar-container {
+  border: 1px solid #3bafda;
+  background-color: #4fc1e9;
+  color: white;
+}
 .main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item {
   margin: 15px 25px 50px 25px;
 }
@@ -937,6 +942,14 @@
 }
 .main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .content, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .content {
   font-size: 14px;
+}
+.main-layer .home-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .i-r-input, .main-layer .signup-component .info-component-wrap .info-component .center-wrap .center .card-list .card-item .right .info-container .i-r-input {
+  margin-bottom: 10px;
+  padding: 0 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #656d78;
 }
 .main-layer .home-component .info-component-wrap .info-component > .right, .main-layer .signup-component .info-component-wrap .info-component > .right {
   float: left;

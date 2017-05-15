@@ -59,4 +59,18 @@ public interface UserService {
 	 */
 	Result<User> insertUser (String loginName, String password);
 	
+	/**
+	 * 根据 userId 得到用户资料信息
+	 * @param userId
+	 * @return
+	 */
+	Result<User> getUserById (int userId);
+	
+	/**
+	 * 修改昵称
+	 * @param userId
+	 * @param nickName
+	 * @return
+	 */
+	Result<Integer> updateNickName (int userId, String nickName);
 }

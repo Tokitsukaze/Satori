@@ -17,6 +17,7 @@
 			logo = #{logo}
 		where project_id = #{projectId} 
 		and creator = #{creator}
+		and state = 0
 	</update>
 	
 	<update id="update">
@@ -27,6 +28,7 @@
 			info = #{info}
 		where project_id = #{projectId} 
 		and creator = #{creator}
+		and state = 0
 	</update>
 	
 	<update id="remove">
@@ -42,6 +44,7 @@
 		select project_id, name, info, logo, create_date
 		from project
 		where creator = #{creator}
+		and state = 0
 	</select>
 	
 

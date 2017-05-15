@@ -9,22 +9,22 @@ package moe.harusame.dto;
  *
  */
 public class Result<T> {
-	private int state;
+	private String state;
 	private String info;
 	private T data;
 
-	public Result(int state, String info, T data) {
+	public Result(String state, String info, T data) {
 		super();
 		this.state = state;
 		this.info = info;
 		this.data = data;
 	}
 
-	public int isState() {
+	public String isState() {
 		return state;
 	}
 
-	public void setState(int state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 
