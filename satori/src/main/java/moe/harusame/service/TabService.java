@@ -15,7 +15,7 @@ public interface TabService {
 	
 	Result<Integer> removeTab (int tabId);
 	
-	Result<Integer> updateTabName (int tabId, Date updateDate, String name);
+	Result<Integer> updateTabName (int tabId, String name);
 	
 	Result<Integer> updateTabDate (int tabId, Date updateDate);
 }

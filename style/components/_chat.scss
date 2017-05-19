@@ -232,13 +232,7 @@
 /**
  * chat 的图层
  */
-.chat-layer {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	z-index: $chat-layer;
-	pointer-events: none;
-
+.util-layer {
 	.chat-component-full {
 		position: relative;
 		height: 500px;

@@ -20,8 +20,12 @@ public class TabServiceImpl implements TabService {
 	@Override
 	public Result<Integer> insertTab(int projectId, String name) {
 		int result = tabDao.insertTab(projectId, name);
+		int tabId = 0;
 		if (result == 1) {
-			return new Result<Integer>("200", "创建tab成功", null);
+			tabId = tabDao.getTabByProjectIdAndName(projectId, name).getTabId();
+		}
+		if (tabId != 0) {
+			return new Result<Integer>("200", "创建tab成功", tabId);
 		} else {
 			return new Result<Integer>("421", "创建tab失败", null);
 		}
@@ -45,14 +49,22 @@ public class TabServiceImpl implements TabService {
 
 	@Override
 	public Result<Integer> removeTab(int tabId) {
-		// TODO Auto-generated method stub
-		return null;
+		int result = tabDao.removeTab(tabId);
+		if (result == 1) {
+			return new Result<Integer>("200", "删除tab成功", null);
+		} else {
+			return new Result<Integer>("424", "删除tab失败", null);
+		}
 	}
 
 	@Override
-	public Result<Integer> updateTabName(int tabId, Date updateDate, String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Result<Integer> updateTabName(int tabId, String name) {
+		int result = tabDao.updateTabName(tabId, new Date(), name);
+		if (result == 1) {
+			return new Result<Integer>("200", "修改tab成功", null);
+		} else {
+			return new Result<Integer>("423", "修改tab失败", null);
+		}
 	}
 
 	@Override

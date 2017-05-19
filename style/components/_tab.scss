@@ -39,7 +39,6 @@
 	.tab-component {
 		@extend %util-component;
 		width: 200px;
-		height: 250px;
 		> .info {
 			@extend %util-info;
 			.title {

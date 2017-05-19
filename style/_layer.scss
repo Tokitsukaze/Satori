@@ -32,3 +32,23 @@ $chat-layer: 300;
  * 工具栏 层
  */
 $util-layer: 200;
+
+/**
+ * 模态框 层
+ */
+$modal-layer: 2000;
+
+.util-layer {
+	position: fixed;
+	z-index: $util-layer;
+
+	> * {
+		display: none;
+	}
+}
+
+.modal-layer {
+	position: fixed;
+	z-index: $modal-layer;
+}
+

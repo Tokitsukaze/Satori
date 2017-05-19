@@ -23,13 +23,19 @@
 	var SESSION_userAvatar = '${SESSION_userAvatar}'
 	var SESSION_userImpression = '${SESSION_userImpression}'
 	var SESSION_userId = '${SESSION_userId}'
+	
+	var CURRENT_PROJECT_ID
+	var CURRENT_TAB_ID
 </script>
 <script src="${ctx}/assets/script/third-party/axios.min.js"></script>
 <script src="${ctx}/assets/script/vd.js"></script>
 <script src="${ctx}/assets/script/template.js"></script>
+<script src="${ctx}/assets/script/request.js"></script>
+<script src="${ctx}/assets/script/modal.js"></script>
 <script src="${ctx}/assets/script/event.js"></script>
 <script src="${ctx}/assets/script/view.js"></script>
 <script src="${ctx}/assets/script/satori.js"></script>
+<script src="${ctx}/assets/script/prototype.js"></script>
 <script type="text/javascript">
 
 </script>

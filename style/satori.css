@@ -135,7 +135,51 @@
 /**
  * 工具栏 层
  */
-.util-layer .tab-component .tab-info {
+/**
+ * 模态框 层
+ */
+.util-layer {
+  position: fixed;
+  z-index: 200;
+}
+.util-layer > * {
+  display: none;
+}
+
+.modal-layer {
+  position: fixed;
+  z-index: 2000;
+}
+
+.modal-layer {
+  position: fixed;
+  right: 0;
+  bottom: 100px;
+}
+.modal-layer .modal-list .modal-item {
+  padding: 5px 50px 20px 5px;
+  font-size: 14px;
+  color: white;
+  opacity: 0;
+  transition: all 0.25s ease-in-out 0s;
+}
+.modal-layer .modal-list .normal {
+  background-color: rgba(67, 74, 84, 0.8);
+}
+.modal-layer .modal-list .success {
+  background-color: rgba(0, 128, 0, 0.8);
+}
+.modal-layer .modal-list .error {
+  background-color: rgba(124, 72, 77, 0.8);
+}
+.modal-layer .modal-list .info {
+  background-color: rgba(74, 137, 220, 0.8);
+}
+.modal-layer .mask {
+  display: none;
+}
+
+.util-layer .tab-component > .info {
   height: 25px;
   line-height: 25px;
   background-color: rgba(140, 116, 118, 0.5);
@@ -144,34 +188,82 @@
 .util-layer .tab-component {
   position: absolute;
   border: 1px solid #a48e92;
+  background-color: white;
   border-radius: 5px;
 }
 
-.util-layer .tab-component .tab-info .title .i-circle-5x {
+.util-layer .tab-component > .info .title .i-circle-5x {
   margin-right: 5px;
 }
 
-.util-layer .tab-component .tab-info .title {
+.util-layer .tab-component > .info .title {
   margin-left: 5px;
   font-size: 12px;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: rgba(93, 156, 236, 0.3);
+  pointer-events: none;
 }
 
 /**
  * 原型设计页面中的 技能栏 中的 菜单弹出层
  */
 .util-layer {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 200;
-  pointer-events: none;
   /**
    * 标签页
    */
 }
 .util-layer .tab-component {
   width: 200px;
-  height: 250px;
+}
+.util-layer .tab-component > .content {
+  position: relative;
+}
+.util-layer .tab-component > .content > .i-slider {
+  height: 25px;
+}
+.util-layer .tab-component > .content .tab-list .tab-item {
+  padding-left: 5px;
+  line-height: 25px;
+  transition: all 0.25s ease-in-out 0s;
+}
+.util-layer .tab-component > .content .tab-list .tab-item .tab-item-link {
+  display: block;
+}
+.util-layer .tab-component > .content .tab-list .active {
+  color: white;
+  background-color: #ac92ec;
+}
+.util-layer .tab-component > .content .satori-input {
+  display: none;
+  padding: 0 5px;
+  height: 25px;
+  line-height: 25px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  border-bottom: 1px solid #ac92ec;
+  color: #aab2bd;
+}
+.util-layer .tab-component .menu-list {
+  position: absolute;
+  right: -42px;
+  bottom: -1px;
+}
+.util-layer .tab-component .menu-list .satori-btn {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ac92ec;
+  background-color: rgba(172, 146, 236, 0.6);
+  color: white;
 }
 
 /**
@@ -479,14 +571,7 @@
 /**
  * chat 的图层
  */
-.chat-layer {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 300;
-  pointer-events: none;
-}
-.chat-layer .chat-component-full {
+.util-layer .chat-component-full {
   position: relative;
   height: 500px;
   width: 600px;
@@ -494,86 +579,86 @@
   border-radius: 5px;
   box-shadow: 5px 5px 5px #a48e92;
 }
-.chat-layer .chat-component-full > .header {
+.util-layer .chat-component-full > .header {
   padding: 5px;
   box-sizing: border-box;
   width: 100%;
 }
-.chat-layer .chat-component-full > .body {
+.util-layer .chat-component-full > .body {
   position: absolute;
   top: 70px;
   bottom: 0;
   width: 100%;
 }
-.chat-layer .chat-component-full > .body > .right {
+.util-layer .chat-component-full > .body > .right {
   float: right;
   border-left: 1px solid rgba(164, 142, 146, 0.1);
   width: 200px;
   height: 100%;
   /* 参与者列表 */
 }
-.chat-layer .chat-component-full > .body > .right > .contributor-info {
+.util-layer .chat-component-full > .body > .right > .contributor-info {
   margin: 0 5px;
   height: 25px;
   line-height: 25px;
 }
-.chat-layer .chat-component-full > .body > .right > .contributor-info .sort-type {
+.util-layer .chat-component-full > .body > .right > .contributor-info .sort-type {
   float: left;
 }
-.chat-layer .chat-component-full > .body > .right > .contributor-info .sort-type .i-circle-5x {
+.util-layer .chat-component-full > .body > .right > .contributor-info .sort-type .i-circle-5x {
   margin-right: 5px;
 }
-.chat-layer .chat-component-full > .body > .right > .contributor-info .contributor-count {
+.util-layer .chat-component-full > .body > .right > .contributor-info .contributor-count {
   float: right;
 }
-.chat-layer .chat-component-full > .body > .right .contributor-list-wrap .contributor-list {
+.util-layer .chat-component-full > .body > .right .contributor-list-wrap .contributor-list {
   overflow: hidden;
 }
-.chat-layer .chat-component-full > .body > .right .contributor-list-wrap .contributor-list .i-contributor-item {
+.util-layer .chat-component-full > .body > .right .contributor-list-wrap .contributor-list .i-contributor-item {
   margin: 5px;
 }
-.chat-layer .chat-component-full > .body > .left {
+.util-layer .chat-component-full > .body > .left {
   position: relative;
   overflow: hidden;
   height: 100%;
   /* 聊天框 */
   /* 输入框 */
 }
-.chat-layer .chat-component-full > .body > .left .chat-container {
+.util-layer .chat-component-full > .body > .left .chat-container {
   position: absolute;
   top: 0;
   bottom: 140px;
   width: 100%;
   overflow: hidden;
 }
-.chat-layer .chat-component-full > .body > .left .chat-container .message-content {
+.util-layer .chat-component-full > .body > .left .chat-container .message-content {
   position: absolute;
   bottom: 0;
   width: 100%;
   /* height: 100%;*/
 }
-.chat-layer .chat-component-full > .body > .left .chat-container .message-content .i-message-item {
+.util-layer .chat-component-full > .body > .left .chat-container .message-content .i-message-item {
   margin: 25px 5px;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container {
+.util-layer .chat-component-full > .body > .left .chater-container {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .top {
+.util-layer .chat-component-full > .body > .left .chater-container .top {
   margin: 5px;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .top .option-container {
+.util-layer .chat-component-full > .body > .left .chater-container .top .option-container {
   margin-bottom: 5px;
   height: 25px;
   /* 文字处理选项 */
   /* 文字 IO 选项 */
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .top .option-container .option-list {
+.util-layer .chat-component-full > .body > .left .chater-container .top .option-container .option-list {
   display: inline-block;
   font-size: 0;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .top .option-container .option-list .option-item {
+.util-layer .chat-component-full > .body > .left .chater-container .top .option-container .option-list .option-item {
   display: inline-block;
   margin-right: 10px;
   padding: 0 5px;
@@ -584,14 +669,14 @@
   background-color: #8c7476;
   color: white;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .top .option-container .option-list .option-item:last-child {
+.util-layer .chat-component-full > .body > .left .chater-container .top .option-container .option-list .option-item:last-child {
   margin-right: 0;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .top .option-container .operation-list {
+.util-layer .chat-component-full > .body > .left .chater-container .top .option-container .operation-list {
   font-size: 0;
   float: right;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .top .option-container .operation-list .operation-item {
+.util-layer .chat-component-full > .body > .left .chater-container .top .option-container .operation-list .operation-item {
   display: inline-block;
   margin-right: 10px;
   padding: 0 5px;
@@ -602,13 +687,13 @@
   background-color: #8c7476;
   color: white;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .top .option-container .operation-list .operation-item:last-child {
+.util-layer .chat-component-full > .body > .left .chater-container .top .option-container .operation-list .operation-item:last-child {
   margin-right: 0;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .top .inputer-container {
+.util-layer .chat-component-full > .body > .left .chater-container .top .inputer-container {
   height: 115px;
 }
-.chat-layer .chat-component-full > .body > .left .chater-container .bottom {
+.util-layer .chat-component-full > .body > .left .chater-container .bottom {
   height: 40px;
 }
 
@@ -618,7 +703,10 @@
 .skill-layer {
   position: fixed;
   bottom: 50px;
-  width: 100%;
+  display: inline-block;
+  left: 50%;
+  margin-left: -234.5px;
+  text-align: center;
   z-index: 800;
   /**
    * 技能栏
@@ -626,6 +714,7 @@
 }
 .skill-layer .skill-component {
   position: relative;
+  display: inline-block;
   text-align: center;
   font-size: 0;
 }

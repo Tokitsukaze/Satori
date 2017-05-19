@@ -34,6 +34,14 @@
 		where tab_id = #{tabId}
 	</update>
 	
+	<select id="getTabByProjectIdAndName" resultType="Tab">
+		select tab_id, project_id, name, branch, update_date
+		from tab
+		where project_id = #{projectId}
+		and name = #{name}
+		and state = 0
+	</select>
+	
 	<select id="getTabByTabId" resultType="Tab">
 		select tab_id, project_id, name, branch, update_date
 		from tab

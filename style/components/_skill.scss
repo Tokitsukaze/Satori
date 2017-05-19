@@ -4,7 +4,10 @@
  .skill-layer {
  	position: fixed;
 	bottom: 50px;
-	width: 100%;
+	display: inline-block;
+	left: 50%;
+	margin-left: -234.5px;
+	text-align: center;
 	z-index: $skill-layer;
 
 	/**
@@ -12,6 +15,7 @@
 	 */
 	.skill-component {
 		position: relative;
+		display: inline-block;
 		text-align: center;
 		font-size: 0;
 

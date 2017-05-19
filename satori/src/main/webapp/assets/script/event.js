@@ -348,9 +348,9 @@
 				event.preventDefault()
 				var $target = event.target
 				var href = $target.getAttribute("href")
+				CURRENT_PROJECT_ID = href.split("/satori/project/")[1]
 				if (href != null) {
 					View.updateStage("prototype")
-					View.updateViewPrototype(href.split("/satori/project/")[1])
 				}
 			})
 		},
@@ -358,8 +358,11 @@
 		/**
 		 * Prototype 相关
 		 */
-		activePrototpye: function (v_$skill_list) {
-			// new Prototype(v_$skill_list)
+		activePrototpye: function (v_$dom) {
+			window.Harusame = new SatoriPrototype({
+				$prototype_layer: Template.layers.$prototype_layer,
+				$prototype_utils: v_$dom.$skill_component
+			})
 		},
 
 

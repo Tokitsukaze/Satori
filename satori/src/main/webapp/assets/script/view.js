@@ -32,9 +32,6 @@
 		 */
 		init: function () {
 			this.$main_layer = Template.layers.$main_layer
-			this.$satori = Template.$satori;
-
-			this.$satori.appendChild(this.$main_layer)
 		},
 
 		/**
@@ -48,8 +45,6 @@
 		 * 7. 删除多出来的组件
 		 */
 		updateStage: function (v_new_stage, v_callback) {
-			console.info("SESSION_userId", SESSION_userId)
-			console.info("SESSION_userAvatar", SESSION_userAvatar)
 			if (this.stage === v_new_stage) {
 				console.info('WARNING 相同的视图')
 				return
@@ -60,7 +55,6 @@
 			var $fragment = document.createDocumentFragment()
 			/* 1  */
 			var components_required = STAGE[v_new_stage]["components"]
-			console.info("components_required", components_required)
 			if (components_required == null) {
 				this.updateStage("index")
 				return
@@ -83,7 +77,6 @@
 						}
 					}
 
-					console.info("component_need_name", component_need_name)
 					/* 4 */
 					var component_need = this.exist_all_compoents[component_need_name] || Template[component_need_name]()
 					var component_exist = this.exist_components[i]
@@ -211,26 +204,6 @@
 				console.log(error);
 			})
 		},
-
-		updateViewPrototype: function (v_projectId) {
-			axios({
-				"method": "post",
-				"url": "/satori/project/" + v_projectId,
-			})
-			.then(function (response) {
-				var data = response.data.data
-				if (response.status === 200) {
-					console.info(response)
-				} else {
-					console.log(response)
-				}
-			}).catch(function (error) {
-				console.log(error);
-			})
-		}
-
-
-
 	}
 
 	window.View =  new View()

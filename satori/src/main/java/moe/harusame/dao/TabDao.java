@@ -11,6 +11,8 @@ public interface TabDao {
 	
 	int insertTab (@Param("projectId") int projectId, @Param("name") String name);
 	
+	Tab getTabByProjectIdAndName (@Param("projectId") int projectId, @Param("name") String name);
+	
 	List<Tab> getTabList (@Param("projectId") int projectId);
 	
 	Tab getTabByTabId (@Param("tabId") int tabId);

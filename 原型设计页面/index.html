@@ -25,7 +25,7 @@
 			</div>
 
 			<!-- 分支所在的图层 -->
-			<div class="branch-layer">
+			<div class="branch-layer" style="display: none;">
 				<!-- 分支信息 -->
 				<div class="branch-component">
 					<div class="branch-panel-wrap">
@@ -65,21 +65,28 @@
 			</div>
 
 			<!-- 所有原型所在的图层 -->
-			<div class="prototype-layer">
-				<div class="modal">
-					<div class="prototype-create">
-
-					</div>
-				</div>
-				<div class="prototype" style="position: absolute; top: 50px; left: 50px;  background: gray; opacity: .5; width: 150px; height: 150px;">
+			<div class="prototype-layer" id="prototype-layer">
+				<!-- <div class="prototype" style="position: absolute; top: 50px; left: 50px;  background: gray; opacity: .5; width: 150px; height: 150px;">
 					<div>
 
 					</div>
-				</div>
+				</div> -->
 			</div>
 
-			<!-- 讨论框所在的图层 -->
-			<div class="chat-layer">
+			<!-- 用到的工具所在的图层 -->
+			<div class="util-layer" id="util-layer">
+				<!-- <div class="tab-component" id="tab" style="display: block">
+					<div class="info">
+						<span class="title"><i class="circle-5x i-circle-5x"></i>标签页</span>
+					</div>
+					<div class="content">
+						<ul class="tab-list">
+							<li class="tab-item active"><a class="tab-item-link">社团管理系统</a></li>
+							<li class="tab-item"><a>图书管理系统</a></li>
+							<li class="tab-item"><a>测试项目</a></li>
+						</ul>
+					</div>
+				</div> -->
 
 				<!-- 讨论框组件，极简模式 -->
 
@@ -228,39 +235,33 @@
 				</div>
 			</div>
 
-
-			<!-- 用到的工具所在的图层 -->
-			<div class="util-layer">
-
-				<!-- 标签页信息 -->
-				<div class="tab-component">
-					<div class="tab-info">
-						<span class="title"><i class="circle-5x i-circle-5x"></i>标签页</span>
-					</div>
-				</div>
+			<div class="right-menu-layer">
+				<ul class=""></ul>
 			</div>
 
-
+			<!-- 模态框弹出层 -->
+			<div class="modal-layer" id="modal-layer">
+			</div>
 
 			<!-- 用到的技能所在的图层 -->
 			<div class="skill-layer">
-				<div class="skill-component"> <!-- 技能栏组件 -->
+				<div class="skill-component" id="skill-component"> <!-- 技能栏组件 -->
 					<!-- 原型级别的菜单 -->
 					<ul class="skill-list">
 						<li class="skill-item">
-							<span class="skill-name">盒子</span>
+							<span class="skill-name">新建</span>
 						</li> <!-- 查看盒子模型 -->
 						<li class="skill-item">
 							<span class="skill-name">编辑</span>
 						</li> <!-- 更全面的编辑功能 -->
 						<li class="skill-item">
-							<span class="skill-name">新建</span>
+							<span class="skill-name"></span>
 						</li> <!-- 创建一个新原型 -->
 						<li class="skill-item">
 							<span class="skill-name">历史</span>
 						</li> <!-- 操作历史 -->
 						<li class="skill-item">
-							<span class="skill-name">没有</span>
+							<span class="skill-name"></span>
 						</li>
 						<li class="skill-item">
 							<span class="skill-name">代码</span>
@@ -275,21 +276,21 @@
 							<span class="skill-name">动画</span>
 						</li> <!-- 动画功能 -->
 						<li class="skill-item">
-							<span class="skill-name">操作</span>
+							<span class="skill-name">菜单</span>
 						</li> <!-- 这里面的东西都放在右键菜单中，但是保留能被点击的特性 -->
 					</ul>
 					<!-- 项目级别的菜单 -->
 					<ul class="skill-list">
 						<li class="skill-item">当前</li> <!-- 项目信息的管理 -->
 						<li class="skill-item">预览</li> <!-- 预览导出后的页面 -->
-						<li class="skill-item" id="tab">Tab</li> <!-- 管理标签页 -->
-						<li class="skill-item">效果</li> <!-- 开启效果(网格，标尺之类的，以及相关的设置)-->
-						<li class="skill-item">计划</li> <!-- 要执行的计划管理 -->
-						<li class="skill-item">地图</li> <!-- 项目的 Dom Tree -->
+						<li class="skill-item" s-sign="tab">Tab</li> <!-- 管理标签页 -->
+						<li class="skill-item" id="effect">效果</li> <!-- 开启效果(网格，标尺之类的，以及相关的设置)-->
+						<li class="skill-item" id="plan">计划</li> <!-- 要执行的计划管理 -->
+						<li class="skill-item" id="map">地图</li> <!-- 项目的 Dom Tree -->
 						<li class="skill-item" id="group">组</li> <!-- 项目聊天室 -->
-						<li class="skill-item">IO</li> <!-- 项目的导入导出 -->
+						<li class="skill-item"></li> <!-- 项目的导入导出 -->
 						<li class="skill-item" id="branch">分支</li> <!-- 查看当前项目的分支(版本)情况，某种角度来说是一种保存UI -->
-						<li class="skill-item">载入</li> <!-- 加载 -->
+						<li class="skill-item" id="load">载入</li> <!-- 加载 -->
 					</ul>
 					<!-- 用户级别的菜单 -->
 					<ul class="skill-list">
@@ -310,7 +311,10 @@
 			</div>
 		</main>
 
-		<script type="text/javascript" src="_temp.js"></script>
+	<!-- <script type="text/javascript" src="_temp.js"></script> -->
+		<script type="text/javascript" src="vd.js"></script>
+		<script type="text/javascript" src="modal.js"></script>
+		<script type="text/javascript" src="request.js"></script>
 		<script type="text/javascript" src="satori-prototype.js"></script>
 	</body>
 </html>

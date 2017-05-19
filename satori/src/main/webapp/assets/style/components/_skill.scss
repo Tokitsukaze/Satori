@@ -2,17 +2,20 @@
  * 原型设计页面的 底部 工具栏
  */
  .skill-layer {
- 	position: fixed;
-	bottom: 50px;
-	width: 100%;
-	z-index: $skill-layer;
+  	position: fixed;
+ 	bottom: 50px;
+ 	display: inline-block;
+ 	left: 50%;
+ 	margin-left: -234.5px;
+ 	text-align: center;
+ 	z-index: $skill-layer;
 
 	/**
 	 * 技能栏
 	 */
 	.skill-component {
 		position: relative;
-		text-align: center;
+		display: inline-block;
 		font-size: 0;
 
 		.skill-list {
