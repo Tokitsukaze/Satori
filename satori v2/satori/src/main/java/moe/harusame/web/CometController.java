@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import moe.harusame.dto.CometResult;
-import moe.harusame.dto.Result;
 import moe.harusame.entity.User;
+import moe.harusame.entity.Whisper;
 import moe.harusame.service.FriendService;
 import moe.harusame.service.ProjectService;
 import moe.harusame.service.UserService;
@@ -42,8 +42,8 @@ public class CometController {
 	public CometResult comet(@PathVariable("userId") int userId) {
 		// Check Who Invite Me
 		List<User> friendInviteMeList = friendService.inviteMe(userId);
+		List<Whisper> whisperList = friendService.getWhisperList(userId);
 		
-		
-		return new CometResult("200", "成功获得轮询信息", friendInviteMeList);
+		return new CometResult("200", "成功获得轮询信息", friendInviteMeList, whisperList);
 	}
 }

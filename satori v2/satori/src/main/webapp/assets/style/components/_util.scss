@@ -34,6 +34,8 @@
  * 原型设计页面中的 技能栏 中的 菜单弹出层
  */
 .util-layer {
+	position: fixed;
+	z-index: 900;
 	/**
 	 * 标签页
 	 */

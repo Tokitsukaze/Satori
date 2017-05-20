@@ -125,7 +125,7 @@
 			SatoriEvent.skill_top_project($project)
 			SatoriEvent.skill_top_store($store)
 			SatoriEvent.skill_top_note($note)
-			SatoriEvent.skill_top_denpa($friends)
+			SatoriEvent.skill_top_friend($friends)
 			SatoriEvent.skill_top_home($home)
 
 			return VD.compile(

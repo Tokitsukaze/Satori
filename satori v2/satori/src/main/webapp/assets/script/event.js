@@ -255,6 +255,7 @@
 		 */
 		comet: function () {
 			var _this = this
+			window.whisper_list = {}
 
 			startComet()
 
@@ -294,12 +295,37 @@
 								}
 							}, 0)
 						}
+						var whisperList = data.whisperList
+						whisperList.reduce(function (v_rope, v_whisper) {
+							console.info('v_whisper', v_whisper)
+							var whisper_id = v_whisper.messageId
+							var sender_Id = v_whisper.senderId
 
+							/**
+							 * 如果还没有与这个人聊过天，那么就新建 对她的消息队列
+							 */
+							if (window.whisper_list[sender_Id] == null) {
+								window.whisper_list[sender_Id] = []
+								window.whisper_list[sender_Id][whisper_id] = {
+									messageContent: v_whisper.messageContent,
+									sendDate: v_whisper.sendDate
+								}
+								return
 
-
-
-
-
+							// 如果聊过天了
+							} else if (window.whisper_list[sender_Id] != null) {
+								// 看看有没有这条消息
+								// 如果没有那么就加入
+								if (window.whisper_list[sender_Id][whisper_id] == null) {
+									window.whisper_list[sender_Id][whisper_id] = {
+										messageContent: v_whisper.messageContent,
+										sendDate: v_whisper.sendDate
+									}
+								} else {
+									return
+								}
+							}
+						}, "")
 
 
 

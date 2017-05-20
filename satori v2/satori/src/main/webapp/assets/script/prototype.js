@@ -331,7 +331,7 @@
 })()
 
 /**
- * 私信
+ * 私信框
  */
 ;(function () {
  	var SatoriWhisper = function () {
@@ -347,7 +347,58 @@
  		constructor: SatoriWhisper,
 
  		initHTML: function () {
+ 			this.$friends_list = VD.compile(e("ul", {"class": "friends-list"}))
+ 			this.$message_content = VD.compile(e("div", {"class": "message-content"}))
+ 			this.$chatter = VD.compile(e("textarea", {"class": "inputer-container", "placeholder": "在这里输入~"}))
 
+ 			this.$friend_avatar = VD.compile(e("img", {"src": "assets/images/default-avatar.jpg", "class": "friends-avatar-5x"}))
+ 			this.$friend_name = VD.compile(e("h2", {"class": "friends-name"}))
+ 			this.$friend_intro = VD.compile(e("h3", {"class": "friends-intro"}))
+
+ 			this.$component = VD.compile(
+ 				e("div", {"class": "whisper-component-full"}, [
+ 					e("div", {"class": "left"}, [
+ 						this.$friends_list
+ 					]),
+ 					e("div", {"class": "right"}, [
+ 						e("div", {"class": "top"}, [
+ 							e("div", {"class": "friends-info"}, [
+ 								e("div", {"class": "left"}, [
+ 									e("div", {"class": "friends-avatar-container"}, [
+ 										this.$friend_avatar
+ 									])
+ 								]),
+ 								e("div", {"class": "right"}, [
+ 									this.$friend_name,
+ 									this.$friend_intro
+ 								])
+ 							])
+ 						]),
+ 						e("div", {"class": "body"}, [
+ 							e("div", {"class": "chat-container"}, [
+ 								this.$message_content
+ 							])
+ 						]),
+ 						e("div", {"class": "chater-container"}, [
+ 							e("div", {"class": "top"}, [
+ 								e("div", {"class": "option-container"}, [
+ 									e("ul", {"class": "option-list"}, [
+ 										e("li", {"class": "option-item"}, "字体"),
+ 										e("li", {"class": "option-item"}, "表情"),
+ 										e("li", {"class": "option-item"}, "图片")
+ 									]),
+ 									e("ul", {"class": "operation-list"}, [
+ 										e("li", {"class": "operation-item"}, "关闭"),
+ 										e("li", {"class": "operation-item"}, "记录"),
+ 										e("li", {"class": "operation-item"}, "发送")
+ 									]),
+ 									this.$chatter
+ 								])
+ 							])
+ 						])
+ 					])
+ 				])
+ 			)
  		},
 
  		mountHTML: function () {
@@ -355,8 +406,164 @@
  		},
 
  		init: function () {
+ 			var _this = this
 
+ 			Object.defineProperty(_this, 'view', {
+ 				set: function (v_new_view) {
+ 					if (v_new_view) {
+ 						_this.$component.style.display = 'block'
+ 						_this.getFriendList()
+ 					} else {
+ 						_this.$component.style.display = 'none'
+ 					}
+ 					_this._view = v_new_view
+ 				},
+
+ 				get: function () {
+ 					return _this._view
+ 				}
+ 			})
+
+ 			/**
+ 			 * 设置当前好友
+ 			 */
+ 			this.$friends_list.addEventListener('click', function (event) {
+ 				var $target = event.target
+ 				var friend_id = $target.getAttribute("friend-id")
+ 				if (friend_id == null) {
+ 					return
+ 				}
+ 				_this.current_whisper_friend_id = friend_id
+
+ 				// 并且刷新聊天界面
+ 				axios({
+ 					"method": "post",
+ 					"url": "/satori/home/" + _this.current_whisper_friend_id + "/getUser"
+ 				}).then(function (response) {
+ 					var data = response.data
+ 					var user = data['data']
+ 					_this.current_whisper_friend = user
+
+ 					_this.$friend_avatar.setAttribute("src", "assets/images/" + user.avatar)
+ 					_this.$friend_name.textContent = user.nickName
+ 					_this.$friend_intro.textContent = user.info
+
+ 					var target_friend_whisper_list = window.whisper_list[ _this.current_whisper_friend_id]
+ 					console.info('朋友消息队列', target_friend_whisper_list)
+ 					/**
+ 					 * 1. 没有跟这个人的消息
+ 					 * 2. 有消息
+ 					 * 3. 并且没有被渲染过
+ 					 */
+ 					if (target_friend_whisper_list == null) {
+ 						console.info('没有消息啦！')
+ 						return
+ 					}
+ 					/* 2 */
+ 					target_friend_whisper_list.reduce(function (v_rope, v_whisper) {
+ 						console.info('v_whisper', v_whisper)
+ 						if (v_whisper.render) {
+ 							return
+ 						}
+ 						/* 3 */
+ 						v_whisper.render = true
+ 						_this.$message_content.appendChild(_this.getFriendsMessage(v_whisper))
+ 					}, "")
+ 				}).catch(function (error) {
+ 					console.log(error)
+ 				})
+ 			})
+
+ 			this.$chatter.addEventListener('blur', function () {
+ 				axios({
+ 					"method": "post",
+ 					"url": "/satori/friend/" + SESSION_userId + "/sendWhisper",
+ 					"params": {
+ 						"friendId": _this.current_whisper_friend_id,
+ 						"messageContent": _this.$chatter.value
+ 					}
+ 				}).then(function (response) {
+ 					console.info(response)
+ 					SatoriModal.pop("发送成功", SatoriModal.SUCCESS, 1500)
+ 					_this.$message_content.appendChild(_this.getMyMessage({
+ 						messageContent: _this.$chatter.value
+ 					}))
+ 				}).catch(function (error) {
+ 					console.log(error)
+ 				})
+ 			})
  		},
+
+ 		getFriendList: function () {
+ 			var _this = this
+ 			axios({
+ 				"method": "post",
+ 				"url": "/satori/friend/" + SESSION_userId + "/friendsList",
+ 			}).then(function (response) {
+ 				console.info(response)
+ 				var data = response.data
+ 				var friend_list = data['data']
+ 				friend_list.reduce (function (v_rope, v_friend) {
+ 					_this.$friends_list.appendChild(_this.getFriendItem(v_friend))
+ 				}, "")
+ 				SatoriModal.pop("获取好友列表成功", SatoriModal.SUCCESS, 1500)
+ 			}).catch(function (error) {
+ 				console.log(error)
+ 			})
+ 		},
+
+ 		getFriendItem: function (v_data) {
+ 			return VD.compile(
+ 				e("li", {"class": "friends-item i-friends-item"}, [
+ 					e("div", {"class": "friends-avatar-container"}, [
+ 						e("img", {"src": "assets/images/" + v_data.avatar, "alt": v_data.nickName, "class": "friends-avatar-5x"})
+ 					]),
+ 					e("div", {"class": "friends-info"}, [
+ 						e("span", {"class": "friends-name", "friend-id": v_data.userId}, v_data.nickName)
+ 					])
+ 				])
+ 			)
+ 		},
+
+ 		getFriendsMessage: function (v_data) {
+ 			var _this = this
+ 			return VD.compile(
+	 			e("div", {"class": "friend-message-item i-message-item"}, [
+	 				e("div", {"class": "friend-avatar-container"}, [
+	 					e("img", {"src": "assets/images/" + _this.current_whisper_friend.avatar, "alt": _this.current_whisper_friend.nickName, "class": "user-avatar-5x"})
+	 				]),
+	 				e("div", {"class": "friend-info"}, [
+	 					e("div", {"class": "friend-header"}, [
+	 						e("span", {"class": "friend-name"}, _this.current_whisper_friend.nickName, [
+	 							e("span", {"class": "friend-send-time"}, v_data.sendDate)
+	 						]),
+							e("div", {"class": "friend-message-container"}, [
+								e("p", {"class": "friend-message"}, v_data.messageContent)
+							])
+	 					])
+	 				])
+	 			])
+ 			)
+ 		},
+
+ 		getMyMessage: function (v_data) {
+ 			return VD.compile(
+ 				e("div", {"class": "my-message-item i-message-item"}, [
+ 					e("div", {"class": "my-avatar-container"}, [
+ 						e("img", {"src": "assets/images/" + SESSION_userAvatar, "alt": SESSION_nickName, "class": "user-avatar-5x"})
+ 					]),
+ 					e("div", {"class": "my-info"}, [
+ 						e("div", {"class": "my-header"}, [
+ 							e("span", {"class": "my-name"}, SESSION_nickName),
+ 							e("span", {"class": "my-send-time"}, new Date())
+ 						]),
+						e("div", {"class": "my-message-container"}, [
+							e("p", {"class": "my-message"}, v_data.messageContent),
+						])
+ 					])
+ 				])
+ 			)
+ 		}
  	}
 
  	window.SatoriWhisper = SatoriWhisper

@@ -2,10 +2,9 @@ package moe.harusame.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import moe.harusame.dto.Result;
 import moe.harusame.entity.User;
+import moe.harusame.entity.Whisper;
 
 public interface FriendService {
 	
@@ -15,7 +14,7 @@ public interface FriendService {
 	 * @param userId
 	 * @return
 	 */
-	Result<Integer> sendInvitation (@Param("friendId") int friendId, @Param("userId") int userId);
+	Result<Integer> sendInvitation (int friendId, int userId);
 	
 	/**
 	 * 得到我正被哪些人邀请
@@ -30,7 +29,7 @@ public interface FriendService {
 	 * @param userId
 	 * @return
 	 */
-	Result<Integer> acceptInvitation (@Param("friendId") int friendId, @Param("userId") int userId);
+	Result<Integer> acceptInvitation (int friendId, int userId);
 	
 	/**
 	 * 获得一个用户的所有好友
@@ -38,4 +37,15 @@ public interface FriendService {
 	 * @return
 	 */
 	List<User> getFriendsByUserId (int userId);
+	
+	/**
+	 * 得到一个用户的所有私信消息
+	 */
+	List<Whisper> getWhisperList (int userId);
+	
+	/**
+	 * 插入一条私信
+	 * @return
+	 */
+	Result<Integer> insertWhisper (int senderId, int receiverId, String messageContent);
 }

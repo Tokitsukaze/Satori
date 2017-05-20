@@ -464,6 +464,8 @@
  * 原型设计页面中的 技能栏 中的 菜单弹出层
  */
 .util-layer {
+  position: fixed;
+  z-index: 900;
   /**
    * 标签页
    */
@@ -680,6 +682,153 @@
   height: 10px;
   border-radius: 50%;
   background-color: #a48e92;
+}
+
+/**
+ * 私信框
+ */
+.whisper-component-full {
+  display: block;
+  position: relative;
+  height: 500px;
+  width: 600px;
+  border: 1px solid #a48e92;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #a48e92;
+}
+.whisper-component-full > .left {
+  width: 160px;
+  float: left;
+}
+.whisper-component-full > .left .friends-list {
+  margin: 5px;
+}
+.whisper-component-full > .left .friends-list .friends-item {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.whisper-component-full > .left .friends-list .friends-item .friends-avatar-container {
+  float: left;
+  margin-right: 5px;
+  font-size: 0;
+}
+.whisper-component-full > .left .friends-list .friends-item .friends-avatar-container .friends-avatar-5x {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+.whisper-component-full > .left .friends-list .friends-item .friends-info {
+  overflow: hidden;
+}
+.whisper-component-full > .left .friends-list .friends-item .friends-info .friends-name {
+  height: 30px;
+  line-height: 30px;
+}
+.whisper-component-full > .right {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+.whisper-component-full > .right > .top > .friends-info .left {
+  float: left;
+  margin-right: 5px;
+}
+.whisper-component-full > .right > .top > .friends-info .left .friends-avatar-container {
+  border: 1px solid rgba(164, 142, 146, 0.1);
+}
+.whisper-component-full > .right > .top > .friends-info .left .friends-avatar-container .friends-avatar-5x {
+  display: block;
+  width: 58px;
+  height: 58px;
+}
+.whisper-component-full > .right > .top > .friends-info .right {
+  height: 60px;
+}
+.whisper-component-full > .right > .top > .friends-info .right .friends-name {
+  display: block;
+  font-size: 14px;
+}
+.whisper-component-full > .right > .top > .friends-info .right .friends-intro {
+  display: block;
+  font-size: 12px;
+}
+.whisper-component-full > .right .chat-container {
+  position: absolute;
+  top: 60px;
+  bottom: 140px;
+  width: 100%;
+  overflow: hidden;
+}
+.whisper-component-full > .right .chat-container .friend-message-item .friend-info .friend-name {
+  display: block;
+  height: 25px;
+  line-height: 25px;
+}
+.whisper-component-full > .right .chat-container .message-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* height: 100%;*/
+}
+.whisper-component-full > .right .chat-container .message-content .i-message-item {
+  margin: 25px 5px;
+}
+.whisper-component-full > .right .chater-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.whisper-component-full > .right .chater-container .top {
+  margin: 5px;
+}
+.whisper-component-full > .right .chater-container .top .option-container {
+  margin-bottom: 5px;
+  height: 25px;
+  /* 文字处理选项 */
+  /* 文字 IO 选项 */
+}
+.whisper-component-full > .right .chater-container .top .option-container .option-list {
+  display: inline-block;
+  font-size: 0;
+}
+.whisper-component-full > .right .chater-container .top .option-container .option-list .option-item {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  line-height: 25px;
+  height: 25px;
+  font-size: 12px;
+  background-color: #8c7476;
+  color: white;
+}
+.whisper-component-full > .right .chater-container .top .option-container .option-list .option-item:last-child {
+  margin-right: 0;
+}
+.whisper-component-full > .right .chater-container .top .option-container .operation-list {
+  font-size: 0;
+  float: right;
+}
+.whisper-component-full > .right .chater-container .top .option-container .operation-list .operation-item {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  line-height: 25px;
+  height: 25px;
+  font-size: 12px;
+  background-color: #8c7476;
+  color: white;
+}
+.whisper-component-full > .right .chater-container .top .option-container .operation-list .operation-item:last-child {
+  margin-right: 0;
+}
+.whisper-component-full > .right .chater-container .top .inputer-container {
+  height: 115px;
+}
+.whisper-component-full > .right .chater-container .bottom {
+  height: 40px;
 }
 
 /**

@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import moe.harusame.dao.FriendDao;
 import moe.harusame.dao.UserDao;
+import moe.harusame.dao.WhisperDao;
 import moe.harusame.dto.Result;
 import moe.harusame.entity.Friend;
 import moe.harusame.entity.User;
+import moe.harusame.entity.Whisper;
 import moe.harusame.service.FriendService;
 
 @Service
@@ -21,6 +23,9 @@ public class FriendServiceImpl implements FriendService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private WhisperDao whisperDao;
 	
 	@Override
 	public Result<Integer> sendInvitation(int friendId, int userId) {
@@ -69,6 +74,21 @@ public class FriendServiceImpl implements FriendService {
 			}
 		}
 		return friendList;
+	}
+
+	@Override
+	public List<Whisper> getWhisperList(int userId) {
+		return whisperDao.getWhisperList(userId);
+	}
+
+	@Override
+	public Result<Integer> insertWhisper(int senderId, int receiverId, String messageContent) {
+		int result = whisperDao.insertWhisper(senderId, receiverId, messageContent);
+		if (result == 1) {
+			return new Result<Integer>("200", "发送私信成功", null);
+		} else {
+			return new Result<Integer>("400", "发送私信失败", null);
+		}
 	}
 	
 }
