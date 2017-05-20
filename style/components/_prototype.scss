@@ -2,5 +2,8 @@
  * 原型 层
  */
 .prototype-layer {
-
+	* {
+		position: absolute;
+		background-color: rgba($color_medium_gray, 1);
+	}
 }

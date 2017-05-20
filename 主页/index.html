@@ -44,6 +44,46 @@
 						</ul>
 					</div>
 				</div>
+
+				<div class="search-component">
+					<div class="top">
+						<span class="search-keyword">春雨</span>
+					</div>
+					<div class="bottom">
+						<ul class="search-result-list">
+							<li class="search-result-item type-user">
+								<div class="card-wrap">
+									<div class="friend-invite" button-type="become_friends/1000">Friends</div>
+									<div class="left">
+										<div class="info-container">
+											<span class="name">春雨棲姬</span>
+											<p class="info">我是白露级驱逐舰五番舰的春雨。</p>
+										</div>
+									</div>
+									<div class="right">
+										<img src="../images/harusame.png" alt="春雨棲姬" class="avatar-5x">
+									</div>
+								</div>
+							</li>
+							<li class="search-result-item type-project">
+								<div class="left">
+									<img src="../images/book.jpg" alt="图书管理系统" class="avatar-5x">
+								</div>
+								<div class="right">
+									<div class="info-container">
+										<span class="name" button-type="project/1002">图书管理系统</span>
+										<p class="info">一个简单的图书管理系统。</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="end">
+							<div class="end-circle"></div>
+							<span class="end-tip">搜索完毕</span>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</main>
 	</body>
@@ -52,49 +92,3 @@
 <script>
 
 </script>
-
-<div class="container">
-	<div class="panel panel-default text-center">
-		<div class="panel-heading">
-			<h1>${seckill.name}</h1>
-		</div>
-	</div>
-	<div class="panel-body">
-		<h2 class="text-danger">
-			<!-- 显示 time图标 -->
-			<span class="glyphicon glyphicon-time"></span>
-			<!-- 展示倒计时 -->
-			<span class="glyphicon" id="seckill-box"></span>
-		</h2>
-	</div>
-</div>
-
-<div id="killPhoneModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-header">
-			<h3 class="modal-title text-center">
-				<span class="glyphicon glyphicon-phone"></span>秒杀电话:
-			</h3>
-		</div>
-		<div class="modal-body">
-			<div class="row">
-				<div class="col-xs-8 col-xs-offset-2">
-					<input type="text" name="killPhone" class="form-control" id="killPhoneKey" placeholder="填手机好^o^">
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<!-- 验证信息 -->
-			<span class="killPhoneMessage glyphicon"></span>
-			<button type="button" id="killphoneBtn" class="btn btn-succcess">
-				<span class="glyphicon glyphicon-phone"></span>Submit
-			</button>
-		</div>
-	</div>
-</div>
-
-<!-- 使用 CDN 获取公共 js http://www.bootcdn.cn/ -->
-<!-- jQuery cookie 操作插件 -->
-<script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-<!-- jQuery countDown 倒计时插件 -->
-<script src="http://cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.min.js"></script>

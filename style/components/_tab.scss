@@ -1,14 +1,15 @@
-%util-info {
-	height: 25px;
-	line-height: 25px;
-	background-color: rgba($color_grape_darken, .5);
-}
-
 %util-component {
+	display: none;
 	position: absolute;
 	border: 1px solid rgba($color_grape, 1);
 	background-color: rgba($color_white, 1);
 	border-radius: 5px;
+}
+
+%util-info {
+	height: 25px;
+	line-height: 25px;
+	background-color: rgba($color_grape_darken, .5);
 }
 
 %i-circle-5x {

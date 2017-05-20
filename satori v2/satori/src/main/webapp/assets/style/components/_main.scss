@@ -1,0 +1,412 @@
+$home_width: 1200px;
+
+.main-layer {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: $main-layer;
+
+	/* 技能栏移动到顶部 */
+	.skill-top-component {
+		position: relative;
+		width: 100%;
+		height: 40px;
+		line-height: 40px;
+		background-color: rgba($color_white, 1);
+
+		.skill-list-container {
+			margin: 0 auto;
+			width: $home_width;
+			height: 40px;
+			font-size: 0;
+			.skill-list {
+				display: inline-block;
+				height: 40px;
+				.skill-item {
+					position: relative;
+					display: inline-block;
+					.skill-item-link {
+						display: block;
+						font-size: 12px;
+						padding: 0 15px;
+					}
+
+					.skill-item-search {
+						margin-top: 10px;
+						margin-left: 15px;
+						color: rgba($color_white, 1);
+						background-color: rgba($color_medium_gray, 1);
+						border: 1px solid rgba($color_medium_gray, 1);
+						padding: 0 10px;
+						border-radius: 15px;
+						box-sizing: border-box;
+						font-size: 12px;
+						width: 200px;
+						height: 20px;
+						line-height: 20px;
+						&:hover {
+							color: rgba($color_medium_gray, 1);
+							background-color: rgba($color_white, 1);
+						}
+					}
+				}
+
+				&:last-child {
+					float: right;
+				}
+			}
+		}
+	}
+
+	/* 注册框 */
+	.signup-component, .signin-component {
+		margin-top: 50px;
+		text-align: center;
+
+		.card-list {
+			.operation-container {
+				margin-top: 25px;
+				text-align: center;
+				.i-r-submit {
+					display: inline-block;
+					width: 289px;
+					height: 30px;
+					line-height: 30px;
+					background-color: rgba($color_white, 1);
+				}
+			}
+
+			.type-input {
+				.card-avatar-container {
+					border: 1px solid rgba($color_medium_gray_darken, 1);
+					background-color: rgba($color_medium_gray, 1);
+					color: rgba($color_white, 1);
+				}
+			}
+
+			.card-item {
+				.card-wrap {
+					display: inline-block;
+					margin-bottom: 25px;
+					.left {
+						float: left;
+						margin-right: 15px;
+						.card-avatar-container {
+							display: inline-block;
+							font-size: 12px;
+							text-align: center;
+							width: 50px;
+							height: 50px;
+							line-height: 50px;
+							border-radius: 5px;
+						}
+						.card-illustate {
+							width: 50px;
+							height: 50px;
+						}
+					}
+					.right {
+						overflow: hidden;
+						line-height: 25px;
+						.info-container {
+							.i-r-input {
+								margin-bottom: 10px;
+								padding: 0 10px;
+								width: 200px;
+								border-radius: 5px;
+								color: rgba($color_dark_gray, 1);
+							}
+							.condition-list {
+								text-align: left;
+								.condition-item {
+									line-height: 20px;
+									color: rgba($color_medium_gray_darken, 1);
+								}
+							}
+
+							.i-r-result {
+								text-align: left;
+							}
+
+							.avatar-wrapper {
+								font-size: 100%;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.part-two {
+			margin-top: 200px;
+		}
+	}
+	/* 登陆框 */
+	.signin-component {
+		margin-top: 200px;
+		text-align: center;
+		.form-container {
+			text-align: left;
+			display: inline-block;
+
+			.i-input-array {
+				margin-bottom: 25px;
+				.i-input-line {
+
+				}
+			}
+
+			.i-option-line {
+
+			}
+		}
+	}
+
+	/* 个人主页 */
+	.home-component, .signup-component {
+		/* 印象图 */
+		.impression-component {
+			.impression-container {
+				position: relative;
+				width: 100%;
+				height: 300px;
+				overflow: hidden;
+				.impression-5x {
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					margin: auto;
+					width: 100%;
+				}
+			}
+		}
+
+		/* 头像 以及 统计 */
+		.statistics-component {
+			position: relative;
+			margin: 0 auto;
+			width: $home_width;
+			height: 50px;
+			line-height: 50px;
+			/* 头像 */
+			.user-avatar-container {
+				position: absolute;
+				top: -120px;
+				border: 2px solid rgba($color_white, 1);
+				border-radius: 5px;
+				.user-avatar-5x {
+					display: block;
+					width: 200px;
+					height: 200px;
+					border-radius: 5px;
+				}
+			}
+
+			/* 统计 */
+			.statistics-container {
+
+				.statistics-list {
+					margin-left: (250 + 25) + px;
+					font-size: 0;
+					.statistics-item {
+						position: relative;
+						display: inline-block;
+
+						vertical-align: top;
+						text-align: center;
+						font-size: 12px;
+
+						&:last-child {
+							float: right;
+						}
+
+						.statistics-count {
+							display: block;
+							padding: 0 15px;
+							min-width: 50px;
+							font-size: 50px;
+							color: rgba($color_lavender, .2);
+						}
+
+						.item-name {
+							display: block;
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+
+
+		/* 个人信息 以及 主要信息展示 */
+		.info-component-wrap {
+			width: 100%;
+			background-color: rgba($color_medium_gray, .2);
+
+			.info-component {
+				position: relative;
+				width: $home_width;
+				margin: 0 auto;
+				overflow: hidden;
+
+				> .left {
+					float: left;
+					margin-left: -100%;
+					width: 250px;
+
+					.info-container {
+						margin-top: 30px;
+						.user-name {
+							line-height: 50px;
+						}
+						.user-state {
+
+						}
+						.user-introduce {
+
+						}
+					}
+				}
+
+				.center-wrap {
+					width: 100%;
+					float: left;
+
+					.center {
+						margin: 0 300px 0 250px;
+						left: 250px;
+						right: 300px;
+
+						.state-component {
+							margin: 15px 25px;
+							.state-no-card {
+								box-sizing: border-box;
+								width: 100%;
+								height: 300px;
+								line-height: 300px;
+								text-align: center;
+								border-radius: 5px;
+								border: 1px solid rgba($color_medium_gray, 1);
+								background-color: rgba($color_medium_gray, .5);
+								.state-illustate {
+									font-size: 30px;
+									color: rgba($color_white, 1);
+								}
+							}
+						}
+
+						.card-list {
+							.type-note {
+								.card-avatar-container {
+									border: 1px solid rgba($color_ram_darken, 1);
+									background-color: rgba($color_ram, 1);
+									color: rgba($color_white, 1);
+								}
+							}
+							.type-project {
+								.card-avatar-container {
+									border: 1px solid rgba($color_lavender_darken, 1);
+									background-color: rgba($color_lavender, 1);
+									color: rgba($color_white, 1);
+								}
+							}
+							.type-store {
+								.card-avatar-container {
+									border: 1px solid rgba($color_aqua_darken, 1);
+									background-color: rgba($color_aqua, 1);
+									color: rgba($color_white, 1);
+								}
+							}
+							.type-input {
+								.card-avatar-container {
+									border: 1px solid rgba($color_aqua_darken, 1);
+									background-color: rgba($color_aqua, 1);
+									color: rgba($color_white, 1);
+								}
+							}
+							.card-item {
+								margin: 15px 25px 50px 25px;
+								.left {
+									float: left;
+									margin-right: 15px;
+									.card-avatar-container {
+										display: inline-block;
+										font-size: 12px;
+										text-align: center;
+										width: 50px;
+										height: 50px;
+										line-height: 50px;
+										border-radius: 5px;
+									}
+									.card-avatar-5x {
+										width: 50px;
+										height: 50px;
+									}
+								}
+								.right {
+									overflow: hidden;
+									line-height: 25px;
+									.info-container {
+										.title {
+											font-size: 16px;
+											font-weight: 700;
+										}
+										.date {
+											line-height: 20px;
+											font-size: 12px;
+											color: rgba($color_medium_gray_darken, 1);
+										}
+										.content {
+											font-size: 14px;
+										}
+
+										.i-r-input {
+											margin-bottom: 10px;
+											padding: 0 10px;
+											width: 100%;
+											box-sizing: border-box;
+											border-radius: 5px;
+											color: rgb(101, 109, 120);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				> .right {
+					float: left;
+					margin-top: 15px;
+					margin-left: -300px;
+					width: 300px;
+
+					.create-menu-container {
+
+						.create-menu-list {
+
+							.create-menu-item {
+								display: block;
+								margin-right: 1px;
+								font-size: 12px;
+								text-align: center;
+								width: 100%;
+								height: 80px;
+								line-height: 80px;
+								background-color: rgba($color_white, 1);
+								color: rgba($color_aqua, 1);
+								cursor: pointer;
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+}

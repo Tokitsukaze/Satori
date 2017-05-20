@@ -151,6 +151,257 @@
   z-index: 2000;
 }
 
+.search-component > .top {
+  text-align: center;
+}
+.search-component > .top .search-keyword {
+  display: inline-block;
+  font-size: 40px;
+  display: inline-block;
+  height: 80px;
+  line-height: 80px;
+  letter-spacing: 5px;
+  color: #ccd1d9;
+  border-bottom: 2px solid rgba(204, 209, 217, 0.6);
+}
+.search-component > .bottom {
+  position: relative;
+}
+.search-component > .bottom .search-result-list {
+  position: relative;
+  overflow: hidden;
+}
+.search-component > .bottom .search-result-list .search-result-item {
+  padding: 30px;
+  box-sizing: border-box;
+  font-size: 0;
+  overflow: hidden;
+  position: relative;
+}
+.search-component > .bottom .search-result-list .type-user {
+  width: 50%;
+  border-right: 1px solid rgba(204, 209, 217, 0.6);
+}
+.search-component > .bottom .search-result-list .type-user .card-wrap {
+  float: right;
+  margin-right: 120px;
+}
+.search-component > .bottom .search-result-list .type-user .card-wrap .friend-invite {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+  background-color: rgba(93, 156, 236, 0.1);
+  border: 1px solid #4a89dc;
+  color: #5d9cec;
+  transition: all 0.25s ease-in-out 0s;
+  cursor: pointer;
+}
+.search-component > .bottom .search-result-list .type-user .card-wrap .friend-invite:hover {
+  background-color: #5d9cec;
+  color: white;
+}
+.search-component > .bottom .search-result-list .type-user .card-wrap .left {
+  display: inline-block;
+  vertical-align: top;
+}
+.search-component > .bottom .search-result-list .type-user .card-wrap .left .info-container {
+  margin-right: 10px;
+  font-size: 12px;
+  text-align: right;
+}
+.search-component > .bottom .search-result-list .type-user .card-wrap .left .info-container .name {
+  display: block;
+  height: 25px;
+  line-height: 25px;
+}
+.search-component > .bottom .search-result-list .type-user .card-wrap .left .info-container .info {
+  display: block;
+  line-height: 20px;
+  max-width: 160px;
+}
+.search-component > .bottom .search-result-list .type-user .card-wrap .right {
+  display: inline-block;
+  vertical-align: top;
+}
+.search-component > .bottom .search-result-list .type-user .card-wrap .right .avatar-5x {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.search-component > .bottom .search-result-list .type-user:before {
+  display: block;
+  content: '';
+  position: absolute;
+  border-bottom: 1px solid #ccd1d9;
+  width: 100px;
+  right: 0;
+  top: 55px;
+}
+.search-component > .bottom .search-result-list .type-user:after {
+  display: block;
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #ec87c0;
+  right: 100px;
+  top: 50px;
+}
+.search-component > .bottom .search-result-list .type-project {
+  float: right;
+  position: relative;
+  left: -1px;
+  padding-left: 150px;
+  border-left: 1px solid rgba(204, 209, 217, 0.6);
+  width: 50%;
+}
+.search-component > .bottom .search-result-list .type-project .left {
+  display: inline-block;
+  vertical-align: top;
+}
+.search-component > .bottom .search-result-list .type-project .left .avatar-5x {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+.search-component > .bottom .search-result-list .type-project .right {
+  display: inline-block;
+  vertical-align: top;
+}
+.search-component > .bottom .search-result-list .type-project .right .info-container {
+  text-align: left;
+  margin-left: 10px;
+  font-size: 12px;
+}
+.search-component > .bottom .search-result-list .type-project .right .info-container .name {
+  display: block;
+  height: 25px;
+  line-height: 25px;
+}
+.search-component > .bottom .search-result-list .type-project .right .info-container .info {
+  display: block;
+  line-height: 20px;
+  max-width: 160px;
+}
+.search-component > .bottom .search-result-list .type-project:before {
+  display: block;
+  content: '';
+  position: absolute;
+  border-bottom: 1px solid #ccd1d9;
+  width: 100px;
+  left: 0;
+  top: 55px;
+}
+.search-component > .bottom .search-result-list .type-project:after {
+  display: block;
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #5d9cec;
+  left: 100px;
+  top: 50px;
+}
+.search-component > .bottom .end {
+  position: relative;
+  right: 1px;
+  width: 50%;
+  height: 100px;
+  border-right: 1px solid rgba(204, 209, 217, 0.6);
+}
+.search-component > .bottom .end .end-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ac92ec;
+  position: absolute;
+  bottom: 0px;
+  right: -10px;
+}
+.search-component > .bottom .end .end-tip {
+  font-size: 12px;
+  position: absolute;
+  bottom: -25px;
+  right: -25px;
+  width: 50px;
+}
+
+.mask-layer {
+  position: fixed;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.mask-layer .mask-component {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 400px;
+  height: 600px;
+  background-color: white;
+  border: 1px solid #ccd1d9;
+  box-shadow: 5px 5px 5px rgba(204, 209, 217, 0.5);
+}
+
+#mask-project-create > .top {
+  background-color: rgba(204, 209, 217, 0.5);
+  text-align: center;
+}
+#mask-project-create > .top .project-avatar {
+  display: inline-block;
+  margin: 25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #ccd1d9;
+  background-color: white;
+}
+#mask-project-create > .bottom .card-item {
+  margin: 15px 25px 50px 25px;
+}
+#mask-project-create > .bottom .card-item > .left {
+  float: left;
+  margin-right: 15px;
+}
+#mask-project-create > .bottom .card-item > .left .card-avatar-container {
+  display: inline-block;
+  font-size: 12px;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 5px;
+  border: 1px solid #3bafda;
+  background-color: #4fc1e9;
+  color: white;
+}
+#mask-project-create > .bottom .card-item > .left .card-avatar-container .card-avatar-5x {
+  width: 50px;
+  height: 50px;
+}
+#mask-project-create > .bottom .card-item > .right {
+  overflow: hidden;
+  line-height: 25px;
+}
+#mask-project-create > .bottom .card-item > .right .info-container .r-input {
+  margin-bottom: 10px;
+  padding: 0 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #656d78;
+}
+
 .modal-layer {
   position: fixed;
   right: 0;
@@ -158,7 +409,7 @@
 }
 .modal-layer .modal-list .modal-item {
   padding: 5px 50px 20px 5px;
-  font-size: 14px;
+  font-size: 12px;
   color: white;
   opacity: 0;
   transition: all 0.25s ease-in-out 0s;
@@ -179,17 +430,18 @@
   display: none;
 }
 
-.util-layer .tab-component > .info {
-  height: 25px;
-  line-height: 25px;
-  background-color: rgba(140, 116, 118, 0.5);
-}
-
 .util-layer .tab-component {
+  display: none;
   position: absolute;
   border: 1px solid #a48e92;
   background-color: white;
   border-radius: 5px;
+}
+
+.util-layer .tab-component > .info {
+  height: 25px;
+  line-height: 25px;
+  background-color: rgba(140, 116, 118, 0.5);
 }
 
 .util-layer .tab-component > .info .title .i-circle-5x {
@@ -361,6 +613,11 @@
 /**
  * 原型 层
  */
+.prototype-layer * {
+  position: absolute;
+  background-color: #ccd1d9;
+}
+
 /**
  * 项目信息
 
@@ -419,7 +676,6 @@
 
 /**
  *  原型装饰
-
  <i class="circle-5x i-circle-5x"></i>
  */
 .circle-5x {
@@ -428,6 +684,148 @@
   height: 10px;
   border-radius: 50%;
   background-color: #a48e92;
+}
+
+/**
+ * 私信框
+ */
+.whisper-component-full {
+  display: block;
+  position: relative;
+  height: 500px;
+  width: 600px;
+  border: 1px solid #a48e92;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #a48e92;
+}
+.whisper-component-full > .left {
+  width: 160px;
+  float: left;
+}
+.whisper-component-full > .left .friends-list {
+  margin: 5px;
+}
+.whisper-component-full > .left .friends-list .friends-item {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.whisper-component-full > .left .friends-list .friends-item .friends-avatar-container {
+  float: left;
+  margin-right: 5px;
+  font-size: 0;
+}
+.whisper-component-full > .left .friends-list .friends-item .friends-avatar-container .friends-avatar-5x {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+.whisper-component-full > .left .friends-list .friends-item .friends-info {
+  overflow: hidden;
+}
+.whisper-component-full > .left .friends-list .friends-item .friends-info .friends-name {
+  height: 30px;
+  line-height: 30px;
+}
+.whisper-component-full > .right {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+.whisper-component-full > .right > .top > .friends-info .left {
+  float: left;
+  margin-right: 5px;
+}
+.whisper-component-full > .right > .top > .friends-info .left .friends-avatar-container {
+  border: 1px solid rgba(164, 142, 146, 0.1);
+}
+.whisper-component-full > .right > .top > .friends-info .left .friends-avatar-container .friends-avatar-5x {
+  display: block;
+  width: 58px;
+  height: 58px;
+}
+.whisper-component-full > .right > .top > .friends-info .right {
+  height: 60px;
+}
+.whisper-component-full > .right > .top > .friends-info .right .friends-name {
+  display: block;
+  font-size: 14px;
+}
+.whisper-component-full > .right > .top > .friends-info .right .friends-intro {
+  display: block;
+  font-size: 12px;
+}
+.whisper-component-full > .right .chat-container {
+  position: absolute;
+  top: 60px;
+  bottom: 140px;
+  width: 100%;
+  overflow: hidden;
+}
+.whisper-component-full > .right .chat-container .message-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* height: 100%;*/
+}
+.whisper-component-full > .right .chat-container .message-content .i-message-item {
+  margin: 25px 5px;
+}
+.whisper-component-full > .right .chater-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.whisper-component-full > .right .chater-container .top {
+  margin: 5px;
+}
+.whisper-component-full > .right .chater-container .top .option-container {
+  margin-bottom: 5px;
+  height: 25px;
+  /* 文字处理选项 */
+  /* 文字 IO 选项 */
+}
+.whisper-component-full > .right .chater-container .top .option-container .option-list {
+  display: inline-block;
+  font-size: 0;
+}
+.whisper-component-full > .right .chater-container .top .option-container .option-list .option-item {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  line-height: 25px;
+  height: 25px;
+  font-size: 12px;
+  background-color: #8c7476;
+  color: white;
+}
+.whisper-component-full > .right .chater-container .top .option-container .option-list .option-item:last-child {
+  margin-right: 0;
+}
+.whisper-component-full > .right .chater-container .top .option-container .operation-list {
+  font-size: 0;
+  float: right;
+}
+.whisper-component-full > .right .chater-container .top .option-container .operation-list .operation-item {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  line-height: 25px;
+  height: 25px;
+  font-size: 12px;
+  background-color: #8c7476;
+  color: white;
+}
+.whisper-component-full > .right .chater-container .top .option-container .operation-list .operation-item:last-child {
+  margin-right: 0;
+}
+.whisper-component-full > .right .chater-container .top .inputer-container {
+  height: 115px;
+}
+.whisper-component-full > .right .chater-container .bottom {
+  height: 40px;
 }
 
 /**
@@ -740,6 +1138,9 @@
    * 技能栏里的头像
    */
 }
+.skill-layer .skill-component .skill-list .skill-item .skill-name {
+  display: block;
+}
 .skill-layer .skill-component .skill-list .skill-item:last-child {
   margin-right: 0;
 }
@@ -778,6 +1179,7 @@
 }
 .main-layer .skill-component .skill-list-container .skill-list .skill-item {
   display: inline-block;
+  position: relative;
   font-size: 12px;
   padding: 0 15px;
 }

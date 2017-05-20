@@ -5,6 +5,9 @@
 /* 图层管理 */
 @import '_layer';
 
+@import 'components/_search';
+
+@import 'components/_mask';
 @import 'components/_modal';
 @import 'components/_tab';
 @import 'components/_branch';

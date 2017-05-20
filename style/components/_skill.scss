@@ -39,6 +39,10 @@
 				color: rgba($color_grape_darken, 1);
 				font-size: 12px;
 
+				.skill-name {
+					display: block;
+				}
+
 				&:last-child {
 					margin-right: 0;
 				}
