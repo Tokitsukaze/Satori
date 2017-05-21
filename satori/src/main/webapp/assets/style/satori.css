@@ -468,7 +468,7 @@
  */
 .util-layer {
   position: fixed;
-  z-index: 900;
+  z-index: 1000;
   /**
    * 标签页
    */
@@ -618,6 +618,43 @@
 /**
  * 原型 层
  */
+.prototype-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ccd1d9;
+  z-index: 900;
+}
+.prototype-layer * {
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.prototype-layer *:hover {
+  border: 1px solid rgba(79, 193, 233, 0.6);
+}
+.prototype-layer .selected {
+  border: 1px solid #ac92ec;
+}
+.prototype-layer .comment-tip {
+  opacity: 0;
+  transition: all 0.25s ease-in-out 0s;
+  position: absolute;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: rgba(67, 74, 84, 0.9);
+  color: white;
+}
+.prototype-layer .limit-x {
+  width: 100%;
+  border-top: 1px solid rgba(93, 156, 236, 0.5);
+}
+.prototype-layer .limit-y {
+  height: 100%;
+  border-left: 1px solid rgba(236, 135, 192, 0.5);
+}
+
 /**
  * 项目信息
 
@@ -701,7 +738,9 @@
 }
 .whisper-component-full > .left {
   width: 160px;
+  height: 100%;
   float: left;
+  background-color: rgba(74, 137, 220, 0.5);
 }
 .whisper-component-full > .left .friends-list {
   margin: 5px;
@@ -732,6 +771,7 @@
   position: relative;
   overflow: hidden;
   height: 100%;
+  background-color: white;
 }
 .whisper-component-full > .right > .top > .friends-info .left {
   float: left;
@@ -1122,7 +1162,7 @@
   left: 50%;
   margin-left: -234.5px;
   text-align: center;
-  z-index: 800;
+  z-index: 1000;
   /**
    * 技能栏
    */
@@ -1529,4 +1569,13 @@ a:hover {
 
 a:active {
   color: #ec87c0;
+}
+
+html, body {
+  height: 100%;
+}
+
+#satori {
+  width: 100%;
+  height: 100%;
 }

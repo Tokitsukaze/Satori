@@ -2,5 +2,44 @@
  * 原型 层
  */
 .prototype-layer {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba($color_medium_gray, 1);
+	z-index: 900;
 
+	* {
+		position: absolute;
+		background-color: rgba($color_white, 1);
+		border-radius: 5px;
+		box-sizing: border-box;
+
+		&:hover {
+			border: 1px solid rgba($color_aqua, .6);
+		}
+	}
+
+	.selected {
+		border: 1px solid rgba($color_lavender, 1);
+	}
+
+	.comment-tip {
+		opacity: 0;
+		transition: all 0.25s ease-in-out 0s;
+		position: absolute;
+		border-radius: 5px;
+		padding: 5px 10px;
+		background-color: rgba($color_dark_gray_darken, .9);
+		color: rgba($color_white, 1);
+	}
+
+	.limit-x {
+		width: 100%;
+		border-top: 1px solid rgba($color_rem, .5);
+	}
+
+	.limit-y {
+		height: 100%;
+		border-left: 1px solid rgba($color_ram, .5);
+	}
 }

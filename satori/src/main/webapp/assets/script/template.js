@@ -18,6 +18,13 @@
 			this.$satori = document.getElementById("satori")
 
 			/**
+			 * 接受键盘事件
+			 */
+			this.$keyborad_inputer = VD.compile(e('textarea', {"style": "opacity: 0; position: absolute"}))
+
+			this.$satori.appendChild(this.$keyborad_inputer)
+
+			/**
 			 * 所有图层
 			 */
 			this.layers = {
@@ -26,7 +33,6 @@
 				// $branch_layer: VD.compile(e('div', {'class': 'branch-layer'})),
 				$main_layer: VD.compile(e('div', {'class': 'main-layer'})),
 				$effect_layer: VD.compile(e('div', {'class': 'effect-layer'})),
-				$prototype_layer: VD.compile(e('div', {'class': 'prototype-layer'})),
 				// $chat_layer: VD.compile(e('div', {'class': 'chat-layer'})),
 				$util_layer: VD.compile(e('div', {'class': 'util-layer'})),
 				$skill_layer: VD.compile(e('div', {'class': 'skill-layer'})),
@@ -38,11 +44,18 @@
 			for (var layer in this.layers) {
 				$fragment.appendChild(this.layers[layer])
 			}
+
+			this.$prototype_component = VD.compile(e("div", {'class': 'prototype-layer', "id": "prototype-layer"}))
+
 			this.$satori.appendChild($fragment)
 			// /**
 			//  * mask 图层
 			//  */
 			// this.mask = VD.compile(e('div', {'class': 'mask'}))
+		},
+
+		prototype_component: function () {
+			return this.$prototype_component
 		},
 
 		/**
@@ -632,6 +645,7 @@
 
 			SatoriEvent.skill_top_home($avatar)
 
+			var $preview = VD.compile(e("span", {"class": "skill-name", "s-sign": "preview"}, "预览"))
 			var $tab = VD.compile(e("span", {"class": "skill-name", "s-sign": "tab"}, "Tab"))
 			var $whisper = VD.compile(e("span", {"class": "skill-name", "s-sign": "whisper"}, "私信"))
 
@@ -674,7 +688,7 @@
 							e("span", {"class": "skill-name"}, "当前")
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "预览")
+
 						]),
 						e("li",  {"class": "skill-item"}, [
 							$tab
@@ -736,16 +750,19 @@
 				])
 			)
 
-			SatoriEvent.activePrototpye({
-				"$tab": $tab,
-				"$skill_component": $skill_component
-			})
-
-			return VD.compile(
+			this.$skill_layer = VD.compile(
 				e("div", {"class": "skill-layer"}, [
 					$skill_component
 				])
 			)
+
+			SatoriEvent.activePrototpye({
+				"$tab": $tab,
+				"$preview": $preview,
+				"$skill_component": $skill_component
+			})
+
+			return this.$skill_layer
 		},
 
 		/**
@@ -804,12 +821,20 @@
 					])
 				])
 			)
+		},
+
+		comment_tip: function () {
+			this.$comment_tip = VD.compile(e('span', {'class': 'comment-tip', 'id': 'comment-tip'}))
+			return this.$comment_tip
+		},
+
+
+		satori_real_prototype: function (v_data) {
+			console.info(v_data)
+			return VD.compile(
+				e(v_data.tagname, {'style': v_data.props, 'data-pid': v_data.prototypeId, 'data-comment': v_data.comment}, v_data.text)
+			)
 		}
-
-
-
-
-
 
 
 

@@ -50,6 +50,8 @@
 				return
 			}
 
+			Template.$prototype_component.innerHTML = ""
+
 			this.stage = v_new_stage
 
 			var $fragment = document.createDocumentFragment()
@@ -260,6 +262,8 @@
 	"prototype": {
 		"components": [
 			"skill",
+			"prototype_component",
+			"comment_tip"
 		],
 	},
 	"search": {

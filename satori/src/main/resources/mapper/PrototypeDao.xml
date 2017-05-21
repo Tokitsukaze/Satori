@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- 目的:为 dao接口方法提供 sql语句 -->
+<mapper namespace="moe.harusame.dao.PrototypeDao">	
+
+	<insert id="insertPrototype">
+		insert ignore into prototype (prototype_id, tab_id, tagname, props, text, comment, update_date, branch_id)
+		values (#{prototypeId}, #{tabId}, #{tagname}, #{props}, #{text}, #{comment}, #{updateDate}, #{branchId})
+	</insert>
+	
+	<select id="getPrototype" resultType="Prototype">
+		select prototype_id, tab_id, tagname, props, text, comment, update_date, branch_id
+		from prototype
+		where tab_id = #{tabId}
+		and branch_id = #{branchId}
+	</select>
+	
+	<delete id="deleteBranchPrototype">
+		delete from prototype
+		where tab_id = #{tabId}
+		and branch_id = #{branchId}
+	</delete>
+</mapper>

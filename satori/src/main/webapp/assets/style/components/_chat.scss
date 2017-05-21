@@ -89,7 +89,9 @@
 	box-shadow: 5px 5px 5px rgba($color_grape, 1);
 	> .left {
 		width: 160px;
+		height: 100%;
 		float: left;
+		background-color: rgba($color_rem_darken, .5);
 		.friends-list {
 			margin: 5px;
 			.friends-item {
@@ -120,6 +122,7 @@
 		position: relative;
 		overflow: hidden;
 		height: 100%;
+		background-color: rgba($color_white, 1);
 		> .top {
 			> .friends-info {
 				.left {

@@ -111,6 +111,7 @@ config = {
          * 重新检测高度
          */
         refresh: function (v_config) {
+            var config = v_config || {}
             // 得到实际高度
             var viewport_height = this.viewport_node.clientHeight
             var content_height = this.content_node.clientHeight
@@ -124,7 +125,7 @@ config = {
             this.scroller_node.style.height = scroller_height + 'px'
 
             // 高度偏移量
-            this.scroller_offsetY = v_config.scrolloffsetY || 0
+            this.scroller_offsetY = config.scrolloffsetY || 0
             this.content_offsetY = scroller_height * this.scroller_offsetY
 
             // scroller 最高滚动高度
@@ -168,8 +169,8 @@ config = {
          * 设置滚动对象的位置
          */
         _setScrollData: function (v_scroller_offsetY, v_content_offsetY) {
-            this.scroller_node.style[transform] = 'translate(0, ' + v_scroller_offsetY + 'px)'
-            this.content_node.style[transform] = 'translate(0, ' + v_content_offsetY + 'px)'
+            this.scroller_node.style.top =  v_scroller_offsetY + 'px' // 'translate(0, ' + v_scroller_offsetY + 'px)'
+            this.content_node.style.top = v_content_offsetY + 'px' //'translate(0, ' + v_content_offsetY + 'px)'
         },
 
         /**
@@ -199,7 +200,7 @@ config = {
             var scroll = document.createElement('div')
             scroll_style != null ? scroll.setAttribute('class', scroll_style) : scroll.style.cssText = "height: 100%; width: 10px; background-color: rgba(118, 45, 138, .3); position: absolute; top: 0; right: 0"
             var scroller = document.createElement('div')
-            scroller_style != null ? scroller.setAttribute('class', scroller_style) : scroller.style.cssText = "width: 100%; background-color: rgba(118, 45, 138, 1);"
+            scroller_style != null ? scroller.setAttribute('class', scroller_style) : scroller.style.cssText = "width: 100%; background-color: rgba(118, 45, 138, 1); position: absolute; bottom: 0;"
             scroll.appendChild(scroller)
             return {scroll: scroll, scroller: scroller}
         }

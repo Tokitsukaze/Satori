@@ -284,7 +284,6 @@
 
 			function startComet () {
 				setTimeout(function () {
-					console.info(SESSION_userId)
 					if (SESSION_userId.length !== 0) {
 						_comet()
 					}
@@ -559,7 +558,6 @@
 		 */
 		activePrototpye: function (v_$dom) {
 			window.Harusame = new SatoriPrototype({
-				$prototype_layer: Template.layers.$prototype_layer,
 				$prototype_utils: v_$dom.$skill_component
 			})
 		},

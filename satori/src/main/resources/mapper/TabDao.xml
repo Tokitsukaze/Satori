@@ -34,6 +34,21 @@
 		where tab_id = #{tabId}
 	</update>
 	
+	<update id="branchAddOne">
+		update 
+			tab
+		set
+			branch = branch + 1
+		where tab_id = #{tabId}
+	</update>
+	
+	<select id="getNewBranch" resultType="Tab">
+		select tab_id, project_id, name, branch, update_date
+		from tab
+		and tab_id = #{tabId}
+		and state = 0
+	</select>
+	
 	<select id="getTabByProjectIdAndName" resultType="Tab">
 		select tab_id, project_id, name, branch, update_date
 		from tab
@@ -45,8 +60,7 @@
 	<select id="getTabByTabId" resultType="Tab">
 		select tab_id, project_id, name, branch, update_date
 		from tab
-		where project_id = #{projectId}
-		and tab_id = #{tabId}
+		where tab_id = #{tabId}
 		and state = 0
 	</select>
 	

@@ -26,10 +26,12 @@
 	
 	var CURRENT_PROJECT_ID
 	var CURRENT_TAB_ID
+	var CURRENT_BRANCH_ID
 </script>
 <script src="${ctx}/assets/script/third-party/jquery-2.1.1.min.js"></script>
 <script src="${ctx}/assets/script/third-party/jquery.form.js"></script>
 <script src="${ctx}/assets/script/third-party/axios.min.js"></script>
+<script src="${ctx}/assets/script/third-party/store.legacy.min.js"></script>
 <script src="${ctx}/assets/script/satori-scroller.js"></script>
 <script src="${ctx}/assets/script/vd.js"></script>
 <script src="${ctx}/assets/script/template.js"></script>
