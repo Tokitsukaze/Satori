@@ -138,14 +138,16 @@
 						if (response.status === 200) {
 							console.info("response", response)
 							var datas = data["data"]
-							var datas_length = datas.length
-							if (datas_length > 0) {
-								v_$count.textContent = datas_length
+							if (datas == null) {
 								$center.innerHTML = ""
-								$center.appendChild(Template["home_card_list"](datas))
-							} else {
+								$center.appendChild(v_$card_list)
 								$center.appendChild(Template["home_card_tip"]("项目"))
+								return
 							}
+							var datas_length = datas.length
+							v_$count.textContent = datas_length
+							$center.innerHTML = ""
+							$center.appendChild(Template["home_card_list"](datas))
 						} else {
 							console.log(error);
 							console.log(response)
@@ -157,8 +159,32 @@
 				case "note":
 
 					break
-				case "denpa":
-
+				case "friend":
+					axios({
+						"method": "post",
+						"url": "/satori/home/" + SESSION_userId + "/friends",
+					})
+					.then(function (response) {
+						var data = response.data
+						if (response.status === 200) {
+							console.info("response", response)
+							var datas = data["data"]
+							if (datas == null) {
+								$center.innerHTML = ""
+								$center.appendChild(v_$card_list)
+								$center.appendChild(Template["home_card_tip"]("好友"))
+								return
+							}
+							var datas_length = datas.length
+							v_$count.textContent = datas_length
+							$center.innerHTML = ""
+							$center.appendChild(Template["home_card_list"](datas))
+						} else {
+							console.log(response)
+						}
+					}).catch(function (error) {
+						console.log(error);
+					})
 					break
 				case "store":
 
@@ -187,7 +213,7 @@
 		updateViewHomeUserInfo: function (v_$name, v_$info, v_$avatar, v_$impression) {
 			axios({
 				"method": "post",
-				"url": "/satori/home/" + SESSION_userId + "/getUser",
+				"url": "/satori/home/" + SESSION_userId + "/getUser"
 			})
 			.then(function (response) {
 				var data = response.data.data
@@ -201,7 +227,7 @@
 					console.log(response)
 				}
 			}).catch(function (error) {
-				console.log(error);
+				console.log(error)
 			})
 		},
 	}
@@ -234,6 +260,12 @@
 	"prototype": {
 		"components": [
 			"skill",
+		],
+	},
+	"search": {
+		"components": [
+			"skill_top",
+			"search_component"
 		],
 	}
 })

@@ -1,5 +1,7 @@
 package moe.harusame.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -113,5 +115,10 @@ public class UserServiceImpl implements UserService {
 		} else {
 			return new Result<Integer>("403", "ÐÞ¸ÄêÇ³ÆÊ§°Ü", null);
 		}
+	}
+
+	@Override
+	public List<User> searchUser(String nickName) {
+		return userDao.searchUser(nickName);
 	}
 }

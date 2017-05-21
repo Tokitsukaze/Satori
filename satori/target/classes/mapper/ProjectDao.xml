@@ -5,6 +5,13 @@
 	<!-- 目的:为 dao接口方法提供 sql语句 -->
 <mapper namespace="moe.harusame.dao.ProjectDao">
 
+	<select id="searchProject" resultType="Project">
+		select project_id, name, info, logo, create_date
+		from project
+		where name like concat(concat('%',#{name}),'%')
+		and state = 0
+	</select>
+
 	<insert id="insertProject">
 		insert ignore into project (creator, name, info)
 		values (#{creator}, #{name}, #{info})

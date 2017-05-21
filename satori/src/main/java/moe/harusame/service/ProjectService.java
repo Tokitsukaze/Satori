@@ -46,4 +46,6 @@ public interface ProjectService {
 	 * @return
 	 */
 	Result<List<Project>> getProjectList (int creator);
+	
+	List<Project> searchProject (String name);
 }

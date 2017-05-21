@@ -5,6 +5,12 @@
 	<!-- 目的:为 dao接口方法提供 sql语句 -->
 <mapper namespace="moe.harusame.dao.UserDao">
 	
+	<select id="searchUser" resultType="User">
+		select user_id, nick_name, avatar, impression, info
+		from user
+		where nick_name like concat(concat('%',#{nickName}),'%')
+	</select>
+	
 	<select id="getUserById" resultType="User">
 		select user_id, nick_name, avatar, impression, info, email, signup_date
 		from user

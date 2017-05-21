@@ -22,6 +22,7 @@
 			 */
 			this.layers = {
 				$loading_layer: VD.compile(e('div', {'class': 'loading-layer'})),
+				$mask_layer: VD.compile(e('div', {'class': 'mask-layer'})),
 				// $branch_layer: VD.compile(e('div', {'class': 'branch-layer'})),
 				$main_layer: VD.compile(e('div', {'class': 'main-layer'})),
 				$effect_layer: VD.compile(e('div', {'class': 'effect-layer'})),
@@ -97,8 +98,10 @@
 			var $map = VD.compile(e("li", {"class": "skill-item"}, [
 				e("a", {"class": "skill-item-link", "href": "/satori/map"}, "地图")
 			]))
+
+			var $search_input = VD.compile(e("input", {"class": "skill-item-search", "placeholder": "搜索", "type": "text"}))
 			var $search = VD.compile(e("li", {"class": "skill-item"}, [
-				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "搜索")
+				$search_input
 			]))
 			var $project = VD.compile(e("li", {"class": "skill-item"}, [
 				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "项目")
@@ -109,20 +112,20 @@
 			var $note = VD.compile(e("li", {"class": "skill-item"}, [
 				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "笔记")
 			]))
-			var $denpa = VD.compile(e("li", {"class": "skill-item"}, [
-				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "电波")
+			var $friends = VD.compile(e("li", {"class": "skill-item"}, [
+				e("a", {"class": "skill-item-link", "href": "/satori/search"}, "好友")
 			]))
 			var $home = VD.compile(e("li", {"class": "skill-item"}, [
-				e("a", {"class": "skill-item-link", "href": "/satori/search"}, SESSION_nickName)
+				e("a", {"class": "skill-item-link", "id": "skill-top-user-nick-name", "href": "/satori/search"}, SESSION_nickName)
 			]))
 
 			SatoriEvent.skill_top_index($index)
 			SatoriEvent.skill_top_map($map)
-			SatoriEvent.skill_top_search($search)
+			SatoriEvent.skill_top_search($search_input)
 			SatoriEvent.skill_top_project($project)
 			SatoriEvent.skill_top_store($store)
 			SatoriEvent.skill_top_note($note)
-			SatoriEvent.skill_top_denpa($denpa)
+			SatoriEvent.skill_top_friend($friends)
 			SatoriEvent.skill_top_home($home)
 
 			return VD.compile(
@@ -137,7 +140,7 @@
 							$project,
 							$store,
 							$note,
-							$denpa,
+							$friends,
 							$home
 						])
 					])
@@ -153,24 +156,24 @@
 				View.updateViewHome("project", $center, $card_list, $project_count)
 				View.updateViewHomeUserInfo($name, $info, $avatar, $impression)
 			})
-			var $card_list = VD.compile(e("ul", {"class": "card-list"}))
+			var $card_list = VD.compile(e("ul", {"class": "card-list", "id": "home-card-listlist"}))
 
 			var $trend = VD.compile(e("a", {"class": "item-name"}, "动态"))
 
-			var $project_count = VD.compile(e("span", {"class": "statistics-count"}, "0"))
+			var $project_count = VD.compile(e("span", {"class": "statistics-count", "id": "project-count"}, "0"))
 			var $project = VD.compile(e("a", {"class": "item-name"}, "项目"))
 
 			var $note = VD.compile(e("a", {"class": "item-name", "href": ""}, "笔记"))
 
-			var $denpa_count = VD.compile(e("span", {"class": "statistics-count"}, "0"))
-			var $denpa = VD.compile(e("a", {"class": "item-name", "href": ""}, "电波"))
+			var $friends_count = VD.compile(e("span", {"class": "statistics-count"}, "0"))
+			var $friends = VD.compile(e("a", {"class": "item-name", "href": ""}, "好友"))
 
 			var $store_count = VD.compile(e("span", {"class": "statistics-count"}, "0"))
 			var $store = VD.compile(e("a", {"class": "item-name", "href": ""}, "仓库"))
 			var $setting = VD.compile(e("a", {"class": "item-name", "href": ""}, "设置"))
 
 			var $center = VD.compile(
-				e("div", {"class": "center"}, [
+				e("div", {"class": "center", "id": "home-center"}, [
 					$card_list
 				])
 			)
@@ -180,14 +183,19 @@
 			SatoriEvent.home_trend($trend, $center, $card_list)
 			SatoriEvent.home_project($project, $center, $card_list, $project_count)
 			SatoriEvent.home_note($note, $center, $card_list)
-			SatoriEvent.home_denpa($denpa, $center, $card_list, $denpa_count )
+			SatoriEvent.home_friend($friends, $center, $card_list, $friends_count )
 			SatoriEvent.home_store($store, $center, $card_list, $store_count)
 			SatoriEvent.home_setting($setting, $center, $card_list)
 
-			var $name = VD.compile(e("h1", {"class": "user-name"}))
-			var $info = VD.compile(e("p", {"class": "user-introduce"}))
-			var $impression = VD.compile(e("img", {"src": "assets/images/serval.png", "class": "impression-5x"}))
-			var $avatar = VD.compile(e("img", {"src": "assets/images/serval.png", "class": "user-avatar-5x"}))
+			var $name = VD.compile(e("h1", {"class": "user-name", "id": "user-nick-name"}))
+			var $info = VD.compile(e("p", {"class": "user-introduce", "id": "user-info"}))
+			var $impression = VD.compile(e("img", {"src": "assets/images/default-avatar.jpg", "class": "impression-5x", "id": "impression"}))
+			var $avatar = VD.compile(e("img", {"src": "assets/images/default-impression.jpg", "class": "user-avatar-5x", "id": "avatar"}))
+
+			var $btn_create_project = VD.compile(e("li", {"class": "create-menu-item"}, "创建项目"))
+			var $btn_create_note = VD.compile(e("li", {"class": "create-menu-item"}, "创建笔记"))
+
+			SatoriEvent.btn_create_project($btn_create_project)
 
 			return VD.compile(
 				e("div", {"class": "home-component"}, [
@@ -215,8 +223,8 @@
 									$note
 								]),
 								e("li", {"class": "statistics-item"}, [
-									$denpa_count,
-									$denpa
+									$friends_count,
+									$friends
 								]),
 								e("li", {"class": "statistics-item"}, [
 									$store_count,
@@ -244,8 +252,8 @@
 							e("div", {"class": "right"}, [
 								e("div", {"class": "create-menu-container"}, [
 									e("ul", {"class": "create-menu-list"}, [
-										e("li", {"class": "create-menu-item"}, "创建项目"),
-										e("li", {"class": "create-menu-item"}, "创建笔记"),
+										$btn_create_project,
+										$btn_create_note
 									])
 								])
 							])
@@ -275,8 +283,30 @@
 			var $setting_info = VD.compile(e("textarea", {"type": "text","name": "info", "class": "r-input i-r-input", "placeholder": "个人信息", "style": "height: 200px; padding-top: 10px;"}, v_data.info))
 			var $setting_infoTip = VD.compile(e("span", {"class": "i-r-result"}))
 
+			var $setting_avatar = VD.compile(e('input', {'type': 'file', 'accept': 'image/*', 'name': 'file'}))
+			var $setting_avatarTip = VD.compile(e("span", {"class": "i-r-result"}))
+
+			var $setting_avatar_wrap = VD.compile(e('form', {'enctype': 'multipart/form-data', 'method': 'post'}, [
+				e('div', {'class': 'avatar-wrapper'}, [
+					$setting_avatar
+				]),
+				$setting_avatarTip
+			]))
+
+			var $setting_impression = VD.compile(e('input', {'type': 'file', 'accept': 'image/*', 'name': 'file'}))
+			var $setting_impressionTip = VD.compile(e("span", {"class": "i-r-result"}))
+
+			var $setting_impression_wrap = VD.compile(e('form', {'enctype': 'multipart/form-data', 'method': 'post'}, [
+				e('div', {'class': 'avatar-wrapper'}, [
+					$setting_impression
+				]),
+				$setting_impressionTip
+			]))
+
 			SatoriEvent.setting_nickName($setting_nickName, $setting_nickNameTip)
 			SatoriEvent.setting_info($setting_info, $setting_infoTip)
+			SatoriEvent.setting_avatar($setting_avatar, $setting_avatarTip, $setting_avatar_wrap)
+			SatoriEvent.setting_impression($setting_impression, $setting_impressionTip, $setting_impression_wrap)
 
 			return VD.compile(
 				e("ul", {"class": "card-list"}, [
@@ -308,6 +338,30 @@
 							e("div", {"class": "info-container"}, [
 								$setting_info,
 								$setting_infoTip
+							])
+						])
+					]),
+					e("li", {"class": "card-item type-input"}, [
+						e("div", {"class": "left"}, [
+							e("div", {"class": "card-avatar-container"}, [
+								e("img", {"src": "", "alt": "头像", "class": "card-avatar-5x"})
+							]),
+						]),
+						e("div", {"class": "right"}, [
+							e("div", {"class": "info-container"}, [
+								$setting_avatar_wrap
+							])
+						])
+					]),
+					e("li", {"class": "card-item type-input"}, [
+						e("div", {"class": "left"}, [
+							e("div", {"class": "card-avatar-container"}, [
+								e("img", {"src": "", "alt": "印象", "class": "card-avatar-5x"})
+							]),
+						]),
+						e("div", {"class": "right"}, [
+							e("div", {"class": "info-container"}, [
+								$setting_impression_wrap
 							])
 						])
 					])
@@ -417,7 +471,7 @@
 			var $password = VD.compile(e("input", {"type": "text", "name": "password", "class": "r-input i-r-input", "placeholder": "登陆密码"}))
 			var $passwordTip = VD.compile(e("span", {"class": "i-r-result"}))
 
-			var $signin_submit = VD.compile(e("div", {"class": "next r-submit i-r-submit"}, "登陆"))
+			var $signin_submit = VD.compile(e("div", {"class": "r-submit i-r-submit"}, "登陆"))
 
 
 			SatoriEvent.input_signin_loginName($loginName, $loginNameTip)
@@ -536,12 +590,12 @@
 		/**
 		 * 卡片类型: 电波
 		 */
-		type_denpa: function (v_data) {
+		type_friend: function (v_data) {
 			return VD.compile(
 				e("li", {"class": "card-item type-denpa"}, [
 					e("div", {"class": "left"}, [
 						e("div", {"class": "card-avatar-container"}, [
-							e("img", {"src": "assets/images/poi.png", "alt": v_data.title, "class": "card-avatar-5x"})
+							e("img", {"src": "assets/images/" + v_data.avatar, "alt": v_data.title, "class": "card-avatar-5x"})
 						]),
 					]),
 					e("div", {"class": "right"}, [
@@ -576,7 +630,10 @@
 			// VD.compile()
 			var $avatar = VD.compile(e("img", {"class": "skill-avatar", "alt": SESSION_nickName, "src": "assets/images/" + SESSION_userAvatar}))
 
+			SatoriEvent.skill_top_home($avatar)
+
 			var $tab = VD.compile(e("span", {"class": "skill-name", "s-sign": "tab"}, "Tab"))
+			var $whisper = VD.compile(e("span", {"class": "skill-name", "s-sign": "whisper"}, "私信"))
 
 			var $skill_component = VD.compile(
 				e("div", {"class": "skill-component"}, [
@@ -591,13 +648,16 @@
 							e("span", {"class": "skill-name"}, "")
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "历史")
+							e("span", {"class": "skill-name"}, "") //历史
 						]),
 						e("li",  {"class": "skill-item"}, [
 							e("span", {"class": "skill-name"}, "")
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "代码")
+							e("span", {"class": "skill-name"}, "") //代码
+						]),
+						e("li",  {"class": "skill-item"}, [
+							e("span", {"class": "skill-name"}, "")//操作
 						]),
 						e("li",  {"class": "skill-item"}, [
 							e("span", {"class": "skill-name"}, "注解")
@@ -607,9 +667,6 @@
 						]),
 						e("li",  {"class": "skill-item"}, [
 							e("span", {"class": "skill-name"}, "动画")
-						]),
-						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "操作")
 						])
 					]),
 					e("ul", {"class": "skill-list"}, [
@@ -623,19 +680,19 @@
 							$tab
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "效果")
+							e("span", {"class": "skill-name"}, "网格")
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "计划")
+							e("span", {"class": "skill-name"}, "") // 计划
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "地图")
+							e("span", {"class": "skill-name"}, "") //地图
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "组")
+							$whisper
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "IO")
+							e("span", {"class": "skill-name"}, "组") //IO
 						]),
 						e("li",  {"class": "skill-item"}, [
 							e("span", {"class": "skill-name"}, "分支")
@@ -649,31 +706,31 @@
 							$avatar
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "项目")
+							e("span", {"class": "skill-name"}, "")
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "仓库")
+							e("span", {"class": "skill-name"}, "")
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "笔记")
+							e("span", {"class": "skill-name"}, "") //笔记
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "好友")
+							e("span", {"class": "skill-name"}, "")
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "设置")
+							e("span", {"class": "skill-name"}, "") //设置
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "消息")
+							e("span", {"class": "skill-name"}, "")
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "搜索")
+							e("span", {"class": "skill-name"}, "") //搜索
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "地图")
+							e("span", {"class": "skill-name"}, "") //地图
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "主页")
+							e("span", {"class": "skill-name"}, "")
 						])
 					])
 				])
@@ -691,7 +748,63 @@
 			)
 		},
 
+		/**
+		 *  搜索
+		 */
+		 search_component: function () {
+		 	var $search_result_list = VD.compile(e("ul", {"class": "search-result-list", "id": "search-result-list"}))
+		 	SatoriEvent.search_result_list($search_result_list)
 
+		 	return VD.compile(
+		 		e("div", {"class": "search-component"}, [
+		 			e("div", {"class": "top"}, [
+		 				e("span", {"class": "search-keyword", "id": "search-keyword"})
+		 			]),
+		 			e("div", {"class": "bottom"}, [
+		 				$search_result_list,
+		 				e("div", {"class": "end"}, [
+		 					e("div", {"class": "end-circle"}),
+		 					e("span", {"class": "end-tip"}, "搜索完毕"),
+		 				])
+		 			])
+		 		])
+		 	)
+		 },
+
+		search_card_type_user: function (v_data) {
+			return VD.compile(
+				e("li", {"class": "search-result-item type-user"}, [
+					e("div", {"class": "card-wrap"}, [
+						e("div", {"class": "friend-invite", "button-type": "become_friends/" + v_data.userId}, "Friends"),
+						e("div", {"class": "left"}, [
+							e("div", {"class": "info-container"}, [
+								e("span", {"class": "name"}, v_data.nickName),
+								e("p", {"class": "info"}, v_data.info)
+							]),
+						]),
+						e("div", {"class": "right"}, [
+							e("img", {"src": "assets/images/" + v_data.avatar, "alt": v_data.name, "class": "avatar-5x"}),
+						])
+					])
+				])
+			)
+		},
+
+		search_card_type_project: function (v_data) {
+			return VD.compile(
+				e("li", {"class": "search-result-item type-project"}, [
+					e("div", {"class": "left"}, [
+						e("img", {"src": "assets/images/" + v_data.logo, "alt": v_data.name, "class": "avatar-5x"}),
+					]),
+					e("div", {"class": "right"}, [
+						e("div", {"class": "info-container"}, [
+							e("span", {"class": "name", "button-type": "project/" + v_data.projectId}, v_data.name),
+							e("p", {"class": "info"}, v_data.info)
+						]),
+					])
+				])
+			)
+		}
 
 
 

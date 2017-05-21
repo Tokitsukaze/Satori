@@ -23,11 +23,31 @@ $home_width: 1200px;
 				display: inline-block;
 				height: 40px;
 				.skill-item {
+					position: relative;
 					display: inline-block;
 					.skill-item-link {
 						display: block;
 						font-size: 12px;
 						padding: 0 15px;
+					}
+
+					.skill-item-search {
+						margin-top: 10px;
+						margin-left: 15px;
+						color: rgba($color_white, 1);
+						background-color: rgba($color_medium_gray, 1);
+						border: 1px solid rgba($color_medium_gray, 1);
+						padding: 0 10px;
+						border-radius: 15px;
+						box-sizing: border-box;
+						font-size: 12px;
+						width: 200px;
+						height: 20px;
+						line-height: 20px;
+						&:hover {
+							color: rgba($color_medium_gray, 1);
+							background-color: rgba($color_white, 1);
+						}
 					}
 				}
 
@@ -53,6 +73,7 @@ $home_width: 1200px;
 					height: 30px;
 					line-height: 30px;
 					background-color: rgba($color_white, 1);
+					transition: all 0.25s ease-in-out 0s;
 				}
 			}
 
@@ -106,6 +127,10 @@ $home_width: 1200px;
 
 							.i-r-result {
 								text-align: left;
+							}
+
+							.avatar-wrapper {
+								font-size: 100%;
 							}
 						}
 					}
@@ -367,17 +392,16 @@ $home_width: 1200px;
 						.create-menu-list {
 
 							.create-menu-item {
-								display: inline-block;
+								display: block;
 								margin-right: 1px;
 								font-size: 12px;
 								text-align: center;
-								width: 60px;
+								width: 100%;
 								height: 80px;
 								line-height: 80px;
-
-								border: 1px solid rgba($color_aqua_darken, 1);
 								background-color: rgba($color_white, 1);
 								color: rgba($color_aqua, 1);
+								cursor: pointer;
 							}
 						}
 					}

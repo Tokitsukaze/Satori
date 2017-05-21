@@ -1,5 +1,6 @@
 package moe.harusame.web;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,12 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import moe.harusame.dto.Card;
 import moe.harusame.dto.Result;
 import moe.harusame.entity.Project;
 import moe.harusame.entity.User;
+import moe.harusame.service.FriendService;
 import moe.harusame.service.ProjectService;
 import moe.harusame.service.UserService;
 
@@ -28,6 +32,9 @@ public class UserController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private FriendService friendService;
 	
 	/**
 	 * 注册
@@ -56,9 +63,9 @@ public class UserController {
 		produces = {"application/json; charset=UTF-8"}
 	)
 	@ResponseBody
-	public Result<User> loginNameCheck(User user) {
-		System.out.println("loginNameCheck:" + user);
-		return userService.loginNameCheck(user.getLoginName());
+	public Result<User> loginNameCheck(String loginName) {
+		System.out.println("loginNameCheck:" + loginName);
+		return userService.loginNameCheck(loginName);
 	}
 	
 	/**
@@ -162,22 +169,35 @@ public class UserController {
 		List<Card> list = new ArrayList<Card>();
 		switch (type) {
 			case "trend":
-				list.add(new Card("denpa", "1" ,"夕立酱", "夕立desu", "assets/images/poi.png"));
-				list.add(new Card("denpa", "2", "春雨酱", "春雨desu", "assets/images/poi.png"));
-				list.add(new Card("denpa", "3", "时雨酱", "时雨desu", "assets/images/poi.png"));
+				list.add(new Card("project", "1" ,"不是什么正经项目", "测试项目", new Date()));
+				list.add(new Card("friend", "2", "春雨酱", "春雨desu", "poi.png"));
+				list.add(new Card("note", "1"  , "自定义滚动条的做法", "自定义的滚动条吧", new Date()));
+				list.add(new Card("friend", "3", "时雨", "时雨desu", "poi.png"));
+				list.add(new Card("friend", "4", "Shigure", "Shgiurea", "poi.png"));
 				break;
 			
 			case "project":
-				List<Project> project_list = projectService.getProjectList(userId).getData();
-				System.out.println("project_list:" + project_list);
-				for (int i = 0; i < project_list.size(); i++) {
-					Project pro = project_list.get(i);
+				List<Project> projectList = projectService.getProjectList(userId).getData();
+				System.out.println("projectList:" + projectList);
+				if (projectList == null) {
+					return new Result<List<Card>>("200", "获取成功，但是没有数据", null);
+				}
+				for (int i = 0; i < projectList.size(); i++) {
+					Project pro = projectList.get(i);
 					System.out.println("projectId" + pro.getProjectId());
 					list.add(new Card("project", pro.getProjectId() + "", pro.getName(), pro.getInfo(), pro.getCreateDate()));
 				}
-				/*list.add(new Card("project", "大学社团管理系统", "一个简单的社团管理系统", new Date()));
-				list.add(new Card("project", "夕立酱", "夕立desu", new Date()));
-				list.add(new Card("project", "夕立酱", "夕立desu", new Date()));*/
+				break;
+			case "friends":
+				List<User> friendList = friendService.getFriendsByUserId(userId);
+				System.out.println("friendList:" + friendList);
+				if (friendList == null) {
+					return new Result<List<Card>>("200", "获取成功，但是没有数据", null);
+				}
+				for (int i = 0; i < friendList.size(); i++) {
+					User user = friendList.get(i);
+					list.add(new Card("friend", user.getUserId() + "", user.getNickName(), user.getInfo(), user.getAvatar()));
+				}
 				break;
 			
 			case "store":
@@ -188,6 +208,58 @@ public class UserController {
 		}
 		
 		Result<List<Card>> result = new Result<List<Card>>("200", "获取成功", list);
+		return result;
+	}
+	
+	@RequestMapping(
+		value = "/home/{userId}/updateUserAvatar",
+		method = RequestMethod.POST
+	)
+	@ResponseBody
+	public Result<Integer> updateUserAvatar (@PathVariable("userId") int userId, @RequestParam("file") MultipartFile file) {
+		Result<Integer> result;
+		if (!file.isEmpty()) {
+			String finalFileName;
+			Date date = new Date();
+			String fileName = userId + "-" + date.getTime() + "-" + "avatar" + "." + file.getContentType().split("/")[1];
+			String absolutePath = "E:/Eclipse Work Space/satori/src/main/webapp/assets/images/";
+			finalFileName = absolutePath + fileName;
+			System.out.println("finalFileName:" + finalFileName);
+			try {
+				file.transferTo(new File(finalFileName)); 
+				return result = userService.updateAvatar(userId, fileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		result = new Result<Integer>("400", "上传头像失败", null);
+		return result;
+	}
+	
+	@RequestMapping(
+		value = "/home/{userId}/updateImpression",
+		method = RequestMethod.POST
+	)
+	@ResponseBody
+	public Result<Integer> updateImpression (@PathVariable("userId") int userId, @RequestParam("file") MultipartFile file) {
+		Result<Integer> result;
+		System.out.println("上传印象中");
+		if (!file.isEmpty()) {
+			String finalFileName;
+			Date date = new Date();
+			String fileName = userId + "-" + date.getTime() + "-" + "impression" + "." + file.getContentType().split("/")[1];
+			String absolutePath = "E:/Eclipse Work Space/satori/src/main/webapp/assets/images/";
+			finalFileName = absolutePath + fileName;
+			try {
+				file.transferTo(new File(finalFileName)); 
+				result = userService.updateImpression(userId, fileName);
+				System.out.println("上传印象中:" + result);
+				return result;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		result = new Result<Integer>("400", "上传印象失败", null);
 		return result;
 	}
 }

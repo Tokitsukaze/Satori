@@ -12,7 +12,7 @@ import moe.harusame.service.ProjectService;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
-	
+
 	@Autowired
 	private ProjectDao projectDao;
 
@@ -65,6 +65,10 @@ public class ProjectServiceImpl implements ProjectService {
 			return new Result<List<Project>>("414", "≤È—Ø ß∞‹", null);
 		}
 	}
-	
-	
+
+	@Override
+	public List<Project> searchProject(String name) {
+		return projectDao.searchProject(name);
+	}
+
 }

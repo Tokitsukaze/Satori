@@ -1,5 +1,7 @@
 package moe.harusame.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import moe.harusame.entity.User;
@@ -74,4 +76,11 @@ public interface UserDao {
 	 * @return
 	 */
 	int insertUser (@Param("loginName") String loginName, @Param("password") String password, @Param("nickName") String nickName);
+	
+	/**
+	 * 根据用户的昵称关键字查询用户
+	 * @param nickName
+	 * @return
+	 */
+	List<User> searchUser (String nickName);
 }

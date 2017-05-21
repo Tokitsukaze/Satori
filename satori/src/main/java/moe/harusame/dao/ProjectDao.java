@@ -50,4 +50,11 @@ public interface ProjectDao {
 	List<Project> getProjectList (int creator);
 	
 	Project getProjectByProjectId (@Param("projectId") int projectId, @Param("creator") int creator);
+	
+	/**
+	 * 根据项目的名字关键词查找项目
+	 * @param name
+	 * @return
+	 */
+	List<Project> searchProject (String name);
 }

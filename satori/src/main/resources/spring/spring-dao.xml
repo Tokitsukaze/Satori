@@ -7,9 +7,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<!-- 配置整合 mybatis 过程 -->
 	<!-- 1: 配置数据库相关参数 
 		properties的属性: 通过$(url) 等类似的形式获取
-	-->
-	<context:property-placeholder location="classpath:jdbc.properties" system-properties-mode="NEVER"/>
+	--> 
 	
+	<context:property-placeholder location="classpath:jdbc.properties" system-properties-mode="NEVER"/>
+	  
 	<!-- 2: 数据库连接池 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<!-- 配置连接池属性 -->

@@ -1,5 +1,7 @@
 package moe.harusame.service;
 
+import java.util.List;
+
 import moe.harusame.dto.Result;
 import moe.harusame.entity.User;
 
@@ -73,4 +75,11 @@ public interface UserService {
 	 * @return
 	 */
 	Result<Integer> updateNickName (int userId, String nickName);
+	
+	/**
+	 * 根据昵称关键字搜索用户
+	 * @param nickName
+	 * @return
+	 */
+	List<User> searchUser (String nickName);
 }
