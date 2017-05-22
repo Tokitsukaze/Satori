@@ -66,7 +66,7 @@ public class ProjectController {
 		produces = {"application/json; charset=UTF-8"}
 	)
 	@ResponseBody
-	public Result<Integer> createTab (@PathVariable("projectId") int projectId, String name) {
+	public Result<Tab> createTab (@PathVariable("projectId") int projectId, String name) {
 		return tabService.insertTab(projectId, name);
 	}
 	
@@ -88,5 +88,15 @@ public class ProjectController {
 	@ResponseBody
 	public Result<Integer> removeTab (@PathVariable("projectId") int projectId, int tabId) {
 		return tabService.removeTab(tabId);
+	}
+	
+	@RequestMapping(
+		value = "/project/{friendId}/getFriendProject", 
+		method = RequestMethod.POST,
+		produces = {"application/json; charset=UTF-8"}
+	)
+	@ResponseBody
+	public Result<List<Project>> removeTab (@PathVariable("friendId") int friendId) {
+		return projectService.getProjectList(friendId);
 	}
 }

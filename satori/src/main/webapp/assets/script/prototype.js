@@ -2,6 +2,7 @@
 	var EVENT_SIGN = 's-sign'
 
 	var SatoriPrototype = function (v_selectors) {
+		var _this = this
 		/**
 		 * 初始化工具栏
 		 */
@@ -9,6 +10,9 @@
 		// this.$create_menu = new SatoriCreateMenu()
 		this.$whisper = new SatoriWhisper()
 		this.$preview = new SatoriPreview()
+		setTimeout(function () {
+			_this.$palette = new SatoriPrototypePalette()
+		})
 
 		/**
 		 * 接收键盘事件
@@ -110,6 +114,10 @@
 
 				'preview': function () {
 					_this.$preview.view = !_this.$preview.view
+				},
+
+				'palette': function () {
+					_this.$palette.view = !_this.$palette.view
 				}
 			}
 
@@ -135,16 +143,20 @@
 				// 注释检测
 				var $target = event.target
 				var comment = $target.dataset.comment
-				if (comment != null) {
+				if (comment != null && comment.length !== 0) {
 					Template.$comment_tip.style.display = 'block'
 					setTimeout(function () {
 						Template.$comment_tip.style.opacity = 1
+						Template.$comment_tip.style.zIndex = 50000
 					}, 250)
+					Template.$comment_tip.style.top = event.pageY + 10 + 'px'
+					Template.$comment_tip.style.left = event.pageX + 10 + 'px'
 					Template.$comment_tip.textContent = comment
 				} else {
 					Template.$comment_tip.style.display = 'block'
 					setTimeout(function () {
 						Template.$comment_tip.style.opacity = 0
+						Template.$comment_tip.style.zIndex = 0
 					}, 250)
 				}
 				var fn = _this.mousemove_event[_this.cursor_event]
@@ -168,7 +180,20 @@
 				'2': function (_this, event) {
 					// 画笔是否完成开关
 					_this.paint_flag = true
-					var $paint_node = VD.compile(e('div', {'data-pid': _this.prototype_id}))
+					var bg
+					if (window.prototype_background) {
+						bg = prototype_background
+					} else {
+						bg = '#ffffff'
+					}
+
+					var $paint_node
+					if (_this.keydown_list['Control']) {
+						$paint_node = VD.compile(e('div', {'data-pid': _this.prototype_id, 'style': 'background-color: ' + bg, 'border-radius': '50%'}))
+					} else {
+						$paint_node = VD.compile(e('div', {'data-pid': _this.prototype_id, 'style': 'background-color: ' + bg}))
+					}
+
 					_this.$paint_node = $paint_node
 					_this.$prototype_layer.appendChild(_this.$paint_node)
 
@@ -182,12 +207,6 @@
 				'3': function (_this, event) {
 					_this.move_flag = true
 
-					// 如果没有选中，那么就弹窗
-					if (_this.$select_list.length === 0) {
-						SatoriModal.pop('请先选择原型节点', SatoriModal.ERROR)
-						return
-					}
-
 					_this.move_start_position = []
 					_this.$select_list.reduce(function (v_rope, v_prototype) {
 						_this.move_start_position.push({
@@ -198,6 +217,21 @@
 
 					_this.move_start_y = event.pageY
 					_this.move_start_x = event.pageX
+				},
+				// 原型注解
+				'4': function (_this, event) {
+
+				},
+				// 原型旋转
+				'5': function (_this, event) {
+					// 如果没有选中，那么就弹窗
+					if (_this.$select_list.length === 0) {
+						SatoriModal.pop('请先选择原型节点', SatoriModal.ERROR)
+						return
+					}
+
+					_this.rotate_sign = true
+					_this.rotate_start_y = event.pageY
 				}
 			}
 
@@ -258,6 +292,24 @@
 						current_prototype.style.top = minus_y + 'px'
 						current_prototype.style.left = minus_x + 'px'
 					}
+				},
+				// 原型注解
+				'4': function (_this, event) {
+
+				},
+				// 原型旋转
+				'5': function (_this, event) {
+					if (!_this.rotate_sign) {
+						return
+					}
+					// 如果没有选中，那么就弹窗
+					if (_this.$select_list.length === 0) {
+						SatoriModal.pop('请先选择原型节点', SatoriModal.ERROR)
+						return
+					}
+					_this.$select_list.reduce(function (v_rope, v_prototype) {
+						v_prototype.style.transform = "rotate(" + (event.pageY - _this.rotate_start_y) + "deg)"
+					}, "")
 				}
 			}
 
@@ -281,11 +333,12 @@
 							SatoriModal.pop('已选择该元素', SatoriModal.ERROR)
 							return
 						}
-						_this.$select_list.reduce(function (v_rope, v_prototype) {
-							v_prototype.className = 'selected'
-						}, "")
 						_this.select_list_pid[pid] = true
-						_this.$select_list.push(event.target)
+						$target.className = 'selected'
+						_this.$select_list.push($target)
+					/*	_this.$select_list.reduce(function (v_rope, v_prototype) {
+							v_prototype.className = 'selected'
+						}, "")*/
 						return
 					}
 					// 单选
@@ -293,9 +346,15 @@
 						SatoriModal.pop('已选择该元素', SatoriModal.ERROR)
 						return
 					}
+
+					_this.$select_list.reduce(function (v_rope, v_prototype) {
+						v_prototype.className = ''
+					}, "")
+					_this.select_list_pid = {}
+					_this.$select_list.length = 0
+
 					event.target.className = 'selected'
 					_this.select_list_pid[pid] = true
-					_this.$select_list.length = 0
 					_this.$select_list.push(event.target)
 				},
 				// 原型画笔
@@ -318,6 +377,23 @@
 				'3': function (_this, event) {
 					_this.move_flag = false
 					_this.ExecuteOperation(_this.ACTION.MOVE, {'$el': _this.$paint_node})
+				},
+				// 原型注解
+				'4': function (_this, event) {
+					var $target = event.target
+					var pid = $target.dataset.pid
+					if (pid == null) {
+						_this.$comment_target = null
+						return
+					}
+					_this.$comment_target = $target
+					_this.$keyborad_inputer.value = ''
+					_this.$keyborad_inputer.style.zIndex = 50000
+					_this.$keyborad_inputer.style.opacity = 1
+				},
+				// 原型旋转
+				'5': function () {
+					_this.rotate_sign = false
 				}
 			}
 
@@ -331,6 +407,32 @@
 			 * 2. 匹配已有的自定义键
 			 * 3. 如果有则执行
 			 */
+			this.$keyborad_inputer.addEventListener('copy', function (event) {
+				if (_this.$select_list.length === 0) {
+					SatoriModal.pop('请先选择原型节点', SatoriModal.ERROR)
+					return
+				}
+				_this.$copy_list = _this.$select_list
+				SatoriModal.pop('复制成功', SatoriModal.SUCCESS)
+			 })
+
+			this.$keyborad_inputer.addEventListener('paste', function (event) {
+				if (_this.$copy_list.length === 0) {
+					SatoriModal.pop('请先复制节点', SatoriModal.ERROR)
+					return
+				}
+				var $fragment = document.createDocumentFragment()
+
+				_this.$copy_list.reduce(function (v_rope, v_prototype) {
+					var $node = VD.compile(e(v_prototype.tagName.toLowerCase(), {'style': v_prototype.getAttribute('style'), 'data-comment': v_prototype.dataset.comment || ""}, v_prototype.textContent))
+					$node.setAttribute('data-pid', _this.prototype_id)
+					$fragment.appendChild($node)
+				}, "")
+				console.info($fragment)
+				Template.$prototype_component.appendChild($fragment)
+				SatoriModal.pop('粘贴成功', SatoriModal.SUCCESS)
+			 })
+
 			this.$keyborad_inputer.addEventListener('keydown', function (event) {
 				console.info(event)
 				var key = event.key /* 1 */
@@ -406,6 +508,16 @@
 					_this.cursor_event = '3'
 					SatoriModal.pop('原型移动 模式', SatoriModal.INFO, 2000)
 				},
+				// 切换为注解 模式
+				'4': function (_this, event) {
+					_this.cursor_event = '4'
+					SatoriModal.pop('注解 模式', SatoriModal.INFO, 2000)
+				},
+				// 原型旋转
+				'5': function (_this, event) {
+					_this.cursor_event = '5'
+					SatoriModal.pop('原型旋转 模式', SatoriModal.INFO, 2000)
+				},
 				'Delete': function (_this, event) {
 					var len = _this.$select_list.length
 					if (len === 0) {
@@ -420,11 +532,32 @@
 					_this.select_list_pid = {}
 					SatoriModal.pop('删除了 ' + len + ' 个原型', SatoriModal.SUCCESS, 2000)
 				},
+				't': function (_this, event) {
+					_this.$palette.view = !_this.$palette.view
+				},
 
+				'Enter': function () {
+					// 添加注释
+					if (_this.cursor_event === '4') {
+						var value = _this.$keyborad_inputer.value.trim()
+						_this.$keyborad_inputer.value = ''
+						console.info('value', value)
+						if (value.length === 0) {
+							SatoriModal.pop('请为注释添加内容', SatoriModal.ERROR)
+							return
+						} else {
+							_this.$keyborad_inputer.style.zIndex = 0
+							_this.$keyborad_inputer.style.opacity = 0
+							_this.$comment_target.setAttribute('data-comment', value)
+							SatoriModal.pop('添加注释成功', SatoriModal.SUCCESS)
+						}
+					}
+				},
 				// Ctrl + s/S(83) 保存
  				'83': function (_this, event) {
  					event.preventDefault() // 防止默认的保存网页
  					if (_this.keydown_list['Shift']) {
+ 						SatoriModal.pop('保存中', SatoriModal.INFO, 5000)
  						var $all_prototype = Array.prototype.slice.call(_this.$prototype_layer.children, 0)
  						console.info($all_prototype)
 
@@ -460,7 +593,8 @@
  							tabId: parseInt(CURRENT_TAB_ID),
  							tagname: v_$dom.tagName.toLowerCase(),
  							props: props,
- 							text: "",
+ 							text: v_$dom.textContent,
+ 							comment: v_$dom.dataset.comment,
  							updateDate: v_update_date
  						}
  					}
@@ -661,10 +795,10 @@
 						}
 					}).then(function (response) {
 						console.info('response', response)
-						var tab_id = response.data.data
-						console.info('tab_id', tab_id)
+						var tab = response.data.data
+						console.info('tab', tab)
 						/*发送请求成功后，在后台就即刻查询，然后返回查询成功后的tab，渲染到tab中，修改的话就直接发送 tab_id和改变后的名字回去 */
-						var $new_tab_item = _this.tab_item_template({"tabId": tab_id, "name": inputer_value})
+						var $new_tab_item = _this.tab_item_template({"tabId": tab.tabId, "name": inputer_value, "branch": tab.branch})
 						_this.$tab_list.appendChild($new_tab_item)
 
 						_this.select_tab_dom = $new_tab_item.parentNode
@@ -1104,13 +1238,16 @@
 		constructor: SatoriPreview,
 
 		init: function () {
+			var _this = this
 			Object.defineProperty(this, 'view', {
 				set: function (v_new_view) {
 					if (v_new_view) {
 						Template.$skill_layer.style.opacity = 0
+						Template.$skill_layer.style.display = 'none'
 						SatoriModal.pop('当前正在 预览模式，按下 ESC 退出', SatoriModal.INFO)
 					} else {
 						Template.$skill_layer.style.opacity = 1
+						Template.$skill_layer.style.display = 'block'
 						SatoriModal.pop('退出了 预览模式', SatoriModal.INFO)
 					}
 					_this._view = v_new_view
@@ -1125,7 +1262,53 @@
 	window.SatoriPreview = SatoriPreview
 })()
 
+;(function () {
+	var SatoriPrototypePalette = function () {
+		this._view = false
+		console.info(Template)
+		this.$palette_component = Template.$satori_prototype_palette
 
+		this.init()
+	}
+
+	SatoriPrototypePalette.prototype = {
+		constructor: SatoriPrototypePalette,
+
+
+		init: function () {
+			var _this = this
+
+			Object.defineProperty(this, 'view', {
+				set: function (v_new_view) {
+					if (v_new_view) {
+						_this.$palette_component.style.display = 'none'
+						SatoriModal.pop('关闭了 调色板', SatoriModal.INFO)
+					} else {
+						_this.$palette_component.style.display = 'block'
+						SatoriModal.pop('打开了 调色板', SatoriModal.INFO)
+					}
+					_this._view = v_new_view
+				},
+				get: function () {
+					return _this._view
+				}
+			})
+
+			_this.$palette_component.addEventListener('click', function (event) {
+				// 拾取颜色
+				var $target = event.target
+				var bg = $target.dataset.bg
+				console.info($target)
+				if (bg != null) {
+					window.prototype_background = bg
+					SatoriModal.pop('选取了颜色', SatoriModal.INFO, 2000)
+				}
+			})
+		}
+	}
+
+	window.SatoriPrototypePalette = SatoriPrototypePalette
+})()
 
 
 

@@ -20,7 +20,7 @@
 			/**
 			 * 接受键盘事件
 			 */
-			this.$keyborad_inputer = VD.compile(e('textarea', {"style": "opacity: 0; position: absolute"}))
+			this.$keyborad_inputer = VD.compile(e('textarea', {"class": "keyborad-inputer", "style": "opacity: 0; position: absolute"}))
 
 			this.$satori.appendChild(this.$keyborad_inputer)
 
@@ -182,7 +182,8 @@
 			var $friends = VD.compile(e("a", {"class": "item-name", "href": ""}, "好友"))
 
 			var $store_count = VD.compile(e("span", {"class": "statistics-count"}, "0"))
-			var $store = VD.compile(e("a", {"class": "item-name", "href": ""}, "仓库"))
+			var $store = VD.compile(e("a", {"class": "item-name"}, "好友项目"))
+
 			var $setting = VD.compile(e("a", {"class": "item-name", "href": ""}, "设置"))
 
 			var $center = VD.compile(
@@ -579,19 +580,19 @@
 		},
 
 		/**
-		 * 卡片类型: 仓库
+		 * 卡片类型: 哈有项目
 		 */
 		type_store: function (v_data) {
 			return VD.compile(
-				e("li", {"class": "card-item type-store"}, [
+				e("li", {"class": "card-item type-project"}, [
 					e("div", {"class": "left"}, [
 						e("div", {"class": "card-avatar-container"}, [
-							e("img", {"src": "", "alt": "仓库", "class": "card-avatar-5x"})
+							e("img", {"src": "", "alt": "项目", "class": "card-avatar-5x"})
 						]),
 					]),
 					e("div", {"class": "right"}, [
 						e("div", {"class": "info-container"}, [
-							e("span", {"class": "title"}, v_data.title),
+							e("a", {"class": "title", "s-link": "", "href": "/satori/project/" + v_data.id}, v_data.title),
 							e("div", {"class": "date"}, v_data.date),
 							e("p", {"class": "content"}, v_data.content)
 						]),
@@ -600,10 +601,33 @@
 			)
 		},
 
+		// /**
+		//  * 卡片类型: 仓库
+		//  */
+		// type_store: function (v_data) {
+		// 	return VD.compile(
+		// 		e("li", {"class": "card-item type-store"}, [
+		// 			e("div", {"class": "left"}, [
+		// 				e("div", {"class": "card-avatar-container"}, [
+		// 					e("img", {"src": "", "alt": "仓库", "class": "card-avatar-5x"})
+		// 				]),
+		// 			]),
+		// 			e("div", {"class": "right"}, [
+		// 				e("div", {"class": "info-container"}, [
+		// 					e("span", {"class": "title"}, v_data.title),
+		// 					e("div", {"class": "date"}, v_data.date),
+		// 					e("p", {"class": "content"}, v_data.content)
+		// 				]),
+		// 			]),
+		// 		]),
+		// 	)
+		// },
+
 		/**
 		 * 卡片类型: 电波
 		 */
 		type_friend: function (v_data) {
+			console.info(v_data)
 			return VD.compile(
 				e("li", {"class": "card-item type-denpa"}, [
 					e("div", {"class": "left"}, [
@@ -613,7 +637,7 @@
 					]),
 					e("div", {"class": "right"}, [
 						e("div", {"class": "info-container"}, [
-							e("span", {"class": "title"}, v_data.title),
+							e("span", {"class": "title", "data-friend_id": v_data.id}, v_data.title),
 							e("p", {"class": "content"}, v_data.content)
 						]),
 					]),
@@ -648,15 +672,16 @@
 			var $preview = VD.compile(e("span", {"class": "skill-name", "s-sign": "preview"}, "预览"))
 			var $tab = VD.compile(e("span", {"class": "skill-name", "s-sign": "tab"}, "Tab"))
 			var $whisper = VD.compile(e("span", {"class": "skill-name", "s-sign": "whisper"}, "私信"))
+			var $palette = VD.compile(e("span", {"class": "skill-name", "s-sign": "palette"}, "调色板"))
 
 			var $skill_component = VD.compile(
 				e("div", {"class": "skill-component"}, [
 					e("ul", {"class": "skill-list"}, [
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "新建")
+							$palette
 						]),
 						e("li",  {"class": "skill-item"}, [
-							e("span", {"class": "skill-name"}, "编辑")
+							e("span", {"class": "skill-name"}, "")
 						]),
 						e("li",  {"class": "skill-item"}, [
 							e("span", {"class": "skill-name"}, "")
@@ -688,7 +713,7 @@
 							e("span", {"class": "skill-name"}, "当前")
 						]),
 						e("li",  {"class": "skill-item"}, [
-
+							$preview
 						]),
 						e("li",  {"class": "skill-item"}, [
 							$tab
@@ -834,9 +859,36 @@
 			return VD.compile(
 				e(v_data.tagname, {'style': v_data.props, 'data-pid': v_data.prototypeId, 'data-comment': v_data.comment}, v_data.text)
 			)
-		}
+		},
 
-
+		satori_prototype_palette: function () {
+			this.$satori_prototype_palette = VD.compile(
+				e('div', {'class': 'palette-component', 'id': 'palette-component'}, [
+					e('ul', {'class': 'palette-list'}, [
+						e('li', {'class': 'palette-item', 'style': 'background: #fff', 'data-bg': '#fff'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #000000', 'data-bg': '#000000'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #94a7f8', 'data-bg': '#94a7f8'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #6ef638', 'data-bg': '#6ef638'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #0abd30', 'data-bg': '#0abd30'})
+					]),
+					e('ul', {'class': 'palette-list'}, [
+						e('li', {'class': 'palette-item', 'style': 'background: #c277f7', 'data-bg': '#c277f7'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #73349f', 'data-bg': '#73349f'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #4b145d', 'data-bg': '#4b145d'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #f13c9a', 'data-bg': '#f13c9a'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #a51592', 'data-bg': '#a51592'})
+					]),
+					e('ul', {'class': 'palette-list'}, [
+						e('li', {'class': 'palette-item', 'style': 'background: #380bfd', 'data-bg': '#380bfd'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #3a18cb', 'data-bg': '#3a18cb'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #341ba1', 'data-bg': '#341ba1'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #241661', 'data-bg': '#241661'}),
+						e('li', {'class': 'palette-item', 'style': 'background: #7a91f4', 'data-bg': '#7a91f4'})
+					])
+				])
+			)
+			return this.$satori_prototype_palette
+		},
 
 
 

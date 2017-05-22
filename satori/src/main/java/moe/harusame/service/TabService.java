@@ -7,7 +7,7 @@ import moe.harusame.dto.Result;
 import moe.harusame.entity.Tab;
 
 public interface TabService {
-	Result<Integer> insertTab (int projectId, String name);
+	Result<Tab> insertTab (int projectId, String name);
 	
 	Result<List<Tab>> getTabList (int projectId);
 	

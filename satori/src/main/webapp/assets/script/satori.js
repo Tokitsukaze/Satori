@@ -4,6 +4,23 @@
 
 
 
+/*var startY = null
+var $target = document.querySelector('.prototype')
+
+$target.addEventListener("mousedown", function (event) {
+	_this.sign.mousedown = true
+	startY = event.clientY
+})
+
+document.addEventListener("mousemove", function (event) {
+	if (_this.sign.mousedown) {
+		$target.style.transform = "rotate(" + (event.clientY - startY) + "deg)"
+	}
+})
+
+document.addEventListener("mouseup", function (event) {
+	_this.sign.mousedown = false
+})*/
 
 
 /*<div class="whisper-component-full">

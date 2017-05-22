@@ -543,6 +543,11 @@
 			v_$el.addEventListener('click', function (event) {
 				// event.preventDefault()
 				var $target = event.target
+				var friend_id = $target.dataset.friend_id
+				if (friend_id && friend_id > 999) {
+					CURRENT_FRIEND_ID = friend_id
+					SatoriModal.pop('选择了好友', SatoriModal.SUCCESS)
+				}
 				var href = $target.getAttribute("href")
 				if (href == null) {
 					return
@@ -718,7 +723,7 @@
 							}).catch(function (error) {
 								console.log(error)
 							})
-						}, 5000)
+						}, 6000)
 						console.info(data)
 					}
 				})
@@ -759,8 +764,7 @@
 							}).catch(function (error) {
 								console.log(error)
 							})
-						}, 5000)
-						console.info(data)
+						}, 8000)
 					}
 				})
 			})

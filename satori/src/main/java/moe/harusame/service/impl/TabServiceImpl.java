@@ -18,17 +18,13 @@ public class TabServiceImpl implements TabService {
 	private TabDao tabDao;
 
 	@Override
-	public Result<Integer> insertTab(int projectId, String name) {
+	public Result<Tab> insertTab(int projectId, String name) {
 		int result = tabDao.insertTab(projectId, name);
-		int tabId = 0;
+		Tab tab = null;
 		if (result == 1) {
-			tabId = tabDao.getTabByProjectIdAndName(projectId, name).getTabId();
+			tab = tabDao.getTabByProjectIdAndName(projectId, name);
 		}
-		if (tabId != 0) {
-			return new Result<Integer>("200", "创建tab成功", tabId);
-		} else {
-			return new Result<Integer>("421", "创建tab失败", null);
-		}
+		return new Result<Tab>("200", "创建tab成功", tab);
 	}
 
 	@Override

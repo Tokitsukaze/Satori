@@ -27,6 +27,7 @@
 	var CURRENT_PROJECT_ID
 	var CURRENT_TAB_ID
 	var CURRENT_BRANCH_ID
+	var CURRENT_FRIEND_ID
 </script>
 <script src="${ctx}/assets/script/third-party/jquery-2.1.1.min.js"></script>
 <script src="${ctx}/assets/script/third-party/jquery.form.js"></script>

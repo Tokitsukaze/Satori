@@ -189,7 +189,33 @@
 					})
 					break
 				case "store":
-
+					if (CURRENT_FRIEND_ID == null || CURRENT_FRIEND_ID < 1000) {
+						SatoriModal.pop('请先选择好友')
+						return
+					}
+					axios.post('/satori/home/' + CURRENT_FRIEND_ID + '/project')
+					.then(function (response) {
+						var data = response.data
+						if (response.status === 200) {
+							console.info("response", response)
+							var datas = data["data"]
+							if (datas == null) {
+								$center.innerHTML = ""
+								$center.appendChild(v_$card_list)
+								$center.appendChild(Template["home_card_tip"]("项目"))
+								return
+							}
+							var datas_length = datas.length
+							v_$count.textContent = datas_length
+							$center.innerHTML = ""
+							$center.appendChild(Template["home_card_list"](datas))
+						} else {
+							console.log(error);
+							console.log(response)
+						}
+					}).catch(function (error) {
+						console.log(error);
+					})
 					break
 				case "setting":
 					axios({
@@ -262,8 +288,9 @@
 	"prototype": {
 		"components": [
 			"skill",
-			"prototype_component",
-			"comment_tip"
+			"comment_tip",
+			"satori_prototype_palette",
+			"prototype_component"
 		],
 	},
 	"search": {
